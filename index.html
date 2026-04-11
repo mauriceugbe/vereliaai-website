@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infera AI - Marketing Attribution & ROI Intelligence for SMBs</title>
+    <meta name="description" content="Know exactly which marketing activities drive revenue — without spreadsheets, guesswork, or enterprise complexity.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #06b6d4 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+        .gradient-bg-logo {
+            background: linear-gradient(135deg, #06b6d4 0%, #9333ea 100%);
+        }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-[#fafaf9]">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg gradient-bg-logo flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Infera</span>
+                    <span class="text-xs font-medium text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">AI</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#problem" class="text-sm font-medium text-gray-600 hover:text-gray-900">Problem</a>
+                    <a href="#solution" class="text-sm font-medium text-gray-600 hover:text-gray-900">Solution</a>
+                    <a href="#features" class="text-sm font-medium text-gray-600 hover:text-gray-900">Features</a>
+                    <a href="#pricing" class="text-sm font-medium text-gray-600 hover:text-gray-900">Pricing</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="https://app.inferaapp.com/sign-in" class="text-sm font-medium text-gray-600 hover:text-gray-900">Log In</a>
+                    <a href="https://app.inferaapp.com/sign-up" class="px-4 py-2 rounded-lg gradient-bg text-white text-sm font-medium hover:opacity-90 transition-all">
+                        Start Free Trial
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-4">
+            <a href="#problem" class="block text-sm font-medium text-gray-600">Problem</a>
+            <a href="#solution" class="block text-sm font-medium text-gray-600">Solution</a>
+            <a href="#features" class="block text-sm font-medium text-gray-600">Features</a>
+            <a href="#pricing" class="block text-sm font-medium text-gray-600">Pricing</a>
+            <a href="https://app.inferaapp.com/sign-in" class="block text-sm font-medium text-gray-600">Log In</a>
+            <a href="https://app.inferaapp.com/sign-up" class="block w-full text-center px-4 py-2 rounded-lg gradient-bg text-white text-sm font-medium">
+                Start Free Trial
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 text-cyan-700 text-sm font-medium mb-8">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+                Now in Beta — 7-Day Free Trial
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                Marketing Attribution & ROI Intelligence
+                <span class="gradient-text"> for SMBs</span>
+            </h1>
+            
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Know exactly which marketing activities drive revenue — without spreadsheets, guesswork, or enterprise complexity.
+            </p>
+            
+            <p class="text-gray-500 mb-8">
+                Connect your channels, track the full customer journey, and see revenue impact in one clear view.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <a href="https://app.inferaapp.com/sign-up" class="w-full sm:w-auto px-8 py-4 rounded-xl gradient-bg text-white font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                    Start Free Trial
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all">
+                    See How It Works
+                </a>
+            </div>
+
+            <p class="text-sm text-gray-500">
+                <strong>7-day free trial</strong> • No credit card required • Setup in minutes
+            </p>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">The Problem</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Most SMBs Don't Have a Marketing Problem —<br>They Have a Visibility Problem
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    You're spending across paid ads, organic, email, social, and sales outreach — but when it's time to answer "What actually drove revenue?", the data falls apart.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
+                    <span class="text-3xl mb-4 block">🔌</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">Tools don't talk to each other</h3>
+                    <p class="text-sm text-gray-500">Data silos everywhere</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
+                    <span class="text-3xl mb-4 block">📊</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">Attribution is last-click or incomplete</h3>
+                    <p class="text-sm text-gray-500">Missing the full picture</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
+                    <span class="text-3xl mb-4 block">⏱️</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">Reporting takes weeks</h3>
+                    <p class="text-sm text-gray-500">If it happens at all</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
+                    <span class="text-3xl mb-4 block">🎯</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">Decisions based on instinct</h3>
+                    <p class="text-sm text-gray-500">Not evidence</p>
+                </div>
+            </div>
+
+            <p class="text-center mt-12 text-xl font-semibold text-cyan-600">
+                Infera fixes this.
+            </p>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="py-20 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">The Solution</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Infera Turns Disconnected Marketing Data<br>Into Revenue Clarity
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Infera automatically ingests data from your marketing, sales, and analytics tools, connects it across the full customer journey, and shows you — in plain language — what's driving real business results.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="font-medium">No custom pipelines</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="font-medium">No BI team required</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="font-medium">No black-box models</span>
+                </div>
+            </div>
+
+            <p class="text-center text-2xl font-bold text-gray-900">Just answers.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">Core Features</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    What You'll Finally Be Able to See
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">💰</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Revenue-Driven Attribution</h3>
+                    <p class="text-sm text-gray-500">Understand which channels, campaigns, and touchpoints contribute to closed revenue — not just clicks or leads.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">📈</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">True ROI by Channel</h3>
+                    <p class="text-sm text-gray-500">See cost vs revenue side-by-side so you know where to double down — and where to stop spending.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">🔭</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Full-Funnel Visibility</h3>
+                    <p class="text-sm text-gray-500">Track performance from first touch → lead → opportunity → revenue in one unified view.</p>
+                </div>
+
+                <!-- Feature 4 - NEW -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">🔀</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">B2B Pipeline Analytics</h3>
+                    <p class="text-sm text-gray-500">Track leads through every stage — MQL, SQL, Opportunity, Proposal, Negotiation — with conversion rates and velocity metrics.</p>
+                </div>
+
+                <!-- Feature 5 - NEW -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">📋</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Executive Dashboards</h3>
+                    <p class="text-sm text-gray-500">KISS metrics for stakeholders — Pipeline Coverage, ROAS, Attribution % — no data archaeology required.</p>
+                </div>
+
+                <!-- Feature 6 - NEW -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">🤖</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">AI-Powered Insights</h3>
+                    <p class="text-sm text-gray-500">Ask questions in plain English and get instant answers about your marketing performance.</p>
+                </div>
+
+                <!-- Feature 7 - NEW -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎯</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Forecast & Targets</h3>
+                    <p class="text-sm text-gray-500">Set revenue targets and track progress with AI-powered forecasting and gap analysis.</p>
+                </div>
+
+                <!-- Feature 8 - NEW -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">🧩</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Dashboard Builder</h3>
+                    <p class="text-sm text-gray-500">Create custom dashboards with drag-and-drop widgets tailored to your specific needs.</p>
+                </div>
+
+                <!-- Feature 9 -->
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Built for SMB Reality</h3>
+                    <p class="text-sm text-gray-500">Set up in days, not months. No expensive consultants. No enterprise contracts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">How It Works</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Three Steps to Revenue Clarity
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="w-12 h-12 rounded-full gradient-bg-logo text-white font-bold text-xl flex items-center justify-center mb-4">1</div>
+                    <h3 class="font-semibold text-gray-900 mb-2 text-lg">Connect Your Data</h3>
+                    <p class="text-gray-500">Plug in your marketing and sales tools (ads, CRM, analytics, calls, forms).</p>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-full gradient-bg-logo text-white font-bold text-xl flex items-center justify-center mb-4">2</div>
+                    <h3 class="font-semibold text-gray-900 mb-2 text-lg">Infera Unifies the Journey</h3>
+                    <p class="text-gray-500">We stitch touchpoints together across the funnel using attribution logic that actually reflects reality.</p>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-full gradient-bg-logo text-white font-bold text-xl flex items-center justify-center mb-4">3</div>
+                    <h3 class="font-semibold text-gray-900 mb-2 text-lg">Get Revenue-Ready Insights</h3>
+                    <p class="text-gray-500">Dashboards, AI insights, and executive reports designed for decisions — not data archaeology.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who It's For -->
+    <section class="py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">Who It's For</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Built for Teams Who Need Answers, Not More Dashboards
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 text-center">
+                    <span class="text-4xl mb-4 block">👔</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">For Founders & CEOs</h3>
+                    <p class="text-sm text-gray-500">Know where growth is really coming from and where your money is leaking. Executive dashboards with the 4 metrics that matter.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 text-center">
+                    <span class="text-4xl mb-4 block">📣</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">For Marketing Leaders</h3>
+                    <p class="text-sm text-gray-500">Prove impact, defend budgets, and optimize based on revenue — not vanity metrics. AI insights answer your questions instantly.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 text-center">
+                    <span class="text-4xl mb-4 block">⚙️</span>
+                    <h3 class="font-semibold text-gray-900 mb-2">For RevOps & Analytics</h3>
+                    <p class="text-sm text-gray-500">Get attribution without fragile spreadsheets or over-engineered pipelines. Full data dictionary included.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-20 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">Why Infera</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Why Infera Is Different
+                </h2>
+            </div>
+
+            <div class="rounded-xl border border-gray-200 overflow-hidden bg-white">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900"></th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-cyan-600">Infera</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-500">Traditional Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Target Audience</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Built for SMBs</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Built for enterprise</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Implementation</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Fast setup, days not months</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Long implementations</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Insights</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">AI-powered, explainable insights</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Black-box models</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Reporting Focus</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Revenue-first reporting</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Click-first reporting</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Technical Requirements</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">No BI team required</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Heavy technical overhead</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Pipeline Visibility</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Full B2B funnel tracking</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Limited or none</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Executive Reporting</td>
+                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">KISS metrics built-in</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Requires custom builds</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-cyan-600 font-semibold mb-4">Pricing</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                    Simple, transparent pricing
+                </h2>
+                <p class="text-gray-600">
+                    Start small, scale as you grow. No hidden fees, no long contracts.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Starter -->
+                <div class="rounded-2xl border border-gray-200 p-8 bg-white hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Starter</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-gray-900">$149</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <p class="text-sm text-cyan-600 mb-6">7-day free trial</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            3 data source connections
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            First-touch attribution
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Core dashboards
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            CSV export
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Email support
+                        </li>
+                    </ul>
+                    
+                    <a href="https://app.inferaapp.com/sign-up" class="block w-full py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold text-center hover:bg-gray-50 transition-colors">
+                        Start Free Trial
+                    </a>
+                </div>
+
+                <!-- Growth - Popular -->
+                <div class="rounded-2xl border-2 border-cyan-500 p-8 bg-white shadow-lg relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-cyan-500 text-white text-sm font-semibold rounded-full">
+                        Most Popular
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Growth</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-cyan-600">$499</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <p class="text-sm text-cyan-600 mb-6">7-day free trial</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            10 data source connections
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Multi-touch attribution
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Customer journey maps
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            B2B pipeline analytics
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            AI insights chat
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            12-month data retention
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Slack notifications
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Priority support
+                        </li>
+                    </ul>
+                    
+                    <a href="https://app.inferaapp.com/sign-up" class="block w-full py-3 rounded-xl gradient-bg text-white font-semibold text-center hover:opacity-90 transition-all">
+                        Start Free Trial
+                    </a>
+                </div>
+
+                <!-- Pro -->
+                <div class="rounded-2xl border border-gray-200 p-8 bg-white hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pro</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold text-gray-900">$1,499</span>
+                        <span class="text-gray-500">/month</span>
+                    </div>
+                    <p class="text-sm text-cyan-600 mb-6">7-day free trial</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Unlimited connections
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            AI-powered attribution
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Custom dashboards
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Dashboard Builder
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Data Dictionary
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Advanced forecasting
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            API access
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            SSO / SAML
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Dedicated CSM
+                        </li>
+                    </ul>
+                    
+                    <a href="mailto:support@inferaapp.com?subject=Pro Plan Inquiry" class="block w-full py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold text-center hover:bg-gray-50 transition-colors">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center mt-8 text-gray-500">
+                <strong>Simple, transparent pricing designed for SMBs</strong> — no enterprise lock-ins.
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                Stop Guessing. Start Knowing.
+            </h2>
+            <p class="text-gray-600 mb-8">
+                If you're an SMB that wants real attribution and ROI clarity — without enterprise friction — Infera is built for you.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://app.inferaapp.com/sign-up" class="w-full sm:w-auto px-8 py-4 rounded-xl gradient-bg text-white font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                    Start Your Free Trial
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="mailto:support@inferaapp.com?subject=Let's Talk" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all">
+                    Talk to Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 bg-white border-t border-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <a href="#" class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg gradient-bg-logo flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">Infera</span>
+                        <span class="text-xs font-medium text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">AI</span>
+                    </a>
+                    <p class="text-sm text-gray-500">
+                        Marketing Attribution & ROI Intelligence for SMBs. Know exactly which marketing activities drive revenue.
+                    </p>
+                    <a href="mailto:support@inferaapp.com" class="text-sm text-cyan-600 hover:underline mt-4 block">
+                        support@inferaapp.com
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#features" class="hover:text-gray-900">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-gray-900">Pricing</a></li>
+                        <li><a href="#" class="hover:text-gray-900">Integrations</a></li>
+                        <li><a href="#" class="hover:text-gray-900">Changelog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-gray-900">Documentation</a></li>
+                        <li><a href="#" class="hover:text-gray-900">Blog</a></li>
+                        <li><a href="#" class="hover:text-gray-900">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-gray-900">API Reference</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-gray-900">About</a></li>
+                        <li><a href="#" class="hover:text-gray-900">Careers</a></li>
+                        <li><a href="mailto:support@inferaapp.com" class="hover:text-gray-900">Contact</a></li>
+                        <li><a href="#" class="hover:text-gray-900">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500">
+                <p>© 2025 Infera AI. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-gray-900">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-900">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
