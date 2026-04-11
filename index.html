@@ -3,716 +3,1372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infera AI - Marketing Attribution & ROI Intelligence for SMBs</title>
-    <meta name="description" content="Know exactly which marketing activities drive revenue — without spreadsheets, guesswork, or enterprise complexity.">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Verelia AI - Business Intelligence & Revenue Clarity for Growing Businesses</title>
+    <meta name="description" content="Business intelligence and revenue clarity for growing businesses. No spreadsheets, guesswork, or enterprise complexity.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Inter', sans-serif; }
+        /* Reset & Base */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #fafaf9; color: #1a1a1a; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; }
+        
+        /* Utilities */
+        .container { max-width: 1152px; margin: 0 auto; padding: 0 24px; }
+        .container-sm { max-width: 896px; margin: 0 auto; padding: 0 24px; }
+        .text-center { text-align: center; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 8px; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .gap-8 { gap: 32px; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        .hidden { display: none; }
+        .block { display: block; }
+        .w-full { width: 100%; }
+        
+        /* Colors */
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-700 { color: #374151; }
+        .text-gray-900 { color: #111827; }
+        .text-cyan-600 { color: #0891b2; }
+        .text-cyan-700 { color: #0e7490; }
+        .text-white { color: #ffffff; }
+        .bg-white { background-color: #ffffff; }
+        .bg-gray-50 { background-color: #f9fafb; }
+        
+        /* Typography */
+        .text-xs { font-size: 12px; }
+        .text-sm { font-size: 14px; }
+        .text-base { font-size: 16px; }
+        .text-lg { font-size: 18px; }
+        .text-xl { font-size: 20px; }
+        .text-2xl { font-size: 24px; }
+        .text-3xl { font-size: 30px; }
+        .text-4xl { font-size: 36px; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        
+        /* Spacing */
+        .mb-2 { margin-bottom: 8px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-8 { margin-bottom: 32px; }
+        .mb-12 { margin-bottom: 48px; }
+        .mb-16 { margin-bottom: 64px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-8 { margin-top: 32px; }
+        .mt-12 { margin-top: 48px; }
+        .py-12 { padding-top: 48px; padding-bottom: 48px; }
+        .py-20 { padding-top: 80px; padding-bottom: 80px; }
+        .px-4 { padding-left: 16px; padding-right: 16px; }
+        .px-6 { padding-left: 24px; padding-right: 24px; }
+        .px-8 { padding-left: 32px; padding-right: 32px; }
+        .p-6 { padding: 24px; }
+        .p-8 { padding: 32px; }
+        
+        /* Components */
         .gradient-text {
             background: linear-gradient(135deg, #06b6d4 0%, #9333ea 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
         .gradient-bg {
             background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
         }
+        
         .gradient-bg-logo {
             background: linear-gradient(135deg, #06b6d4 0%, #9333ea 100%);
         }
-        html { scroll-behavior: smooth; }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .nav-inner {
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+        
+        .nav-badge {
+            font-size: 12px;
+            font-weight: 500;
+            color: #0891b2;
+            background: #ecfeff;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: #111827;
+        }
+        
+        .nav-actions {
+            display: none;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+        
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+        
+        .mobile-menu-btn {
+            display: flex;
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            background: white;
+            border-top: 1px solid #f3f4f6;
+            padding: 16px;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        
+        /* Hero */
+        .hero {
+            padding-top: 128px;
+            padding-bottom: 80px;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #ecfeff;
+            color: #0e7490;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 32px;
+        }
+        
+        .hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #4b5563;
+            margin-bottom: 32px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-desc {
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .hero-note {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        /* Section */
+        .section {
+            padding: 80px 24px;
+        }
+        
+        .section-light {
+            background: white;
+        }
+        
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0891b2;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        
+        .section-desc {
+            color: #4b5563;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        
+        /* Cards */
+        .card {
+            padding: 24px;
+            background: #f9fafb;
+            border: 1px solid #f3f4f6;
+            border-radius: 12px;
+        }
+        
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 16px;
+            color: #0891b2;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .card-desc {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        
+        .feature-card {
+            padding: 24px;
+            background: #f9fafb;
+            border: 1px solid #f3f4f6;
+            border-radius: 12px;
+            transition: box-shadow 0.2s;
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-icon-cyan { background: #cffafe; color: #0891b2; }
+        .feature-icon-purple { background: #f3e8ff; color: #7c3aed; }
+        .feature-icon-emerald { background: #d1fae5; color: #059669; }
+        .feature-icon-amber { background: #fef3c7; color: #d97706; }
+        .feature-icon-rose { background: #ffe4e6; color: #e11d48; }
+        .feature-icon-indigo { background: #e0e7ff; color: #4f46e5; }
+        
+        /* Pills */
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #d1fae5;
+            color: #047857;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .step-desc {
+            color: #6b7280;
+        }
+        
+        /* Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 24px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        .comparison-table thead {
+            background: #f9fafb;
+        }
+        
+        .comparison-table th:nth-child(2) {
+            color: #0891b2;
+            font-weight: 600;
+        }
+        
+        .comparison-table th:nth-child(3) {
+            color: #6b7280;
+        }
+        
+        .comparison-table tbody tr {
+            border-top: 1px solid #f3f4f6;
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 500;
+            color: #111827;
+        }
+        
+        .comparison-table td:nth-child(2) {
+            color: #0e7490;
+            font-weight: 500;
+        }
+        
+        .comparison-table td:nth-child(3) {
+            color: #6b7280;
+        }
+        
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            padding: 32px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            transition: box-shadow 0.2s;
+        }
+        
+        .pricing-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card-popular {
+            border: 2px solid #06b6d4;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 16px;
+            background: #06b6d4;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 9999px;
+        }
+        
+        .pricing-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-price {
+            margin-bottom: 16px;
+        }
+        
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: #111827;
+        }
+        
+        .pricing-card-popular .pricing-amount {
+            color: #0891b2;
+        }
+        
+        .pricing-period {
+            color: #6b7280;
+        }
+        
+        .pricing-trial {
+            font-size: 14px;
+            color: #0891b2;
+            margin-bottom: 24px;
+        }
+        
+        .pricing-features {
+            margin-bottom: 32px;
+        }
+        
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 12px;
+        }
+        
+        .pricing-feature svg {
+            flex-shrink: 0;
+        }
+        
+        .check-cyan { color: #06b6d4; }
+        .check-amber { color: #f59e0b; }
+        
+        /* Footer */
+        .footer {
+            padding: 48px 24px;
+            background: white;
+            border-top: 1px solid #f3f4f6;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-brand p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 16px;
+        }
+        
+        .footer-brand a.email-link {
+            font-size: 14px;
+            color: #0891b2;
+            margin-top: 16px;
+            display: block;
+        }
+        
+        .footer-brand a.email-link:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        
+        .footer-links a {
+            display: block;
+            font-size: 14px;
+            color: #6b7280;
+            padding: 4px 0;
+        }
+        
+        .footer-links a:hover {
+            color: #111827;
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .footer-legal a:hover {
+            color: #111827;
+        }
+        
+        /* ── Mobile base (default — phones first) ── */
+        * { -webkit-tap-highlight-color: transparent; }
+        body { -webkit-text-size-adjust: 100%; }
+
+        .hero { padding-top: 96px; padding-bottom: 48px; }
+        .hero-title { font-size: 32px; line-height: 1.15; }
+        .hero-subtitle { font-size: 17px; }
+        .hero-desc { font-size: 15px; }
+        .hero-buttons { flex-direction: column; align-items: center; gap: 12px; }
+        .hero-note { font-size: 13px; }
+
+        .section { padding: 56px 20px; }
+        .section-title { font-size: 26px; line-height: 1.2; }
+        .section-desc { font-size: 15px; }
+
+        /* Touch targets — minimum 44px for iOS, 48px for Android */
+        .btn { min-height: 48px; padding: 13px 22px; font-size: 15px; border-radius: 12px; width: 100%; justify-content: center; }
+        .btn-lg { min-height: 52px; padding: 15px 28px; font-size: 16px; }
+        .nav-link { min-height: 44px; display: flex; align-items: center; }
+        .mobile-menu a { min-height: 48px; display: flex; align-items: center; font-size: 16px; border-bottom: 1px solid #f3f4f6; }
+
+        /* Cards */
+        .card { padding: 20px; }
+        .feature-card { padding: 20px; }
+        .pricing-card { padding: 24px; }
+
+        /* Grids — single column on mobile */
+        .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+        .problem-grid { grid-template-columns: 1fr; gap: 16px; }
+        .steps { grid-template-columns: 1fr; gap: 28px; }
+        .pricing-grid { grid-template-columns: 1fr; gap: 24px; max-width: 420px; }
+        .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+        .footer-bottom { flex-direction: column; align-items: center; gap: 12px; }
+
+        /* Nav */
+        .nav-links { display: none; }
+        .nav-actions { display: none; }
+        .mobile-menu-btn { display: flex; min-height: 44px; min-width: 44px; align-items: center; justify-content: center; }
+
+        /* Comparison table — horizontal scroll on small screens */
+        .comparison-table { font-size: 13px; }
+        .comparison-table th, .comparison-table td { padding: 12px 14px; }
+        .container-sm { overflow-x: auto; }
+
+        /* ── Small tablets (≥ 540px) ── */
+        @media (min-width: 540px) {
+            .hero-title { font-size: 40px; }
+            .btn { width: auto; }
+            .hero-buttons { flex-direction: row; justify-content: center; }
+            .problem-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { max-width: 100%; }
+        }
+
+        /* ── Tablets (≥ 768px) ── */
+        @media (min-width: 768px) {
+            .hero { padding-top: 120px; padding-bottom: 64px; }
+            .hero-title { font-size: 52px; }
+            .hero-subtitle { font-size: 20px; }
+            .section { padding: 72px 24px; }
+            .section-title { font-size: 32px; }
+
+            .nav-links { display: flex; }
+            .nav-actions { display: flex; }
+            .mobile-menu-btn { display: none; }
+
+            .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+            .feature-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .problem-grid { grid-template-columns: repeat(4, 1fr); }
+            .steps { grid-template-columns: repeat(3, 1fr); }
+            .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-bottom { flex-direction: row; justify-content: space-between; }
+
+            .btn { width: auto; }
+            .card { padding: 24px; }
+            .feature-card { padding: 24px; }
+            .pricing-card { padding: 32px; }
+            .comparison-table { font-size: 14px; }
+            .comparison-table th, .comparison-table td { padding: 16px 24px; }
+        }
+
+        /* ── Desktop (≥ 1024px) ── */
+        @media (min-width: 1024px) {
+            .hero { padding-top: 128px; padding-bottom: 80px; }
+            .hero-title { font-size: 60px; }
+            .section { padding: 80px 24px; }
+            .section-title { font-size: 36px; }
+            .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+            .feature-grid { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
-<body class="bg-[#fafaf9]">
+<body>
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between h-16">
-                <a href="#" class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-lg gradient-bg-logo flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                        </svg>
-                    </div>
-                    <span class="text-xl font-bold text-gray-900">Infera</span>
-                    <span class="text-xs font-medium text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">AI</span>
-                </a>
-
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#problem" class="text-sm font-medium text-gray-600 hover:text-gray-900">Problem</a>
-                    <a href="#solution" class="text-sm font-medium text-gray-600 hover:text-gray-900">Solution</a>
-                    <a href="#features" class="text-sm font-medium text-gray-600 hover:text-gray-900">Features</a>
-                    <a href="#pricing" class="text-sm font-medium text-gray-600 hover:text-gray-900">Pricing</a>
-                </div>
-
-                <div class="hidden md:flex items-center gap-4">
-                    <a href="https://app.inferaapp.com/sign-in" class="text-sm font-medium text-gray-600 hover:text-gray-900">Log In</a>
-                    <a href="https://app.inferaapp.com/sign-up" class="px-4 py-2 rounded-lg gradient-bg text-white text-sm font-medium hover:opacity-90 transition-all">
-                        Start Free Trial
-                    </a>
-                </div>
-
-                <!-- Mobile menu button -->
-                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon gradient-bg-logo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                     </svg>
-                </button>
+                </div>
+                <span class="nav-logo-text">Verelia</span>
+                <span class="nav-badge">AI</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#problem" class="nav-link">Problem</a>
+                <a href="#solution" class="nav-link">Solution</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
             </div>
+
+            <div class="nav-actions">
+                <a href="https://app.vereliaai.com/sign-in" class="nav-link">Log In</a>
+                <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary">Start Free Trial</a>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
 
-        <!-- Mobile menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-4">
-            <a href="#problem" class="block text-sm font-medium text-gray-600">Problem</a>
-            <a href="#solution" class="block text-sm font-medium text-gray-600">Solution</a>
-            <a href="#features" class="block text-sm font-medium text-gray-600">Features</a>
-            <a href="#pricing" class="block text-sm font-medium text-gray-600">Pricing</a>
-            <a href="https://app.inferaapp.com/sign-in" class="block text-sm font-medium text-gray-600">Log In</a>
-            <a href="https://app.inferaapp.com/sign-up" class="block w-full text-center px-4 py-2 rounded-lg gradient-bg text-white text-sm font-medium">
-                Start Free Trial
-            </a>
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="#problem">Problem</a>
+            <a href="#solution">Solution</a>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="https://app.vereliaai.com/sign-in">Log In</a>
+            <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary w-full" style="margin-top: 16px;">Start Free Trial</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 text-cyan-700 text-sm font-medium mb-8">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container text-center">
+            <div class="hero-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                 </svg>
-                Now in Beta — 7-Day Free Trial
+                7-Day Free Trial
             </div>
             
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                Marketing Attribution & ROI Intelligence
-                <span class="gradient-text"> for SMBs</span>
+            <h1 class="hero-title">
+                Business Intelligence & Revenue Clarity
+                <span class="gradient-text"> for Growing Businesses</span>
             </h1>
             
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Know exactly which marketing activities drive revenue — without spreadsheets, guesswork, or enterprise complexity.
+            <p class="hero-subtitle">
+                One platform. Know exactly what drives your business.
             </p>
             
-            <p class="text-gray-500 mb-8">
+            <p class="hero-desc">
                 Connect your channels, track the full customer journey, and see revenue impact in one clear view.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                <a href="https://app.inferaapp.com/sign-up" class="w-full sm:w-auto px-8 py-4 rounded-xl gradient-bg text-white font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+            <div class="hero-buttons">
+                <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary btn-lg">
                     Start Free Trial
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </a>
-                <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all">
-                    See How It Works
-                </a>
+                <a href="#features" class="btn btn-secondary btn-lg">See How It Works</a>
             </div>
 
-            <p class="text-sm text-gray-500">
-                <strong>7-day free trial</strong> • No credit card required • Setup in minutes
+            <p class="hero-note">
+                <strong>Card required to start trial</strong> • You won't be charged until day 8 • Cancel anytime before then
+            </p>
+            <p class="hero-note" style="margin-top: 10px; color: #0891b2;">
+                Web &amp; mobile. One account. Data intelligence that follows you.
             </p>
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section id="problem" class="py-20 px-4 sm:px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
+    <!-- Problem -->
+    <section id="problem" class="section section-light">
+        <div class="container">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">The Problem</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Most SMBs Don't Have a Marketing Problem —<br>They Have a Visibility Problem
-                </h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    You're spending across paid ads, organic, email, social, and sales outreach — but when it's time to answer "What actually drove revenue?", the data falls apart.
-                </p>
+                <p class="section-label">The Problem</p>
+                <h2 class="section-title">Most Growing Businesses Don't Have a Data Problem.<br>They Have a Visibility Problem.</h2>
+                <p class="section-desc">You're running your business across channels, tools, and teams. But when it's time to answer "What actually drove growth?", the data falls apart.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
-                    <span class="text-3xl mb-4 block">🔌</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">Tools don't talk to each other</h3>
-                    <p class="text-sm text-gray-500">Data silos everywhere</p>
+            <div class="problem-grid">
+                <div class="card">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><path d="M6 8H4a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h2"/><rect x="6" y="4" width="12" height="16" rx="2"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="15" y1="9" x2="15" y2="9.01"/></svg></div>
+                    <h3 class="card-title">Tools don't talk to each other</h3>
+                    <p class="card-desc">Data silos everywhere</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
-                    <span class="text-3xl mb-4 block">📊</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">Attribution is last-click or incomplete</h3>
-                    <p class="text-sm text-gray-500">Missing the full picture</p>
+                <div class="card">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg></div>
+                    <h3 class="card-title">Attribution is last-click or incomplete</h3>
+                    <p class="card-desc">Missing the full picture</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
-                    <span class="text-3xl mb-4 block">⏱️</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">Reporting takes weeks</h3>
-                    <p class="text-sm text-gray-500">If it happens at all</p>
+                <div class="card">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                    <h3 class="card-title">Reporting takes weeks</h3>
+                    <p class="card-desc">If it happens at all</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100">
-                    <span class="text-3xl mb-4 block">🎯</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">Decisions based on instinct</h3>
-                    <p class="text-sm text-gray-500">Not evidence</p>
+                <div class="card">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                    <h3 class="card-title">Decisions based on instinct</h3>
+                    <p class="card-desc">Not evidence</p>
                 </div>
             </div>
 
-            <p class="text-center mt-12 text-xl font-semibold text-cyan-600">
-                Infera fixes this.
+            <p class="text-center mt-12" style="font-size: 20px; font-weight: 600; color: #0891b2;">
+                Verelia fixes this.
             </p>
         </div>
     </section>
 
-    <!-- Solution Section -->
-    <section id="solution" class="py-20 px-4 sm:px-6">
-        <div class="max-w-6xl mx-auto">
+    <!-- Solution -->
+    <section id="solution" class="section">
+        <div class="container">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">The Solution</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Infera Turns Disconnected Marketing Data<br>Into Revenue Clarity
-                </h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    Infera automatically ingests data from your marketing, sales, and analytics tools, connects it across the full customer journey, and shows you — in plain language — what's driving real business results.
-                </p>
+                <p class="section-label">The Solution</p>
+                <h2 class="section-title">Verelia Turns Disconnected Business Data<br>Into Revenue Clarity</h2>
+                <p class="section-desc">Verelia automatically ingests data from your business tools: marketing, sales, social, accounting, and analytics. It connects everything across the full customer journey and shows you what's driving real business results.</p>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            <div class="pills">
+                <div class="pill">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 13l4 4L19 7"/>
                     </svg>
-                    <span class="font-medium">No custom pipelines</span>
+                    No custom pipelines
                 </div>
-                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                <div class="pill">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 13l4 4L19 7"/>
                     </svg>
-                    <span class="font-medium">No BI team required</span>
+                    No BI team required
                 </div>
-                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                <div class="pill">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 13l4 4L19 7"/>
                     </svg>
-                    <span class="font-medium">No black-box models</span>
+                    No black-box models
                 </div>
             </div>
 
-            <p class="text-center text-2xl font-bold text-gray-900">Just answers.</p>
+            <p class="text-center" style="font-size: 24px; font-weight: 700; color: #111827;">Just answers.</p>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 px-4 sm:px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
+    <!-- Features -->
+    <section id="features" class="section section-light">
+        <div class="container">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">Core Features</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    What You'll Finally Be Able to See
-                </h2>
+                <p class="section-label">Core Features</p>
+                <h2 class="section-title">What You'll Finally Be Able to See</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Feature 1 -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">💰</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Revenue-Driven Attribution</h3>
-                    <p class="text-sm text-gray-500">Understand which channels, campaigns, and touchpoints contribute to closed revenue — not just clicks or leads.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-cyan"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg></div>
+                    <h3 class="card-title">Revenue-Driven Attribution</h3>
+                    <p class="card-desc">Understand which channels, campaigns, and touchpoints contribute to closed revenue. Not just clicks or leads.</p>
                 </div>
-
-                <!-- Feature 2 -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">📈</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">True ROI by Channel</h3>
-                    <p class="text-sm text-gray-500">See cost vs revenue side-by-side so you know where to double down — and where to stop spending.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+                    <h3 class="card-title">True ROI by Channel</h3>
+                    <p class="card-desc">See cost vs revenue side-by-side so you know where to double down and where to stop spending.</p>
                 </div>
-
-                <!-- Feature 3 -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">🔭</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Full-Funnel Visibility</h3>
-                    <p class="text-sm text-gray-500">Track performance from first touch → lead → opportunity → revenue in one unified view.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-emerald"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></div>
+                    <h3 class="card-title">Full-Funnel Visibility</h3>
+                    <p class="card-desc">Track performance from first touch → lead → opportunity → revenue in one unified view.</p>
                 </div>
-
-                <!-- Feature 4 - NEW -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">🔀</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">B2B Pipeline Analytics</h3>
-                    <p class="text-sm text-gray-500">Track leads through every stage — MQL, SQL, Opportunity, Proposal, Negotiation — with conversion rates and velocity metrics.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-amber"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></div>
+                    <h3 class="card-title">B2B Pipeline Analytics</h3>
+                    <p class="card-desc">Track leads through every stage: MQL, SQL, Opportunity, Proposal, Negotiation. Includes conversion rates and velocity metrics.</p>
                 </div>
-
-                <!-- Feature 5 - NEW -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">📋</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Executive Dashboards</h3>
-                    <p class="text-sm text-gray-500">KISS metrics for stakeholders — Pipeline Coverage, ROAS, Attribution % — no data archaeology required.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-rose"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div>
+                    <h3 class="card-title">Executive Dashboards</h3>
+                    <p class="card-desc">KISS metrics for stakeholders: Pipeline Coverage, ROAS, Attribution %. No data archaeology required.</p>
                 </div>
-
-                <!-- Feature 6 - NEW -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">🤖</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">AI-Powered Insights</h3>
-                    <p class="text-sm text-gray-500">Ask questions in plain English and get instant answers about your marketing performance.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-indigo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
+                    <h3 class="card-title">AI-Powered Insights</h3>
+                    <p class="card-desc">Ask Verelia anything. Get instant, clear answers about your business performance.</p>
                 </div>
-
-                <!-- Feature 7 - NEW -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">🎯</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Forecast & Targets</h3>
-                    <p class="text-sm text-gray-500">Set revenue targets and track progress with AI-powered forecasting and gap analysis.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-cyan"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                    <h3 class="card-title">Forecast & Targets</h3>
+                    <p class="card-desc">Set revenue targets and track progress with AI-powered forecasting and gap analysis.</p>
                 </div>
-
-                <!-- Feature 8 - NEW -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">🧩</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Dashboard Builder</h3>
-                    <p class="text-sm text-gray-500">Create custom dashboards with drag-and-drop widgets tailored to your specific needs.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg></div>
+                    <h3 class="card-title">Dashboard Builder</h3>
+                    <p class="card-desc">Create custom dashboards with drag-and-drop widgets tailored to your specific needs.</p>
                 </div>
-
-                <!-- Feature 9 -->
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
-                        <span class="text-2xl">🚀</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Built for SMB Reality</h3>
-                    <p class="text-sm text-gray-500">Set up in days, not months. No expensive consultants. No enterprise contracts.</p>
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-emerald"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <h3 class="card-title">Built for Growing Businesses</h3>
+                    <p class="card-desc">Set up in days, not months. No expensive consultants. No enterprise contracts.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="py-20 px-4 sm:px-6">
-        <div class="max-w-6xl mx-auto">
+    <section class="section">
+        <div class="container">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">How It Works</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Three Steps to Revenue Clarity
-                </h2>
+                <p class="section-label">How It Works</p>
+                <h2 class="section-title">Three Steps to Revenue Clarity</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="steps">
                 <div>
-                    <div class="w-12 h-12 rounded-full gradient-bg-logo text-white font-bold text-xl flex items-center justify-center mb-4">1</div>
-                    <h3 class="font-semibold text-gray-900 mb-2 text-lg">Connect Your Data</h3>
-                    <p class="text-gray-500">Plug in your marketing and sales tools (ads, CRM, analytics, calls, forms).</p>
+                    <div class="step-number gradient-bg-logo">1</div>
+                    <h3 class="step-title">Connect Your Data</h3>
+                    <p class="step-desc">Plug in your business tools: social platforms, accounting, CRM, analytics, and more.</p>
                 </div>
                 <div>
-                    <div class="w-12 h-12 rounded-full gradient-bg-logo text-white font-bold text-xl flex items-center justify-center mb-4">2</div>
-                    <h3 class="font-semibold text-gray-900 mb-2 text-lg">Infera Unifies the Journey</h3>
-                    <p class="text-gray-500">We stitch touchpoints together across the funnel using attribution logic that actually reflects reality.</p>
+                    <div class="step-number gradient-bg-logo">2</div>
+                    <h3 class="step-title">Verelia Unifies the Journey</h3>
+                    <p class="step-desc">We stitch touchpoints together across the funnel using attribution logic that actually reflects reality.</p>
                 </div>
                 <div>
-                    <div class="w-12 h-12 rounded-full gradient-bg-logo text-white font-bold text-xl flex items-center justify-center mb-4">3</div>
-                    <h3 class="font-semibold text-gray-900 mb-2 text-lg">Get Revenue-Ready Insights</h3>
-                    <p class="text-gray-500">Dashboards, AI insights, and executive reports designed for decisions — not data archaeology.</p>
+                    <div class="step-number gradient-bg-logo">3</div>
+                    <h3 class="step-title">Get Revenue-Ready Insights</h3>
+                    <p class="step-desc">Dashboards, AI insights, and executive reports. Designed for decisions, not data archaeology.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Who It's For -->
-    <section class="py-20 px-4 sm:px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
+    <section class="section section-light">
+        <div class="container">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">Who It's For</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Built for Teams Who Need Answers, Not More Dashboards
-                </h2>
+                <p class="section-label">Who It's For</p>
+                <h2 class="section-title">Built for Teams Who Need Answers,<br>Not More Dashboards</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 text-center">
-                    <span class="text-4xl mb-4 block">👔</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">For Founders & CEOs</h3>
-                    <p class="text-sm text-gray-500">Know where growth is really coming from and where your money is leaking. Executive dashboards with the 4 metrics that matter.</p>
+            <div class="feature-grid grid-cols-3">
+                <div class="card text-center">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+                    <h3 class="card-title">For Founders & CEOs</h3>
+                    <p class="card-desc">Know where growth is really coming from and where your money is leaking. Executive dashboards with the 4 metrics that matter.</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 text-center">
-                    <span class="text-4xl mb-4 block">📣</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">For Marketing Leaders</h3>
-                    <p class="text-sm text-gray-500">Prove impact, defend budgets, and optimize based on revenue — not vanity metrics. AI insights answer your questions instantly.</p>
+                <div class="card text-center">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                    <h3 class="card-title">For Business Owners &amp; Leaders</h3>
+                    <p class="card-desc">Prove what's working, defend decisions with data, and optimize based on revenue, not gut feel. AI insights surface the answers automatically.</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 border border-gray-100 text-center">
-                    <span class="text-4xl mb-4 block">⚙️</span>
-                    <h3 class="font-semibold text-gray-900 mb-2">For RevOps & Analytics</h3>
-                    <p class="text-sm text-gray-500">Get attribution without fragile spreadsheets or over-engineered pipelines. Full data dictionary included.</p>
+                <div class="card text-center">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+                    <h3 class="card-title">For RevOps & Analytics</h3>
+                    <p class="card-desc">Get attribution without fragile spreadsheets or over-engineered pipelines. Full data dictionary included.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Comparison Table -->
-    <section class="py-20 px-4 sm:px-6">
-        <div class="max-w-4xl mx-auto">
+    <!-- Comparison -->
+    <section class="section">
+        <div class="container-sm">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">Why Infera</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Why Infera Is Different
-                </h2>
+                <p class="section-label">Why Verelia</p>
+                <h2 class="section-title">Why Verelia Is Different</h2>
             </div>
 
-            <div class="rounded-xl border border-gray-200 overflow-hidden bg-white">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-50">
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900"></th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-cyan-600">Infera</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-500">Traditional Tools</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Target Audience</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Built for SMBs</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Built for enterprise</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Implementation</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Fast setup, days not months</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Long implementations</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Insights</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">AI-powered, explainable insights</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Black-box models</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Reporting Focus</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Revenue-first reporting</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Click-first reporting</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Technical Requirements</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">No BI team required</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Heavy technical overhead</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Pipeline Visibility</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">Full B2B funnel tracking</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Limited or none</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Executive Reporting</td>
-                            <td class="px-6 py-4 text-sm text-cyan-700 font-medium">KISS metrics built-in</td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Requires custom builds</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Verelia</th>
+                        <th>Traditional Tools</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Target Audience</td>
+                        <td>Built for growing businesses</td>
+                        <td>Built for enterprise</td>
+                    </tr>
+                    <tr>
+                        <td>Implementation</td>
+                        <td>Fast setup, days not months</td>
+                        <td>Long implementations</td>
+                    </tr>
+                    <tr>
+                        <td>Insights</td>
+                        <td>AI-powered, explainable insights</td>
+                        <td>Black-box models</td>
+                    </tr>
+                    <tr>
+                        <td>Reporting Focus</td>
+                        <td>Revenue-first reporting</td>
+                        <td>Click-first reporting</td>
+                    </tr>
+                    <tr>
+                        <td>Technical Requirements</td>
+                        <td>No BI team required</td>
+                        <td>Heavy technical overhead</td>
+                    </tr>
+                    <tr>
+                        <td>Pipeline Visibility</td>
+                        <td>Full B2B funnel tracking</td>
+                        <td>Limited or none</td>
+                    </tr>
+                    <tr>
+                        <td>Executive Reporting</td>
+                        <td>KISS metrics built-in</td>
+                        <td>Requires custom builds</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- Mobile App -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="text-center mb-16">
+                <p class="section-label">Web App + Mobile App</p>
+                <h2 class="section-title">Data Intelligence That Follows You</h2>
+                <p class="section-desc">Verelia AI works on your desktop and your phone. Same account, same data, always in sync. Not two products. One platform, everywhere your business takes you.</p>
+            </div>
+
+            <div class="feature-grid grid-cols-3" style="margin-bottom: 40px;">
+                <div class="card text-center">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                    <h3 class="card-title">Web App</h3>
+                    <p class="card-desc">Deep dashboards, integrations, reports, and full configuration. Your command centre at app.vereliaai.com. Sign up there to get started.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+                    <h3 class="card-title">Mobile App</h3>
+                    <p class="card-desc">Check your numbers on the go, get alerts when something spikes, and ask the AI a question from anywhere. Same account, no extra setup.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+                    <h3 class="card-title">One Account, Both Surfaces</h3>
+                    <p class="card-desc">Sign up on the website. Open the app. You're already logged in. Connect a tool on mobile, it appears on web instantly. One subscription covers both.</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">Sign up at vereliaai.com, enter your card to start the 7-day trial, then download the app. You're already logged in.</p>
+                <div class="hero-buttons" style="justify-content: center; flex-direction: row; flex-wrap: wrap; gap: 12px;">
+                    <a href="https://app.vereliaai.com/sign-up" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 10px;">
+                        <svg width="20" height="24" viewBox="0 0 22 26" fill="none">
+                            <path d="M18.06 13.74c-.03-3.1 2.53-4.6 2.65-4.68-1.45-2.11-3.7-2.4-4.49-2.43-1.9-.19-3.73 1.12-4.7 1.12-.98 0-2.48-1.1-4.08-1.07-2.08.03-4.02 1.21-5.09 3.06-2.19 3.79-.56 9.38 1.55 12.44 1.05 1.5 2.28 3.18 3.9 3.12 1.57-.06 2.16-1 4.06-1 1.88 0 2.43 1 4.08.97 1.69-.03 2.75-1.52 3.77-3.03 1.2-1.73 1.68-3.42 1.7-3.51-.04-.02-3.32-1.27-3.35-5.02z" fill="#111827"/>
+                            <path d="M14.89 4.46c.86-1.05 1.45-2.5 1.29-3.96-1.25.05-2.77.83-3.67 1.87-.8.92-1.51 2.41-1.32 3.82 1.39.11 2.82-.71 3.7-1.73z" fill="#111827"/>
+                        </svg>
+                        <span>
+                            <span style="display: block; font-size: 10px; font-weight: 400; color: #6b7280; line-height: 1;">Download on the</span>
+                            <span style="font-size: 14px; font-weight: 600; color: #111827;">App Store</span>
+                        </span>
+                    </a>
+                    <a href="https://app.vereliaai.com/sign-up" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 10px;">
+                        <svg width="20" height="22" viewBox="0 0 22 24" fill="none">
+                            <path d="M0.43 0.53C0.16 0.82 0 1.28 0 1.87v20.26c0 .59.16 1.05.43 1.34l.07.07 11.36-11.36v-.27L0.5 0.46l-.07.07z" fill="#4285F4"/>
+                            <path d="M15.65 15.85l-3.79-3.79v-.27l3.79-3.79.09.05 4.49 2.55c1.28.73 1.28 1.92 0 2.65l-4.49 2.55-.09.05z" fill="#FBBC04"/>
+                            <path d="M15.74 15.8L11.86 12 0.43 23.47c.42.45 1.12.5 1.9.06l13.41-7.73z" fill="#EA4335"/>
+                            <path d="M15.74 8.2L2.33.47C1.55.02.85.08.43.53L11.86 12 15.74 8.2z" fill="#34A853"/>
+                        </svg>
+                        <span>
+                            <span style="display: block; font-size: 10px; font-weight: 400; color: #6b7280; line-height: 1;">Get it on</span>
+                            <span style="font-size: 14px; font-weight: 600; color: #111827;">Google Play</span>
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-20 px-4 sm:px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
+    <!-- Pricing -->
+    <section id="pricing" class="section section-light">
+        <div class="container">
             <div class="text-center mb-16">
-                <p class="text-cyan-600 font-semibold mb-4">Pricing</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                    Simple, transparent pricing
-                </h2>
-                <p class="text-gray-600">
-                    Start small, scale as you grow. No hidden fees, no long contracts.
-                </p>
+                <p class="section-label">Pricing</p>
+                <h2 class="section-title">Simple, transparent pricing</h2>
+                <p class="section-desc">Start small, scale as you grow. No hidden fees, no long contracts.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="pricing-grid">
                 <!-- Starter -->
-                <div class="rounded-2xl border border-gray-200 p-8 bg-white hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Starter</h3>
-                    <div class="mb-4">
-                        <span class="text-4xl font-bold text-gray-900">$149</span>
-                        <span class="text-gray-500">/month</span>
+                <div class="pricing-card">
+                    <h3 class="pricing-name">Starter</h3>
+                    <div class="pricing-price">
+                        <span class="pricing-amount">$149</span>
+                        <span class="pricing-period">/month</span>
                     </div>
-                    <p class="text-sm text-cyan-600 mb-6">7-day free trial</p>
+                    <p class="pricing-trial">7-day free trial · card required · cancel anytime</p>
                     
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             3 data source connections
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             First-touch attribution
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Core dashboards
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             CSV export
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Email support
                         </li>
                     </ul>
                     
-                    <a href="https://app.inferaapp.com/sign-up" class="block w-full py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold text-center hover:bg-gray-50 transition-colors">
-                        Start Free Trial
-                    </a>
+                    <a href="https://app.vereliaai.com/sign-up" class="btn btn-secondary w-full">Start Free Trial</a>
                 </div>
 
-                <!-- Growth - Popular -->
-                <div class="rounded-2xl border-2 border-cyan-500 p-8 bg-white shadow-lg relative">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-cyan-500 text-white text-sm font-semibold rounded-full">
-                        Most Popular
+                <!-- Growth -->
+                <div class="pricing-card pricing-card-popular">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3 class="pricing-name">Growth</h3>
+                    <div class="pricing-price">
+                        <span class="pricing-amount">$499</span>
+                        <span class="pricing-period">/month</span>
                     </div>
+                    <p class="pricing-trial">7-day free trial · card required · cancel anytime</p>
                     
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Growth</h3>
-                    <div class="mb-4">
-                        <span class="text-4xl font-bold text-cyan-600">$499</span>
-                        <span class="text-gray-500">/month</span>
-                    </div>
-                    <p class="text-sm text-cyan-600 mb-6">7-day free trial</p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             10 data source connections
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Multi-touch attribution
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Customer journey maps
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             B2B pipeline analytics
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             AI insights chat
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             12-month data retention
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Slack notifications
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-cyan" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Priority support
                         </li>
                     </ul>
                     
-                    <a href="https://app.inferaapp.com/sign-up" class="block w-full py-3 rounded-xl gradient-bg text-white font-semibold text-center hover:opacity-90 transition-all">
-                        Start Free Trial
-                    </a>
+                    <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary w-full">Start Free Trial</a>
                 </div>
 
                 <!-- Pro -->
-                <div class="rounded-2xl border border-gray-200 p-8 bg-white hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pro</h3>
-                    <div class="mb-4">
-                        <span class="text-4xl font-bold text-gray-900">$1,499</span>
-                        <span class="text-gray-500">/month</span>
+                <div class="pricing-card">
+                    <h3 class="pricing-name">Pro</h3>
+                    <div class="pricing-price">
+                        <span class="pricing-amount">$1,499</span>
+                        <span class="pricing-period">/month</span>
                     </div>
-                    <p class="text-sm text-cyan-600 mb-6">7-day free trial</p>
+                    <p class="pricing-trial">7-day free trial · card required · cancel anytime</p>
                     
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Unlimited connections
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             AI-powered attribution
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Custom dashboards
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Dashboard Builder
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Data Dictionary
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Advanced forecasting
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             API access
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             SSO / SAML
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <li class="pricing-feature">
+                            <svg class="check-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                             Dedicated CSM
                         </li>
                     </ul>
                     
-                    <a href="mailto:support@inferaapp.com?subject=Pro Plan Inquiry" class="block w-full py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold text-center hover:bg-gray-50 transition-colors">
-                        Contact Sales
-                    </a>
+                    <a href="/cdn-cgi/l/email-protection#6e1d1b1e1e011c1a2e180b1c0b02070f0f07400d0103511d1b0c040b0d1a533e1c014e3e020f004e27001f1b071c17" class="btn btn-secondary w-full">Contact Sales</a>
                 </div>
             </div>
 
-            <p class="text-center mt-8 text-gray-500">
-                <strong>Simple, transparent pricing designed for SMBs</strong> — no enterprise lock-ins.
+            <p class="text-center mt-8" style="color: #6b7280;">
+                <strong>Simple, transparent pricing designed for growing businesses.</strong> No enterprise lock-ins.
             </p>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 px-4 sm:px-6">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Stop Guessing. Start Knowing.
-            </h2>
-            <p class="text-gray-600 mb-8">
-                If you're an SMB that wants real attribution and ROI clarity — without enterprise friction — Infera is built for you.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://app.inferaapp.com/sign-up" class="w-full sm:w-auto px-8 py-4 rounded-xl gradient-bg text-white font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+    <!-- CTA -->
+    <section class="section">
+        <div class="container-sm text-center">
+            <h2 class="section-title">Stop Guessing. Start Knowing.</h2>
+            <p class="section-desc mb-8">If you want real attribution and ROI clarity without enterprise friction, Verelia is built for you. Card required to start. Cancel before day 8 and you owe nothing.</p>
+            <div class="hero-buttons">
+                <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary btn-lg">
                     Start Your Free Trial
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </a>
-                <a href="mailto:support@inferaapp.com?subject=Let's Talk" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all">
-                    Talk to Us
-                </a>
+                <a href="/cdn-cgi/l/email-protection#d4a7a1a4a4bba6a094a2b1a6b1b8bdb5b5bdfab7bbb9eba7a1b6beb1b7a0e998b1a0f3a7f480b5b8bf" class="btn btn-secondary btn-lg">Talk to Us</a>
             </div>
+            <p style="font-size: 13px; color: #9ca3af; margin-top: 24px;">Already a member? Download the mobile app and sign in. You're all set.</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-4 sm:px-6 bg-white border-t border-gray-100">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <a href="#" class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg gradient-bg-logo flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <div class="nav-logo-icon gradient-bg-logo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                             </svg>
                         </div>
-                        <span class="text-xl font-bold text-gray-900">Infera</span>
-                        <span class="text-xs font-medium text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">AI</span>
+                        <span class="nav-logo-text">Verelia</span>
+                        <span class="nav-badge">AI</span>
                     </a>
-                    <p class="text-sm text-gray-500">
-                        Marketing Attribution & ROI Intelligence for SMBs. Know exactly which marketing activities drive revenue.
-                    </p>
-                    <a href="mailto:support@inferaapp.com" class="text-sm text-cyan-600 hover:underline mt-4 block">
-                        support@inferaapp.com
-                    </a>
+                    <p>Business Intelligence & Revenue Clarity for Growing Businesses. Know exactly what drives your business.</p>
+                    <a href="/cdn-cgi/l/email-protection#a7d4d2d7d7c8d5d3e7d1c2d5c2cbcec6c6ce89c4c8ca" class="email-link"><span class="__cf_email__" data-cfemail="1f6c6a6f6f706d6b5f697a6d7a73767e7e76317c7072">[email&#160;protected]</span></a>
                 </div>
 
-                <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
-                        <li><a href="#features" class="hover:text-gray-900">Features</a></li>
-                        <li><a href="#pricing" class="hover:text-gray-900">Pricing</a></li>
-                        <li><a href="#" class="hover:text-gray-900">Integrations</a></li>
-                        <li><a href="#" class="hover:text-gray-900">Changelog</a></li>
-                    </ul>
+                <div class="footer-links">
+                    <h4 class="footer-title">Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#">Integrations</a>
+                    <a href="#">Changelog</a>
                 </div>
 
-                <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-gray-900">Documentation</a></li>
-                        <li><a href="#" class="hover:text-gray-900">Blog</a></li>
-                        <li><a href="#" class="hover:text-gray-900">Case Studies</a></li>
-                        <li><a href="#" class="hover:text-gray-900">API Reference</a></li>
-                    </ul>
+                <div class="footer-links">
+                    <h4 class="footer-title">Resources</h4>
+                    <a href="#">Documentation</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Case Studies</a>
+                    <a href="#">API Reference</a>
                 </div>
 
-                <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-gray-900">About</a></li>
-                        <li><a href="#" class="hover:text-gray-900">Careers</a></li>
-                        <li><a href="mailto:support@inferaapp.com" class="hover:text-gray-900">Contact</a></li>
-                        <li><a href="#" class="hover:text-gray-900">Security</a></li>
-                    </ul>
+                <div class="footer-links">
+                    <h4 class="footer-title">Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Careers</a>
+                    <a href="/cdn-cgi/l/email-protection#067573767669747246706374636a6f67676f2865696b">Contact</a>
+                    <a href="#">Security</a>
                 </div>
             </div>
 
-            <div class="pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500">
-                <p>© 2025 Infera AI. All rights reserved.</p>
-                <div class="flex gap-4 mt-4 sm:mt-0">
-                    <a href="#" class="hover:text-gray-900">Privacy Policy</a>
-                    <a href="#" class="hover:text-gray-900">Terms of Service</a>
+            <div class="footer-bottom">
+                <p>© 2026 Verelia AI. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+        function toggleMenu() {
+            var menu = document.getElementById('mobileMenu');
+            var svg = document.querySelector('.mobile-menu-btn svg');
+            var isOpen = menu.classList.contains('active');
+            menu.classList.toggle('active');
+            svg.innerHTML = isOpen
+                ? '<path d="M4 6h16M4 12h16M4 18h16"/>'
+                : '<path d="M6 18L18 6M6 6l12 12"/>';
         }
+        document.querySelectorAll('#mobileMenu a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+                document.querySelector('.mobile-menu-btn svg').innerHTML = '<path d="M4 6h16M4 12h16M4 18h16"/>';
+            });
+        });
+        document.addEventListener('click', function(e) {
+            var menu = document.getElementById('mobileMenu');
+            if (menu.classList.contains('active') && !e.target.closest('nav')) {
+                menu.classList.remove('active');
+                document.querySelector('.mobile-menu-btn svg').innerHTML = '<path d="M4 6h16M4 12h16M4 18h16"/>';
+            }
+        });
     </script>
 </body>
 </html>
