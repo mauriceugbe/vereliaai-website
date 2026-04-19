@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Verelia AI</title>
+    <meta name="description" content="Verelia AI privacy policy. Learn how we collect, use, and protect your data.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #fafaf9;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .nav-inner {
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+        .nav-badge {
+            font-size: 12px;
+            font-weight: 500;
+            color: #0891b2;
+            background: #ecfeff;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .nav-back {
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .nav-back:hover {
+            color: #0891b2;
+        }
+
+        /* Content */
+        .wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
+        .header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        h1 {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            color: #111827;
+            margin-bottom: 12px;
+            line-height: 1.15;
+        }
+        .updated {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .intro {
+            font-size: 17px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+            margin: 40px 0 16px;
+        }
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin: 24px 0 10px;
+        }
+        p {
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        ul {
+            margin: 12px 0 20px 20px;
+        }
+        li {
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        li strong { color: #111827; }
+        a.inline {
+            color: #0891b2;
+            font-weight: 500;
+        }
+        a.inline:hover {
+            color: #0e7490;
+            text-decoration: underline;
+        }
+        .contact-box {
+            background: #f0f9ff;
+            border: 1px solid #b3dce8;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+        .contact-box h3 {
+            margin-top: 0;
+            color: #0e7490;
+        }
+        .contact-box p {
+            margin-bottom: 8px;
+            color: #0e7490;
+        }
+        .contact-box a {
+            color: #0891b2;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid #e5e7eb;
+            background: #ffffff;
+            padding: 32px 24px;
+        }
+        .footer-inner {
+            max-width: 1152px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-copy {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-links a {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .footer-links a:hover {
+            color: #0891b2;
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 32px; }
+            .wrap { padding: 96px 20px 56px; }
+            .intro { font-size: 16px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 56 56" fill="none">
+                        <defs>
+                            <linearGradient id="vgn" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#06b6d4"/>
+                                <stop offset="100%" stop-color="#9333ea"/>
+                            </linearGradient>
+                        </defs>
+                        <polyline points="11,10 22,30 33,10" stroke="url(#vgn)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="17,46 28,26 39,46" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="22" y1="39" x2="34" y2="39" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="nav-logo-text">Verelia</span>
+                <span class="nav-badge">AI</span>
+            </a>
+            <a href="/" class="nav-back">← Back to home</a>
+        </div>
+    </nav>
+
+    <main class="wrap">
+        <div class="header">
+            <h1>Privacy Policy</h1>
+            <div class="updated">Last updated: April 18, 2026</div>
+        </div>
+
+        <p class="intro">At Verelia AI, we take your privacy seriously. This policy describes what data we collect, how we use it, how we protect it, and the rights you have over it. If anything here is unclear, email us at <a href="mailto:support@vereliaai.com" class="inline">support@vereliaai.com</a>.</p>
+
+        <h2>1. Who we are</h2>
+        <p>Verelia AI ("Verelia," "we," "us," or "our") provides a business intelligence platform that connects your social media, accounting, team management, and website analytics tools into a unified view. The service is available as a web application at <a href="https://app.vereliaai.com" class="inline">app.vereliaai.com</a> and as a mobile application on iOS and Android.</p>
+
+        <h2>2. Information we collect</h2>
+
+        <h3>Account information</h3>
+        <p>When you sign up, we collect your name, email address, business name, business type, and password (stored as a secure hash, never in plain text). Authentication is handled by Clerk, which may also store a session identifier in your browser or device.</p>
+
+        <h3>Billing information</h3>
+        <p>Payment processing is handled by Stripe. We do not store your credit card number. Stripe provides us with a customer ID, subscription status, and the last four digits of your card for display purposes only.</p>
+
+        <h3>Data from connected services</h3>
+        <p>When you connect third-party services to Verelia, we receive the data you authorize us to access. This may include:</p>
+        <ul>
+            <li><strong>Social media platforms</strong> (Instagram, TikTok, Facebook, YouTube, X, LinkedIn): posts, comments, reach, impressions, likes, shares, follower counts, and engagement metrics.</li>
+            <li><strong>Accounting tools</strong> (QuickBooks, Xero, Wave, FreshBooks): revenue categories, expense categories, transaction totals, and profit margins. We do not receive bank account numbers or individual transaction line items unless explicitly authorized.</li>
+            <li><strong>Team and payroll tools</strong> (ADP, Gusto, Homebase, Square Team): employee names, hours worked, payroll totals, and overtime. We do not receive Social Security numbers or bank routing information.</li>
+            <li><strong>Website analytics</strong>: page views, session counts, and conversion events from the tracking snippet you install on your site.</li>
+        </ul>
+        <p>You can disconnect any service at any time from the Connect screen, which revokes our access going forward.</p>
+
+        <h3>Usage data</h3>
+        <p>We log how you use the app: which screens you open, which features you use, when you log in, and basic device information (device type, operating system, app version). This helps us improve the product and diagnose issues.</p>
+
+        <h3>AI chat history</h3>
+        <p>When you use the Ask AI feature, we store your questions and our responses so you can reference them later. We use these in aggregate and anonymized form to improve the AI. We do not sell or share your individual questions.</p>
+
+        <h2>3. How we use your information</h2>
+        <ul>
+            <li>To provide, maintain, and improve the Verelia AI service.</li>
+            <li>To calculate your Business Pulse score and generate personalized insights.</li>
+            <li>To process payments, send billing receipts, and manage your subscription.</li>
+            <li>To send transactional emails (account verification, password reset, billing notifications).</li>
+            <li>To provide customer support and respond to your inquiries.</li>
+            <li>To detect, prevent, and address fraud, security issues, and technical problems.</li>
+            <li>To comply with legal obligations.</li>
+        </ul>
+        <p>We will send you product update emails only if you opt in, and you can unsubscribe at any time using the link in any email we send.</p>
+
+        <h2>4. How we share information</h2>
+        <p>We do <strong>not</strong> sell your data. We do not share your data with advertisers. We do not use your business data to train AI models that benefit other customers.</p>
+        <p>We share information only in these limited cases:</p>
+        <ul>
+            <li><strong>Service providers</strong>: trusted vendors who help us operate the service — Clerk (authentication), Stripe (payments), Railway (database hosting), Vercel (web app hosting), Netlify (website hosting), Anthropic (AI processing), and email delivery providers. Each of these is bound by contract to handle your data confidentially.</li>
+            <li><strong>Legal requirements</strong>: when required by law, court order, or to protect the rights, property, or safety of Verelia, our users, or the public.</li>
+            <li><strong>Business transfers</strong>: if Verelia is acquired or merged, your data may transfer to the acquiring entity, subject to this policy or an equivalent replacement.</li>
+        </ul>
+
+        <h2>5. How we protect your information</h2>
+        <p>We use industry-standard security practices: encryption in transit (TLS/HTTPS), encryption at rest for sensitive data, access controls limiting who on our team can see your data, and regular security reviews. Payment data is handled by Stripe, which is PCI DSS Level 1 certified.</p>
+        <p>No system is perfectly secure. If we ever discover a data breach that affects you, we will notify you within 72 hours of discovery.</p>
+
+        <h2>6. How long we keep your information</h2>
+        <p>We keep your account data for as long as your account is active. If you cancel your subscription, we keep your data for 90 days in case you reactivate, then delete it permanently. You can request immediate deletion at any time by emailing <a href="mailto:support@vereliaai.com" class="inline">support@vereliaai.com</a>.</p>
+        <p>We keep billing records for 7 years to comply with tax and accounting requirements.</p>
+
+        <h2>7. Your rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li><strong>Access</strong> the information we have about you.</li>
+            <li><strong>Correct</strong> inaccurate information.</li>
+            <li><strong>Delete</strong> your account and data.</li>
+            <li><strong>Export</strong> your data in a portable format.</li>
+            <li><strong>Opt out</strong> of marketing emails.</li>
+            <li><strong>Revoke</strong> third-party connections at any time.</li>
+        </ul>
+        <p>To exercise any of these rights, email <a href="mailto:support@vereliaai.com" class="inline">support@vereliaai.com</a> from the email address associated with your account. We respond within 30 days.</p>
+        <p>If you are a California resident, you have additional rights under the CCPA. If you are in the European Economic Area or the United Kingdom, you have rights under the GDPR. Email us for details or to exercise those rights.</p>
+
+        <h2>8. Children's privacy</h2>
+        <p>Verelia AI is not directed at children under 16. We do not knowingly collect information from anyone under 16. If you believe a child has provided us with personal information, please email us and we will delete it.</p>
+
+        <h2>9. International users</h2>
+        <p>Verelia AI is hosted in the United States. If you use the service from outside the United States, your data will be transferred to, stored in, and processed in the United States. By using the service, you consent to this transfer.</p>
+
+        <h2>10. Changes to this policy</h2>
+        <p>We may update this policy from time to time. When we make material changes, we will notify you by email and update the "Last updated" date at the top. Continued use of the service after the update constitutes acceptance of the new policy.</p>
+
+        <div class="contact-box">
+            <h3>Contact us</h3>
+            <p>Questions, concerns, or requests about your privacy?</p>
+            <p>Email: <a href="mailto:support@vereliaai.com">support@vereliaai.com</a></p>
+            <p>Website: <a href="https://vereliaai.com">vereliaai.com</a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-copy">© 2026 Verelia AI. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/privacy">Privacy</a>
+                <a href="mailto:support@vereliaai.com">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
