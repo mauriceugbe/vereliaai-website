@@ -208,6 +208,25 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
 .assure b{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
 .assure span{font-size:12.5px;color:var(--ink-500);line-height:1.5}
 
+/* ---------- alerts ---------- */
+.alertgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,60px);align-items:center}
+.alertstack{display:flex;flex-direction:column;gap:14px}
+.acard{background:#fff;border:1px solid var(--border-soft);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm)}
+.acard.hot{border-color:#fecdd3;background:linear-gradient(180deg,#fff5f6 0%,#fff 65%)}
+.atop{display:flex;align-items:flex-start;gap:13px;margin-bottom:10px}
+.aico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none}
+.ai-rose{background:#ffe4e6}.ai-amber{background:#fef3c7}.ai-cyan{background:var(--cyan-50)}
+.ameta{flex:1}
+.aname{font-size:15px;font-weight:700;line-height:1.3}
+.awhen{font-size:12.5px;color:var(--ink-500);margin-top:2px}
+.acost{font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:7px;white-space:nowrap;flex:none;background:#ffe4e6;color:#be123c}
+.abody2{font-size:14px;color:var(--ink-600);line-height:1.55}
+.abody2 b{color:var(--ink)}
+.arules{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.arule{border:1px solid var(--border-soft);border-radius:12px;padding:16px 18px;background:var(--bg-alt)}
+.arule b{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
+.arule span{font-size:13px;color:var(--ink-500);line-height:1.5}
+
 /* ---------- competitor board ---------- */
 .board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
 .rival{border:1px solid rgba(226,232,240,.14);border-radius:16px;padding:24px;background:rgba(255,255,255,.03)}
@@ -347,7 +366,7 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
 
 /* ---------- responsive ---------- */
 @media(max-width:980px){
-  .hero-grid,.advisor-grid,.price-grid,.dim-wide{grid-template-columns:1fr}
+  .hero-grid,.advisor-grid,.price-grid,.dim-wide,.alertgrid{grid-template-columns:1fr}
   .hero{padding-top:118px}
   .dim-grid,.board,.steps,.traits,.diffs,.wfeats,.assure{grid-template-columns:1fr 1fr}
   .assure div:nth-child(2n){border-right:0}
@@ -357,7 +376,7 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
   .ring-wrap{max-width:240px}
 }
 @media(max-width:680px){
-  .dim-grid,.board,.threads,.steps,.price-list,.traits,.diffs,.wfeats,.assure{grid-template-columns:1fr}
+  .dim-grid,.board,.threads,.steps,.price-list,.traits,.diffs,.wfeats,.assure,.arules{grid-template-columns:1fr}
   .assure div{border-right:0;border-bottom:1px solid var(--border-soft)}
   .assure div:last-child{border-bottom:0}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
@@ -395,6 +414,7 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
       <a href="#compare">Competitors</a>
       <a href="#different">Why Verelia</a>
       <a href="#coaching">Coaching</a>
+      <a href="#alerts">Alerts</a>
       <a href="#pricing">Pricing</a>
     </div>
 
@@ -413,6 +433,7 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
     <a href="#compare">Competitors</a>
     <a href="#different">Why Verelia</a>
     <a href="#coaching">Coaching</a>
+    <a href="#alerts">Alerts</a>
     <a href="#pricing">Pricing</a>
     <a href="https://app.vereliaai.com/sign-in">Log In</a>
     <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary btn-block" style="margin-top:16px">Get Your Score</a>
@@ -434,10 +455,9 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
       </h1>
 
       <p class="hero-desc">
-        Verelia turns your reputation, your visibility across search and AI, your digital
-        presence, and your competitive rank into a single number out of 1,000 — updated daily
-        and ranked against the businesses competing for your customers.
-        Then it shows you exactly what to fix.
+        One number out of 1,000 for how your business shows up — reviews, search, AI answers,
+        social — and, unlike every other score, the businesses taking your customers are inside
+        that number. It moves when they move, and it tells you what to fix.
       </p>
 
       <div class="hero-buttons">
@@ -883,8 +903,59 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
   </div>
 </section>
 
+<!-- ============ ALERTS ============ -->
+<section class="section section-light" id="alerts">
+  <div class="container alertgrid">
+    <div class="reveal">
+      <p class="section-label">Alerts &amp; the weekly digest</p>
+      <h2 class="section-title">You will not have to remember to check.</h2>
+      <p class="section-desc">
+        Most of the time your score sits there quietly. When something actually moves it — a bad
+        review, a competitor undercutting you, a ranking drop — Verelia tells you the same hour,
+        with the points it is costing and the fix already drafted.
+      </p>
+
+      <div class="arules">
+        <div class="arule"><b>Rarely, and never for nothing</b><span>Three alerts a week at most, and nothing that moves your score by less than two points.</span></div>
+        <div class="arule"><b>Always something to do</b><span>Every alert arrives with a drafted reply, a fix, or a decision. None are just news.</span></div>
+        <div class="arule"><b>Good news waits</b><span>Five-star reviews and score rises go in the Monday summary rather than interrupting service.</span></div>
+        <div class="arule"><b>Monday, 8am</b><span>What your score did last week, what caused it, and the one thing worth doing next.</span></div>
+      </div>
+    </div>
+
+    <div class="alertstack reveal">
+      <article class="acard hot">
+        <div class="atop">
+          <span class="aico ai-rose"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg></span>
+          <div class="ameta"><div class="aname">New 1-star review</div><div class="awhen">Google · 40 minutes ago</div></div>
+          <span class="acost">−4 pts</span>
+        </div>
+        <p class="abody2">“Waited 40 minutes and nobody checked on us.” Your reply rate is your strongest signal — <b>answering within 24 hours recovers most of this.</b> Draft is ready to send.</p>
+      </article>
+
+      <article class="acard">
+        <div class="atop">
+          <span class="aico ai-amber"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M3 17l5-5 4 3 5-7 4 4"/></svg></span>
+          <div class="ameta"><div class="aname">A competitor launched a prix-fixe</div><div class="awhen">Instagram · 3 hours ago</div></div>
+          <span class="acost">−2 pts</span>
+        </div>
+        <p class="abody2">$54 for three courses, posted Thursday. It is pulling the Friday traffic you normally hold. <b>Three counter-concepts priced for your margin</b> are waiting.</p>
+      </article>
+
+      <article class="acard">
+        <div class="atop">
+          <span class="aico ai-cyan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
+          <div class="ameta"><div class="aname">You dropped out of the map pack</div><div class="awhen">Google · Tuesday</div></div>
+          <span class="acost">−6 pts</span>
+        </div>
+        <p class="abody2">Position 6 to position 9 for “brunch near me”. Two missing service categories account for most of it — <b>a two-minute fix.</b></p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ ADVISOR ============ -->
-<section class="section section-light">
+<section class="section">
   <div class="container advisor-grid">
     <div class="reveal">
       <p class="section-label">The Advisor</p>
@@ -956,7 +1027,7 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
     <div class="section-head center reveal">
       <p class="section-label">How It Works</p>
       <h2 class="section-title">From signup to your first score</h2>
-      <p class="section-desc">No data exports, no implementation, no onboarding calls. Your baseline is built for you.</p>
+      <p class="section-desc">No data exports, no implementation, no onboarding calls. The first scan runs while you download the app.</p>
     </div>
 
     <div class="steps reveal">
@@ -967,18 +1038,18 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
       </div>
       <div class="step">
         <div class="step-n">2</div>
-        <h3>Download the app</h3>
-        <p>Sign in with the same email you just used. There is nothing to set up twice.</p>
+        <h3>We scan your business</h3>
+        <p>We look at your business the way a customer would, across every place they would check.</p>
       </div>
       <div class="step">
         <div class="step-n">3</div>
-        <h3>Your score appears</h3>
-        <p>We build your baseline while you install. Most first scores land within a few minutes.</p>
+        <h3>You see what we found</h3>
+        <p>Plain findings you can verify yourself — then the score that ties them together.</p>
       </div>
       <div class="step">
         <div class="step-n">4</div>
-        <h3>Start raising it</h3>
-        <p>Work the coaching threads and watch the number move. Every point is a change your customers can see.</p>
+        <h3>We keep watch</h3>
+        <p>Alerts when something moves your score, and a Monday summary of what changed and why.</p>
       </div>
     </div>
   </div>
@@ -1062,11 +1133,11 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
         <ul class="price-list">
           <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Daily Pulse Score</li>
           <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Competitor benchmarking</li>
-          <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Coaching threads</li>
+          <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Coaching threads with drafted work</li>
           <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Advisor access included</li>
+          <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Weekly Monday digest</li>
           <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Drafted posts and replies</li>
-          <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>SEO and listing monitoring</li>
-          <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Verelia mobile app</li>
+          <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>Alerts when your score moves</li>
           <li><svg class="tick" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.6"><path d="M4 12.5l5.5 5.5L20 7"/></svg>No add-ons or upsells</li>
         </ul>
         <a href="https://app.vereliaai.com/sign-up" class="btn btn-primary btn-lg btn-block">Get Your Score</a>
@@ -1148,6 +1219,7 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.15}
         <a href="#score">Pulse Score</a>
         <a href="#compare">Competitors</a>
         <a href="#coaching">Coaching</a>
+        <a href="#alerts">Alerts</a>
         <a href="#web">Web Console</a>
         <a href="#pricing">Pricing</a>
       </div>
