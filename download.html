@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get the app — Verelia AI</title>
+<meta name="description" content="Install Verelia and run your first Pulse Score.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F172A">
+<link rel="canonical" href="https://vereliaai.com/download">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'><defs><linearGradient id='g' x1='11' y1='0' x2='33' y2='0' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='%2306b6d4'/><stop offset='1' stop-color='%239333ea'/></linearGradient></defs><rect width='56' height='56' rx='12' fill='%23111827'/><polyline points='11,10 22,30 33,10' fill='none' stroke='url(%23g)' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/><polyline points='17,46 28,26 39,46' fill='none' stroke='white' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/><line x1='22' y1='39' x2='34' y2='39' stroke='white' stroke-width='4.5' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111827;
+    --muted:#4b5563;
+    --faint:#9ca3af;
+    --line:#e5e7eb;
+    --paper:#fafaf9;
+    --cyan:#06b6d4;
+    --cyan-600:#0891b2;
+    --purple:#9333ea;
+    --dark:#0f172a;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:#fff;color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan-600);}
+  .topbar{height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;}
+
+  header{padding:26px 0 0;}
+  .mark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;}
+  .mark svg{display:block;border-radius:8px;}
+  .wordmark{font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink);}
+  .wordmark em{font-style:normal;font-size:14px;font-weight:500;color:var(--cyan-600);margin-left:3px;}
+
+  main{padding:56px 0 72px;}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--cyan-600);margin:0 0 14px;}
+  h1{font-size:38px;line-height:1.15;letter-spacing:-.025em;font-weight:700;margin:0 0 16px;}
+  .lede{font-size:18px;color:var(--muted);margin:0 0 36px;}
+
+  .btn{
+    display:inline-block;background:var(--cyan-600);color:#fff;text-decoration:none;
+    font-weight:600;font-size:17px;padding:15px 30px;border-radius:10px;
+    transition:background .15s ease;
+  }
+  .btn:hover{background:#0e7490;}
+  .btn:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;}
+  .btn-note{font-size:14px;color:var(--faint);margin:14px 0 0;}
+
+  .steps{list-style:none;counter-reset:s;margin:44px 0 0;padding:0;border-top:1px solid var(--line);}
+  .steps li{counter-increment:s;position:relative;padding:22px 0 22px 46px;border-bottom:1px solid var(--line);}
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:23px;width:26px;height:26px;border-radius:50%;
+    background:var(--paper);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--muted);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps strong{display:block;font-weight:600;margin-bottom:2px;}
+  .steps span{color:var(--muted);font-size:16px;}
+
+  .aside{margin-top:44px;padding:22px 24px;background:var(--paper);border:1px solid var(--line);border-radius:12px;font-size:15px;color:var(--muted);}
+  .aside p{margin:0;}
+  .aside p + p{margin-top:10px;}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:14px;color:var(--faint);}
+  footer a{color:var(--muted);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .dot{padding:0 8px;}
+
+  @media (max-width:520px){
+    h1{font-size:31px;}
+    main{padding:40px 0 56px;}
+    .btn{display:block;text-align:center;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+
+<header>
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Verelia AI">
+      <svg width="30" height="30" viewBox="0 0 56 56" aria-hidden="true">
+        <defs>
+          <linearGradient id="vaGrad" x1="11" y1="0" x2="33" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#06b6d4"/>
+            <stop offset="1" stop-color="#9333ea"/>
+          </linearGradient>
+        </defs>
+        <rect width="56" height="56" rx="12" fill="#111827"/>
+        <polyline points="11,10 22,30 33,10" fill="none" stroke="url(#vaGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="17,46 28,26 39,46" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="22" y1="39" x2="34" y2="39" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">Verelia<em>AI</em></span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="eyebrow">You're in</p>
+    <h1>Get your score.</h1>
+    <p class="lede">Three steps, about two minutes.</p>
+
+    <!-- ============================================================
+         SINGLE SWAP POINT
+         Beta: the button points at TestFlight.
+         When the App Store listing goes live, comment out the
+         TestFlight block, uncomment the App Store block, drop the
+         Apple ID in, and delete step 1 from the list below.
+         ============================================================ -->
+
+    <!-- TESTFLIGHT (current) -->
+    <a class="btn" href="https://testflight.apple.com/join/fDVWyN3F">Install Verelia</a>
+    <p class="btn-note">iPhone, via TestFlight. iOS 16 or later.</p>
+
+    <!-- APP STORE (swap to this once live)
+    <a class="btn" href="https://apps.apple.com/us/app/verelia/idAPPLE_ID_HERE">Download on the App Store</a>
+    <p class="btn-note">iPhone. iOS 16 or later.</p>
+    -->
+
+    <ol class="steps">
+      <li>
+        <strong>Install TestFlight, then tap the button above</strong>
+        <span>TestFlight is Apple's app for pre-release software. It's free, and it's how updates reach you while Verelia is in beta.</span>
+      </li>
+      <li>
+        <strong>Sign in with the email on your subscription</strong>
+        <span>The same address you paid with. That's what unlocks the app.</span>
+      </li>
+      <li>
+        <strong>Enter your business name and city</strong>
+        <span>The first scan takes about twenty seconds. You'll get your number, your band, and your rank against the businesses you're competing with.</span>
+      </li>
+    </ol>
+
+    <div class="aside">
+      <p><strong>Signed in but still seeing the access screen?</strong> Verelia checks your subscription by email address. If you paid with a different one, email <a href="mailto:support@vereliaai.com">support@vereliaai.com</a> and we'll move it across.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026 Verelia AI LLC<span class="dot">·</span><a href="/">vereliaai.com</a><span class="dot">·</span><a href="/privacy">Privacy Policy</a><span class="dot">·</span><a href="mailto:support@vereliaai.com">support@vereliaai.com</a>
+  </div>
+</footer>
+</body>
+</html>
