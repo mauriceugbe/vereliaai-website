@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example dashboard &mdash; Verelia</title>
+<meta name="description" content="An example Verelia performance dashboard for a barbershop, with sample data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@400;500;600&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8423D; --red-dk:#A5322E; --ink:#1E1D1C; --paper:#FFFFFF; --panel:#F7F5F2;
+  --rule:#E5E0DA; --muted:#736D67; --soft:#CFC9C2;
+  --good:#2F7A4B; --warn:#A86A12; --bad:#B42318;
+  --display:'Oswald','Arial Narrow',Arial,sans-serif;
+  --body:'Montserrat',system-ui,-apple-system,Segoe UI,sans-serif;
+  --script:'Yellowtail','Brush Script MT',cursive;
+  /* layout: red masthead band, slicer bar, then summary row, two charts, one detail block per page */
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--panel);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+
+/* masthead */
+.mast{background:var(--red);color:#fff}
+.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
+.mast h1{font-family:var(--display);font-weight:600;font-size:34px;letter-spacing:.02em;text-transform:uppercase;line-height:1.05;text-wrap:balance}
+.mast .sub{font-family:var(--display);font-size:15px;letter-spacing:.14em;text-transform:uppercase;opacity:.9;margin-top:4px}
+.logo{background:#fff;border-radius:3px;padding:8px 22px 6px;text-align:right;min-width:200px}
+.logo .w{font-family:var(--script);color:var(--red);font-size:44px;line-height:1}
+.logo .t{font-family:var(--display);font-size:9px;letter-spacing:.22em;color:var(--ink);text-transform:uppercase;margin-top:-2px}
+
+/* nav + slicers */
+.topbar{background:var(--paper);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{border:0;background:none;padding:8px 14px;font-family:var(--display);font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;color:var(--muted)}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
+.slicers{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--paper);padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer;border-right:1px solid var(--rule)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.sel{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted)}
+.sel select{border:1px solid var(--rule);border-radius:6px;padding:6px 8px;background:var(--paper);font-size:12px;font-weight:600;color:var(--ink);cursor:pointer}
+.chip{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px dashed var(--red);color:var(--red);padding:4px 8px;border-radius:4px;white-space:nowrap}
+
+.context{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;padding:16px 0 10px}
+.context b{color:var(--ink);font-weight:600}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+#client-cards{grid-template-columns:repeat(7,1fr)}
+@media (max-width:1100px){#client-cards{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:700px){.cards,#client-cards{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 14px 12px;position:relative;display:flex;flex-direction:column;gap:6px;min-height:142px}
+.card.hero{border:2px solid var(--red)}
+.card .lab{font-family:var(--display);font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-right:22px}
+.card.hero .lab{color:var(--red)}
+.card .val{font-family:var(--display);font-weight:500;font-size:32px;line-height:1.05;font-variant-numeric:tabular-nums}
+.card .cmp{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:2px;font-variant-numeric:tabular-nums}
+.card .cmp b{font-weight:600}
+.up{color:var(--good)} .dn{color:var(--bad)} .flat{color:var(--muted)}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;white-space:nowrap;align-self:flex-start;margin-top:auto}
+.pill.on{background:#E3F1E8;color:var(--good)}
+.pill.watch{background:#FBF0DC;color:var(--warn)}
+.pill.off{background:#FBE4E2;color:var(--bad)}
+.pill.tbd{background:#ECE9E5;color:var(--muted)}
+
+/* panels */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.panel{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:16px;position:relative;min-width:0}
+.panel h2{font-family:var(--display);font-weight:500;font-size:17px;letter-spacing:.04em;text-transform:uppercase;padding-right:26px;text-wrap:balance}
+.panel .note{font-size:12px;color:var(--muted);margin:2px 0 10px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:12px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.legend i.ln{height:0;border-top:2px dashed var(--red);border-radius:0}
+.full{margin-top:12px}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:var(--body);fill:var(--muted)}
+.grid{stroke:var(--rule);stroke-width:1}
+.ax{font-size:11px}
+.bar{fill:var(--ink)}
+.bar.under{fill:var(--soft)}
+.tline{stroke:var(--red);stroke-width:2;stroke-dasharray:6 4}
+.tlab{font-size:11px;fill:var(--red)!important;font-weight:600}
+.vlab{font-size:11px;fill:var(--ink)!important;font-weight:600}
+
+/* info tooltip */
+.info{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;border:1px solid var(--soft);background:var(--paper);font-size:11px;font-weight:700;color:var(--muted);cursor:help;line-height:18px;text-align:center}
+.info:hover,.info:focus-visible{border-color:var(--red);color:var(--red)}
+#tip{position:fixed;z-index:50;max-width:300px;background:var(--ink);color:#fff;border-radius:6px;padding:10px 12px;font-size:12px;line-height:1.45;pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip b{display:block;font-family:var(--display);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:11px;color:#F2B8B5;margin-top:6px}
+#tip b:first-child{margin-top:0}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+th{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th.n,td.n{text-align:right}
+tr.sel td{background:#FBEDEC}
+tr.tot td{font-weight:700;border-top:2px solid var(--ink);border-bottom:0}
+td .t{display:block;font-size:11px;color:var(--muted);font-weight:400}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.dot.on{background:var(--good)} .dot.watch{background:var(--warn)} .dot.off{background:var(--bad)}
+.defs td:first-child{font-weight:600;white-space:nowrap}
+ol.qs{padding-left:20px;display:grid;gap:8px;max-width:820px}
+ol.qs li{padding-left:4px}
+
+footer{color:var(--muted);font-size:12px;padding:22px 0 34px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+[hidden]{display:none!important}
+
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.mast h1{font-size:26px}}
+@media (max-width:480px){.wrap{padding:0 16px}.logo{min-width:0}.logo .w{font-size:34px}.card .val{font-size:26px}}
+@media (prefers-reduced-motion:reduce){#tip{transition:none}}
+</style>
+</head>
+<body>
+<div style="background:#0F172A;color:#F8FAFC;font-family:Inter,Montserrat,sans-serif;font-size:13.5px"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px"><span>This is an example Verelia dashboard for a barbershop, with sample numbers.</span><span style="display:flex;gap:16px;font-weight:700"><a href="/" style="color:#F8FAFC">Back to Verelia</a><a href="/#pricing" style="color:#22D3EE">Start your dashboard</a></span></div></div>
+
+<header class="mast">
+  <div class="wrap">
+    <div>
+      <h1>Business Performance</h1>
+      <div class="sub">Example dashboard</div>
+    </div>
+    <div class="logo" aria-label="Example barbershop"><div class="w">Your Shop</div><div class="t">Example barbershop</div></div>
+  </div>
+</header>
+
+<nav class="topbar" aria-label="Dashboard pages and filters">
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-pulse" data-page="pulse">Pulse</button>
+      <button class="tab" role="tab" id="tab-barbers" data-page="barbers">Barbers</button>
+      <button class="tab" role="tab" id="tab-clients" data-page="clients">Clients</button>
+      <button class="tab" role="tab" id="tab-definitions" data-page="definitions">Definitions</button>
+    </div>
+    <div class="slicers" id="slicers">
+      <div class="seg" role="group" aria-label="Period" id="period">
+        <button data-p="week">This week</button>
+        <button data-p="month">This month</button>
+        <button data-p="90">Last 90 days</button>
+        <button data-p="ytd">Year to date</button>
+      </div>
+      <label class="sel" for="barber">Barber
+        <select id="barber"></select>
+      </label>
+      <span class="chip">Example · sample data</span>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="context" id="context"></div>
+
+  <section id="page-pulse" hidden>
+    <div class="cards" id="pulse-cards"></div>
+    <div class="grid2">
+      <div class="panel">
+        <h2 id="rev-title">Revenue per day vs $1,650</h2>
+        <p class="note" id="rev-note"></p>
+        <button class="info" data-q="Are we hitting the master critical number?" data-a="Each bar is revenue for one open day (or the average per open day for longer periods). Dark bars cleared the target. A run of light bars is the early warning to act on bookings or tickets.">i</button>
+        <div id="rev-chart"></div>
+        <div class="legend"><span><i style="background:var(--ink)"></i>At or above target</span><span><i style="background:var(--soft)"></i>Below target</span><span><i class="ln"></i>Target</span></div>
+      </div>
+      <div class="panel">
+        <h2>2026 revenue vs $600,000 goal</h2>
+        <p class="note">Cumulative, shop-wide. Dotted line projects the year at the current run rate.</p>
+        <button class="info" data-q="Will we finish the year at $600,000?" data-a="The solid line is revenue banked so far this year. The dashed red line is where we need to be each month to land on $600,000. If the dotted projection ends below the goal, the gap is what the rest of the year has to make up.">i</button>
+        <div id="pace-chart"></div>
+        <div class="legend"><span><i style="background:var(--ink)"></i>Actual</span><span><i style="background:var(--muted)"></i>Projection</span><span><i class="ln"></i>Goal pace</span></div>
+      </div>
+    </div>
+    <div class="panel full">
+      <h2>Annual goals scorecard</h2>
+      <p class="note">The seven goals from the strategic plan, year to date, shop-wide.</p>
+      <button class="info" data-q="Which annual goals are on track right now?" data-a="Each row is one goal from the same-pager with its year-to-date number. On track means the goal is met; Watch means within 5% of it; Off track means further away. Confirm target means the goal needs clarifying before it can be scored.">i</button>
+      <div class="tbl-wrap"><table id="goals"></table></div>
+    </div>
+  </section>
+
+  <section id="page-barbers" hidden>
+    <div class="panel">
+      <h2>Barber scorecard</h2>
+      <p class="note" id="barber-note">Each number is compared with the target for that barber's tier.</p>
+      <button class="info" data-q="Which barbers are hitting their tier targets, and where is each one falling short?" data-a="One row per barber. Green is at or above target, amber is within 5%, red is further off. Read across a row to see whether a gap comes from volume (utilization), price (ticket and add-ons) or retention (rebook).">i</button>
+      <div class="tbl-wrap"><table id="barber-table"></table></div>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h2>Revenue per week by barber</h2>
+        <p class="note">Red tick is the tier target: Tier I $2,500, Tier II $3,000.</p>
+        <button class="info" data-q="Is each barber earning their weekly number?" data-a="Bar length is average weekly revenue in the selected period. The red tick marks the tier target. Bars that stop short of the tick show how much each barber is under.">i</button>
+        <div id="rpw-chart"></div>
+      </div>
+      <div class="panel">
+        <h2>Best sellers mix</h2>
+        <p class="note">Share of completed appointments by service.</p>
+        <button class="info" data-q="Is each barber selling what the shop is known for?" data-a="The plan names scissor haircut, bald fade and clipper haircut as the best sellers. A scissor-led shop should see the scissor share hold up across barbers. A low share points to a training or booking-menu conversation.">i</button>
+        <div id="mix-chart"></div>
+        <div class="legend"><span><i style="background:var(--red)"></i>Scissor haircut</span><span><i style="background:var(--ink)"></i>Bald fade</span><span><i style="background:var(--muted)"></i>Clipper haircut</span><span><i style="background:var(--soft)"></i>Other</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-clients" hidden>
+    <div class="cards" id="client-cards"></div>
+    <div class="grid2">
+      <div class="panel">
+        <h2>New and reactivated clients by week</h2>
+        <p class="note" id="weekly-note">Last 12 weeks.</p>
+        <button class="info" data-q="Are we bringing in enough new clients and winning old ones back?" data-a="Each pair of bars is one week. Dark bars are first-visit appointments against the 50 a week target; light bars are lapsed clients who came back against the 30 a week target.">i</button>
+        <div id="weekly-chart"></div>
+        <div class="legend"><span><i style="background:var(--ink)"></i>New appointments</span><span><i style="background:var(--soft)"></i>Reactivated</span><span><i class="ln"></i>Targets (50 and 30)</span></div>
+      </div>
+      <div class="panel">
+        <h2>Rebook and 30-day retention by month</h2>
+        <p class="note">2026, Jan to Oct.</p>
+        <button class="info" data-q="Are clients coming back?" data-a="The dark line is the share of appointments where the next visit was booked before the client left (target 70%). The grey line is the share of first-time clients who returned within 30 days (target 61%).">i</button>
+        <div id="retention-chart"></div>
+        <div class="legend"><span><i style="background:var(--ink)"></i>Same-day rebook</span><span><i style="background:var(--muted)"></i>30-day retention</span><span><i class="ln"></i>Targets</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-definitions" hidden>
+    <div class="panel">
+      <h2>Metric definitions and data sources</h2>
+      <p class="note">How each number on this dashboard is calculated, and the system it will come from once the business's tools are connected.</p>
+      <div class="tbl-wrap"><table class="defs" id="defs"></table></div>
+    </div>
+    
+  </section>
+
+  <footer>
+    <span>Example dashboard. Every number is sample data. Your dashboard is designed around your own goals and brand.</span>
+    <span>Prepared by Verelia</span>
+  </footer>
+</main>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+(function(){
+/* ---------- sample data engine (seeded, so every reviewer sees the same numbers) ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var rnd=mulberry32(20261031);
+function nrm(){var u=0,v=0;while(!u)u=rnd();while(!v)v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+
+var BARBERS=[
+  {id:'a',name:'Barber A',tier:'I', off:1,base:47.5,u:.87,add:.37,reb:.73,newS:.24,ret:.63,int:3.8,mix:[.46,.30,.18]},
+  {id:'b',name:'Barber B',tier:'I', off:2,base:43.5,u:.81,add:.29,reb:.64,newS:.27,ret:.56,int:4.4,mix:[.30,.38,.24]},
+  {id:'c',name:'Barber C',tier:'II',off:3,base:54.5,u:.89,add:.38,reb:.75,newS:.18,ret:.66,int:3.7,mix:[.55,.25,.12]},
+  {id:'d',name:'Barber D',tier:'II',off:4,base:51.0,u:.84,add:.33,reb:.68,newS:.20,ret:.60,int:4.1,mix:[.38,.34,.20]}
+];
+var BY={};BARBERS.forEach(function(b){BY[b.id]=b});
+function D(y,m,d){return new Date(y,m,d)}
+function add(dt,n){return new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()+n)}
+var TODAY=D(2026,9,31), START=D(2025,0,1);
+var DAYS=[], MARGIN={};
+for(var dt=START; dt<=TODAY; dt=add(dt,1)){
+  var dow=dt.getDay(), open=true, y26=dt.getFullYear()===2026;
+  var doy=(dt-D(dt.getFullYear(),0,1))/864e5;
+  var seas=1+0.05*Math.sin(doy/365*2*Math.PI-1.2);
+  var dowF=[1.0,0.92,0.93,0.96,0.99,1.05,1.12][dow];
+  var yr=y26?1.06:1;
+  var ym=dt.getFullYear()*100+dt.getMonth();
+  if(MARGIN[ym]==null) MARGIN[ym]=(y26?0.305:0.285)+nrm()*0.018;
+  var rec={t:+dt,date:dt,dow:dow,open:open,ym:ym,b:{},leads:0,dl:0};
+  if(open){
+    var nwDay=0;
+    BARBERS.forEach(function(B){
+      if(B.off===dow) return;
+      var hrs=dow===6?8.25:7.5, slots=hrs*60/45;
+      var util=Math.min(.98,Math.max(.55,B.u*seas*dowF*(y26?1:.97)+nrm()*.05));
+      var appts=Math.round(slots*util);
+      var ns=Math.max(0,Math.round(appts*(0.045+nrm()*.02)));
+      var adds=Math.min(appts,Math.max(0,Math.round(appts*B.add+nrm()*1.1)));
+      var rev=appts*B.base*yr*(1+nrm()*.03)+adds*12;
+      var sc=Math.round(appts*B.mix[0]),fd=Math.round(appts*B.mix[1]),cl=Math.round(appts*B.mix[2]);
+      var nw=Math.max(0,Math.round(appts*B.newS*(y26?1:.9)+nrm()));
+      var rx=Math.max(0,Math.round(appts*.11+nrm()*.8));
+      var rb=Math.min(appts,Math.max(0,Math.round(appts*B.reb+nrm()*1.2)));
+      var r30=Math.min(nw,Math.max(0,Math.round(nw*B.ret+nrm()*.7)));
+      var retn=Math.max(0,appts-nw);
+      rec.b[B.id]={appts:appts,ns:ns,adds:adds,rev:rev,ha:hrs,hb:appts*.75,sc:sc,fd:fd,cl:cl,nw:nw,rx:rx,rb:rb,r30:r30,coh:nw,retn:retn,iw:retn*(B.int+nrm()*.15)};
+      nwDay+=nw;
+    });
+    rec.leads=Math.round(nwDay/Math.max(.18,0.245+nrm()*.02));
+    rec.dl=Math.max(0,Math.round((y26?4.1:2.6)+nrm()*1.6));
+  }
+  DAYS.push(rec);
+}
+
+function agg(f,t,bid){
+  var s={appts:0,ns:0,adds:0,rev:0,ha:0,hb:0,sc:0,fd:0,cl:0,nw:0,rx:0,rb:0,r30:0,coh:0,retn:0,iw:0,leads:0,dl:0,open:0,bdays:0,cal:0,shopNw:0,mrev:{}};
+  var ft=+f,tt=+t;
+  for(var i=0;i<DAYS.length;i++){var r=DAYS[i];if(r.t<ft||r.t>tt)continue;s.cal++;if(!r.open)continue;s.open++;s.leads+=r.leads;s.dl+=r.dl;
+    for(var id in r.b){var x=r.b[id];s.shopNw+=x.nw;if(bid!=='all'&&id!==bid)continue;s.bdays++;
+      for(var k in x)s[k]+=x[k];
+      s.mrev[r.ym]=(s.mrev[r.ym]||0)+x.rev;}}
+  var days=bid==='all'?s.open:s.bdays, wk=s.cal/7;
+  var m=0,mw=0;for(var k2 in s.mrev){m+=MARGIN[k2]*s.mrev[k2];mw+=s.mrev[k2]}
+  return {raw:s,rev:s.rev,revDay:days?s.rev/days:0,apptDay:days?s.appts/days:0,ticket:s.appts?s.rev/s.appts:0,
+    util:s.ha?s.hb/s.ha:0,revHr:s.hb?s.rev/s.hb:0,noShow:(s.appts+s.ns)?s.ns/(s.appts+s.ns):0,addRate:s.appts?s.adds/s.appts:0,
+    rebook:s.appts?s.rb/s.appts:0,ret:s.coh?s.r30/s.coh:0,interval:s.retn?s.iw/s.retn:0,
+    newWk:wk?s.nw/wk:0,rxWk:wk?s.rx/wk:0,dlWk:wk?s.dl/wk:0,conv:s.leads?s.shopNw/s.leads:0,
+    revWk:wk?s.rev/wk:0,margin:mw?m/mw:0,appts:s.appts,days:days,open:s.open,
+    mix:s.appts?[s.sc/s.appts,s.fd/s.appts,s.cl/s.appts]:[0,0,0]};
+}
+
+/* ---------- periods, targets, formatting ---------- */
+var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtD(d){return MON[d.getMonth()]+' '+d.getDate()}
+function period(p){
+  if(p==='week'){var f=add(TODAY,-6);return{f:f,t:TODAY,pf:add(f,-7),pt:add(f,-1),label:'This week',cmp:'prior week'}}
+  if(p==='month'){return{f:D(2026,9,1),t:TODAY,pf:D(2026,8,1),pt:D(2026,8,30),label:'This month',cmp:'September'}}
+  if(p==='90'){var f9=add(TODAY,-89),pt9=add(f9,-1);return{f:f9,t:TODAY,pf:add(pt9,-89),pt:pt9,label:'Last 90 days',cmp:'prior 90 days'}}
+  return{f:D(2026,0,1),t:TODAY,pf:D(2025,0,1),pt:D(2025,9,31),label:'Year to date',cmp:'same period 2025'};
+}
+function targets(bid){
+  var T={revDay:1650,apptDay:29,ticket:57,util:.86,revHr:77,noShow:.05,add:.35,rebook:.70,ret:.61,interval:4,newWk:50,rxWk:30,conv:.25,dlWk:30,margin:.32,revWk:null};
+  if(bid==='all')return T;
+  var B=BY[bid],t1=B.tier==='I';
+  T.revDay=t1?2500/6:3000/6;T.apptDay=8.5;T.ticket=t1?50:60;T.util=t1?.85:.87;T.revWk=t1?2500:3000;
+  return T;
+}
+function tTicket(B){return B.tier==='I'?50:60} function tUtil(B){return B.tier==='I'?.85:.87} function tWk(B){return B.tier==='I'?2500:3000}
+var $0=function(v){return '$'+Math.round(v).toLocaleString('en-US')};
+var $k=function(v){return v>=1000?'$'+(Math.round(v/100)/10).toLocaleString('en-US')+'k':'$'+Math.round(v)};
+var $2=function(v){return '$'+v.toFixed(2)};
+var pc=function(v){return (v*100).toFixed(1)+'%'};
+var pc0=function(v){return Math.round(v*100)+'%'};
+var n1=function(v){return v.toFixed(1)};
+function status(v,t,dir){if(t==null||!v)return 'tbd';var r=dir==='dn'?t/v:v/t;return r>=1?'on':r>=.95?'watch':'off'}
+var SLABEL={on:'On track',watch:'Watch',off:'Off track',tbd:'Confirm target'};
+function delta(v,p,dir){if(!p)return '<span class="flat">no prior data</span>';var d=(v-p)/p;var good=dir==='dn'?d<0:d>0;var cls=Math.abs(d)<.0005?'flat':good?'up':'dn';return '<b class="'+cls+'">'+(d>=0?'+':'')+(d*100).toFixed(1)+'%</b>'}
+
+function card(o){
+  var st=o.status||status(o.v,o.t,o.dir);
+  return '<div class="card'+(o.hero?' hero':'')+'"><div class="lab">'+o.label+'</div>'+
+    '<button class="info" data-q="'+o.q+'" data-a="'+o.a+'" aria-label="About '+o.label+'">i</button>'+
+    '<div class="val">'+o.fmt(o.v)+'</div><div class="cmp"><span>Target <b>'+o.tTxt+'</b></span><span>'+delta(o.v,o.p,o.dir)+' vs '+o.cmpLabel+'</span></div>'+
+    '<span class="pill '+st+'">'+SLABEL[st]+'</span></div>';
+}
+
+/* ---------- charts (hand-drawn SVG) ---------- */
+var W=640,H=250,PL=54,PR=16,PT=18,PB=34;
+function niceMax(v){if(v<=0)return 1;var p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;var st=[1,1.5,2,2.5,3,4,5,6,8,10];for(var i=0;i<st.length;i++)if(n<=st[i])return st[i]*p;return 10*p}
+function grid(max,fmt,min){min=min||0;var s='',ih=H-PT-PB;for(var i=0;i<=4;i++){var v=min+(max-min)*i/4,y=PT+ih*(1-i/4);s+='<line class="grid" x1="'+PL+'" x2="'+(W-PR)+'" y1="'+y+'" y2="'+y+'"/><text class="ax" x="'+(PL-8)+'" y="'+(y+4)+'" text-anchor="end">'+fmt(v)+'</text>'}return s}
+function barChart(o){
+  var vals=o.values.filter(function(v){return v!=null});
+  var max=niceMax(Math.max.apply(null,vals.concat([o.target||0]))*1.1),ih=H-PT-PB,iw=W-PL-PR,n=o.labels.length,bw=iw/n,gap=Math.max(2,Math.min(12,bw*.3));
+  var s=grid(max,o.axFmt),every=Math.ceil(n/12);
+  o.labels.forEach(function(L,i){var v=o.values[i],x=PL+i*bw+gap/2,w=bw-gap;
+    if(v!=null){var h=ih*v/max,ok=v>=o.target;s+='<rect class="bar'+(ok?'':' under')+'" x="'+x.toFixed(1)+'" y="'+(PT+ih-h).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2"><title>'+L+': '+o.tipFmt(v)+'</title></rect>';
+      if(n<=13)s+='<text class="vlab" x="'+(x+w/2)+'" y="'+(PT+ih-h-5)+'" text-anchor="middle">'+o.axFmt(v)+'</text>';}
+    else s+='<text class="ax" x="'+(x+w/2)+'" y="'+(PT+ih-6)+'" text-anchor="middle">Closed</text>';
+    if(i%every===0)s+='<text class="ax" x="'+(x+w/2)+'" y="'+(H-12)+'" text-anchor="middle">'+L+'</text>';});
+  var ty=PT+ih*(1-o.target/max);
+  s+='<line class="tline" x1="'+PL+'" x2="'+(W-PR)+'" y1="'+ty+'" y2="'+ty+'"/><text class="tlab" x="'+(W-PR)+'" y="'+(ty-6)+'" text-anchor="end">Target '+o.axFmt(o.target)+'</text>';
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+o.aria+'">'+s+'</svg>';
+}
+function lineChart(o){
+  var ih=H-PT-PB,iw=W-PL-PR,n=o.labels.length,min=o.min||0,max=o.max,step=iw/(n-1);
+  function X(i){return PL+i*step} function Y(v){return PT+ih*(1-(v-min)/(max-min))}
+  var s=grid(max,o.axFmt,min);
+  o.labels.forEach(function(L,i){s+='<text class="ax" x="'+X(i)+'" y="'+(H-12)+'" text-anchor="middle">'+L+'</text>'});
+  (o.targets||[]).forEach(function(t){var y=Y(t.v);s+='<line class="tline" x1="'+PL+'" x2="'+(W-PR)+'" y1="'+y+'" y2="'+y+'"/><text class="tlab" x="'+(W-PR)+'" y="'+(y-6)+'" text-anchor="end">'+t.label+'</text>'});
+  o.series.forEach(function(S){var pts=[],last=null;S.values.forEach(function(v,i){if(v!=null){pts.push(X(i).toFixed(1)+','+Y(v).toFixed(1));last=[i,v]}});
+    if(S.area&&pts.length){s+='<polygon points="'+X(S.values.findIndex(function(v){return v!=null}))+','+Y(min)+' '+pts.join(' ')+' '+X(last[0])+','+Y(min)+'" fill="'+S.color+'" opacity=".07"/>'}
+    if(S.goal){s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="var(--red)" stroke-width="2" stroke-dasharray="6 4"/><text class="tlab" x="'+X(5)+'" y="'+(Y(S.values[5])-10)+'" text-anchor="end">'+S.endLabel+'</text>';return}
+    s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+S.color+'" stroke-width="2.5" '+(S.dash?'stroke-dasharray="2 5" stroke-linecap="round"':'')+'/>';
+    if(last&&!S.dash){s+='<circle cx="'+X(last[0])+'" cy="'+Y(last[1])+'" r="4.5" fill="'+S.color+'"/><text class="vlab" x="'+(X(last[0])-8)+'" y="'+(Y(last[1])+(S.labelDy||-10))+'" text-anchor="end">'+o.axFmt(last[1])+'</text>'}
+    if(last&&S.dash&&S.endLabel){s+='<circle cx="'+X(last[0])+'" cy="'+Y(last[1])+'" r="4" fill="var(--paper)" stroke="'+S.color+'" stroke-width="2"/><text class="vlab" x="'+(X(last[0])-2)+'" y="'+(Y(last[1])+20)+'" text-anchor="end">'+S.endLabel+'</text>'}});
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+o.aria+'">'+s+'</svg>';
+}
+function hbarTarget(rows){
+  var LW=110,RW=70,rowH=44,h=rows.length*rowH+24,iw=W-LW-RW,max=niceMax(Math.max.apply(null,rows.map(function(r){return Math.max(r.v,r.t)}))*1.08),s='';
+  for(var g=0;g<=4;g++){var gx=LW+iw*g/4;s+='<line class="grid" x1="'+gx+'" x2="'+gx+'" y1="4" y2="'+(h-20)+'"/><text class="ax" x="'+gx+'" y="'+(h-4)+'" text-anchor="middle">'+$k(max*g/4)+'</text>'}
+  rows.forEach(function(r,i){var y=8+i*rowH,bw=iw*r.v/max,tx=LW+iw*r.t/max,ok=r.v>=r.t;
+    s+='<text x="0" y="'+(y+17)+'" style="font-size:12.5px;fill:var(--ink);font-weight:'+(r.sel?700:600)+'">'+r.name+'</text><text class="ax" x="0" y="'+(y+31)+'">Tier '+r.tier+'</text>';
+    s+='<rect class="bar'+(ok?'':' under')+'" x="'+LW+'" y="'+(y+6)+'" width="'+bw.toFixed(1)+'" height="22" rx="2"'+(r.sel?' style="stroke:var(--red);stroke-width:2"':'')+'><title>'+r.name+': '+$0(r.v)+' per week</title></rect>';
+    s+='<line x1="'+tx+'" x2="'+tx+'" y1="'+(y+1)+'" y2="'+(y+33)+'" stroke="var(--red)" stroke-width="3"/>';
+    s+='<text class="vlab" x="'+(W-RW+10)+'" y="'+(y+21)+'">'+$0(r.v)+'</text>';});
+  return '<svg viewBox="0 0 '+W+' '+h+'" role="img" aria-label="Weekly revenue by barber against tier targets">'+s+'</svg>';
+}
+function stack100(rows){
+  var LW=110,rowH=40,h=rows.length*rowH+8,iw=W-LW-10,cols=['var(--red)','var(--ink)','var(--muted)','var(--soft)'],names=['Scissor','Bald fade','Clipper','Other'],s='';
+  rows.forEach(function(r,i){var y=6+i*rowH,x=LW,parts=r.mix.concat([Math.max(0,1-r.mix[0]-r.mix[1]-r.mix[2])]);
+    s+='<text x="0" y="'+(y+18)+'" style="font-size:12.5px;fill:var(--ink);font-weight:'+(r.sel||r.shop?700:600)+'">'+r.name+'</text>';
+    parts.forEach(function(p,j){var w=iw*p;s+='<rect x="'+x.toFixed(1)+'" y="'+(y+4)+'" width="'+Math.max(0,w-1).toFixed(1)+'" height="22" fill="'+cols[j]+'"><title>'+r.name+', '+names[j]+': '+pc0(p)+'</title></rect>';
+      if(w>34)s+='<text x="'+(x+6)+'" y="'+(y+19)+'" style="font-size:11px;font-weight:600;fill:'+(j===3?'var(--ink)':'#fff')+'">'+pc0(p)+'</text>';x+=w;});});
+  return '<svg viewBox="0 0 '+W+' '+h+'" role="img" aria-label="Service mix by barber">'+s+'</svg>';
+}
+function groupedBars(o){
+  var max=niceMax(Math.max.apply(null,o.a.concat(o.b,[o.ta]))*1.12),ih=H-PT-PB,iw=W-PL-PR,n=o.labels.length,bw=iw/n,gap=bw*.22,w=(bw-gap)/2,s=grid(max,function(v){return Math.round(v)});
+  o.labels.forEach(function(L,i){var x=PL+i*bw+gap/2,ha=ih*o.a[i]/max,hb=ih*o.b[i]/max;
+    s+='<rect class="bar" x="'+x.toFixed(1)+'" y="'+(PT+ih-ha).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+ha.toFixed(1)+'" rx="1.5"><title>Week of '+L+': '+o.a[i]+' new</title></rect>';
+    s+='<rect class="bar under" x="'+(x+w).toFixed(1)+'" y="'+(PT+ih-hb).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+hb.toFixed(1)+'" rx="1.5"><title>Week of '+L+': '+o.b[i]+' reactivated</title></rect>';
+    if(i%2===0)s+='<text class="ax" x="'+(x+w)+'" y="'+(H-12)+'" text-anchor="middle">'+L+'</text>';});
+  [[o.ta,'New target '+o.ta],[o.tb,'Reactivated target '+o.tb]].forEach(function(t){var y=PT+ih*(1-t[0]/max);s+='<line class="tline" x1="'+PL+'" x2="'+(W-PR)+'" y1="'+y+'" y2="'+y+'"/><text class="tlab" x="'+(W-PR)+'" y="'+(y-6)+'" text-anchor="end">'+t[1]+'</text>'});
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="New and reactivated clients by week">'+s+'</svg>';
+}
+
+/* ---------- state ---------- */
+var state={page:'pulse',period:'month',barber:'all'};
+try{var sv=JSON.parse(localStorage.getItem('sheared-wf')||'{}');if(sv.period)state.period=sv.period;if(sv.barber)state.barber=sv.barber}catch(e){}
+var sel=document.getElementById('barber');
+sel.innerHTML='<option value="all">All barbers</option>'+BARBERS.map(function(b){return '<option value="'+b.id+'">'+b.name+' (Tier '+b.tier+')</option>'}).join('');
+
+/* ---------- pages ---------- */
+function renderPulse(P,T,cur,prv){
+  var bl=state.barber==='all'?'per open day':'per working day';
+  document.getElementById('pulse-cards').innerHTML=[
+    card({hero:1,label:'Revenue '+bl,v:cur.revDay,p:prv.revDay,t:T.revDay,tTxt:$0(T.revDay),fmt:$0,cmpLabel:P.cmp,q:'Are we making the master critical number each day?',a:'Service and add-on revenue divided by days worked. $1,650 a day across the year is what lands $600,000.'}),
+    card({label:'Revenue',v:cur.rev,p:prv.rev,t:T.revDay*cur.days,tTxt:$0(T.revDay*cur.days),fmt:$0,cmpLabel:P.cmp,q:'How much have we taken in this period?',a:'Total service and add-on revenue in the period. The target is the daily number times the days worked.'}),
+    card({label:'Average ticket',v:cur.ticket,p:prv.ticket,t:T.ticket,tTxt:$0(T.ticket),fmt:$2,cmpLabel:P.cmp,q:'Are clients spending enough per visit?',a:'Revenue divided by completed appointments. Add-ons are the fastest lever on this number.'}),
+    card({label:'Appts per day',v:cur.apptDay,p:prv.apptDay,t:T.apptDay,tTxt:n1(T.apptDay),fmt:n1,cmpLabel:P.cmp,q:'Are the chairs busy enough?',a:'Completed appointments divided by days worked. 29 a day at a $57 ticket is the $1,650 day.'}),
+    card({label:'Utilization',v:cur.util,p:prv.util,t:T.util,tTxt:state.barber==='all'?'85% / 87%':pc0(T.util),fmt:pc,cmpLabel:P.cmp,q:'How much of our scheduled chair time is booked?',a:'Booked chair hours divided by scheduled chair hours. Tier I target is 85%, Tier II 87%.'}),
+    card({label:'Revenue / booked hr',v:cur.revHr,p:prv.revHr,t:T.revHr,tTxt:$0(T.revHr),fmt:$2,cmpLabel:P.cmp,q:'What is an hour in the chair worth?',a:'Revenue divided by booked chair hours. It rises with ticket size and falls with long appointments.'}),
+    card({label:'No-show rate',v:cur.noShow,p:prv.noShow,t:T.noShow,tTxt:'Under 5%',fmt:pc,dir:'dn',cmpLabel:P.cmp,q:'How many booked clients are not showing up?',a:'No-shows divided by completed appointments plus no-shows. Lower is better.'}),
+    card({label:'Profit margin',v:cur.margin,p:prv.margin,t:T.margin,tTxt:'32%',fmt:pc,cmpLabel:P.cmp,q:'Are we keeping enough of what we earn?',a:'Net profit divided by revenue, from the monthly books. Shop-wide only; it does not split by barber.'})
+  ].join('');
+
+  // revenue chart
+  var labels=[],values=[],p=state.period;
+  if(p==='week'||p==='month'){
+    for(var d=P.f;d<=P.t;d=add(d,1)){var a=agg(d,d,state.barber);if(!a.raw.open){if(p==='week'){labels.push(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()]);values.push(null)}continue}
+      if(state.barber!=='all'&&!a.days)continue;labels.push(p==='week'?['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()]:String(d.getDate()));values.push(a.rev);}
+  }else if(p==='90'){
+    for(var w=P.f;w<=P.t;w=add(w,7)){var we=add(w,6)>P.t?P.t:add(w,6),aw=agg(w,we,state.barber);labels.push(fmtD(w));values.push(aw.revDay)}
+  }else{
+    for(var m=0;m<=9;m++){var am=agg(D(2026,m,1),m===9?TODAY:D(2026,m+1,0),state.barber);labels.push(MON[m]);values.push(am.revDay)}
+  }
+  var unit=(p==='week'||p==='month')?'Revenue each open day':p==='90'?'Average per day, by week':'Average per day, by month';
+  document.getElementById('rev-title').textContent='Revenue per day vs '+$0(T.revDay);
+  document.getElementById('rev-note').textContent=unit+(state.barber==='all'?', shop-wide.':', '+BY[state.barber].name+'.')+'';
+  document.getElementById('rev-chart').innerHTML=barChart({labels:labels,values:values,target:T.revDay,axFmt:$0,tipFmt:$0,aria:'Revenue per day against target'});
+
+  // pace chart (shop-wide, always 2026)
+  var cum=0,act=[],goal=[],proj=[];
+  for(var mm=0;mm<12;mm++){goal.push(50000*(mm+1));if(mm<=9){cum+=agg(D(2026,mm,1),mm===9?TODAY:D(2026,mm+1,0),'all').rev;act.push(cum)}else act.push(null)}
+  var ytd=agg(D(2026,0,1),TODAY,'all'),daysEl=304,runRate=ytd.rev/daysEl;
+  for(var k=0;k<12;k++){proj.push(k<9?null:k===9?act[9]:act[9]+runRate*[0,0,0,0,0,0,0,0,0,0,30,61][k])}
+  var fy=act[9]+runRate*61;
+  document.getElementById('pace-chart').innerHTML=lineChart({labels:MON.map(function(x){return x[0]}),min:0,max:700000,axFmt:$k,aria:'Cumulative 2026 revenue against goal',
+    targets:[],series:[{values:goal,goal:true,endLabel:'Goal $600k'},{values:act,color:'var(--ink)',area:true,labelDy:20},{values:proj,color:'var(--muted)',dash:true,endLabel:'Projected '+$k(fy)}]});
+
+  // goals scorecard
+  var t1=agg(D(2026,0,1),TODAY,'a'),t1b=agg(D(2026,0,1),TODAY,'b'),t2=agg(D(2026,0,1),TODAY,'c'),t2b=agg(D(2026,0,1),TODAY,'d');
+  var u1=(t1.raw.hb+t1b.raw.hb)/(t1.raw.ha+t1b.raw.ha),u2=(t2.raw.hb+t2b.raw.hb)/(t2.raw.ha+t2b.raw.ha);
+  var uSt=[status(u1,.85),status(u2,.87)].indexOf('off')>-1?'off':[status(u1,.85),status(u2,.87)].indexOf('watch')>-1?'watch':'on';
+  var apptMo=ytd.appts/10,newMo=ytd.raw.nw/10;
+  var rows=[
+    ['Revenue','$600,000',$0(ytd.rev)+' banked','Projected '+$0(fy)+' for the year',status(fy,600000)],
+    ['Profit margin','32%',pc(ytd.margin),'From monthly books',status(ytd.margin,.32)],
+    ['Master critical number','$1,650 / day',$0(ytd.revDay)+' / day','Per open day',status(ytd.revDay,1650)],
+    ['Marketing number','2,000 new appts / month',Math.round(newMo)+' new / month',Math.round(apptMo)+' total appointments / month. See question 1 on Definitions','tbd'],
+    ['Sales number','Over $57 average ticket',$2(ytd.ticket),'All services and add-ons',status(ytd.ticket,57)],
+    ['Customer success number','70% same-day rebook',pc(ytd.rebook),'Next visit booked before leaving',status(ytd.rebook,.70)],
+    ['Operational number','85% Tier I · 87% Tier II',pc(u1)+' · '+pc(u2),'Booked over scheduled chair hours',uSt]
+  ];
+  document.getElementById('goals').innerHTML='<thead><tr><th>#</th><th>Goal</th><th>2026 target</th><th class="n">Year to date</th><th>Context</th><th>Status</th></tr></thead><tbody>'+
+    rows.map(function(r,i){return '<tr><td>'+(i+1)+'</td><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td class="n"><b>'+r[2]+'</b></td><td>'+r[3]+'</td><td><span class="pill '+r[4]+'">'+SLABEL[r[4]]+'</span></td></tr>'}).join('')+'</tbody>';
+}
+
+function cell(v,t,fmt,dir,tTxt){var st=status(v,t,dir);return '<td class="n"><span class="dot '+st+'" aria-label="'+SLABEL[st]+'"></span>'+fmt(v)+'<span class="t">'+tTxt+'</span></td>'}
+function renderBarbers(P){
+  var rows=BARBERS.map(function(B){var a=agg(P.f,P.t,B.id);a.B=B;return a}),shop=agg(P.f,P.t,'all');
+  document.getElementById('barber-table').innerHTML='<thead><tr><th>Barber</th><th>Tier</th><th class="n">Revenue / week</th><th class="n">Avg ticket</th><th class="n">Add-on rate</th><th class="n">Utilization</th><th class="n">Rev / booked hr</th><th class="n">Same-day rebook</th><th class="n">No-show</th></tr></thead><tbody>'+
+    rows.map(function(a){var B=a.B;return '<tr'+(state.barber===B.id?' class="sel"':'')+'><td><b>'+B.name+'</b></td><td>Tier '+B.tier+'</td>'+
+      cell(a.revWk,tWk(B),$0,'up','target '+$0(tWk(B)))+cell(a.ticket,tTicket(B),$2,'up','target '+$0(tTicket(B)))+cell(a.addRate,.35,pc0,'up','target 35%')+
+      cell(a.util,tUtil(B),pc0,'up','target '+pc0(tUtil(B)))+cell(a.revHr,77,$0,'up','target $77')+cell(a.rebook,.70,pc0,'up','target 70%')+cell(a.noShow,.05,pc,'dn','under 5%')+'</tr>'}).join('')+
+    '<tr class="tot"><td>Shop</td><td></td><td class="n">'+$0(shop.revWk)+'</td><td class="n">'+$2(shop.ticket)+'</td><td class="n">'+pc0(shop.addRate)+'</td><td class="n">'+pc0(shop.util)+'</td><td class="n">'+$0(shop.revHr)+'</td><td class="n">'+pc0(shop.rebook)+'</td><td class="n">'+pc(shop.noShow)+'</td></tr></tbody>';
+  document.getElementById('barber-note').textContent=P.label+'. Each number is compared with the target for that barber’s tier. Pick a barber in the filter to highlight their row.';
+  document.getElementById('rpw-chart').innerHTML=hbarTarget(rows.map(function(a){return{name:a.B.name,tier:a.B.tier,v:a.revWk,t:tWk(a.B),sel:state.barber===a.B.id}}));
+  document.getElementById('mix-chart').innerHTML=stack100(rows.map(function(a){return{name:a.B.name,mix:a.mix,sel:state.barber===a.B.id}}).concat([{name:'Shop',mix:shop.mix,shop:1}]));
+}
+
+function renderClients(P,T,cur,prv){
+  var shopOnly=state.barber!=='all'?' Shop-wide; does not split by barber.':'';
+  document.getElementById('client-cards').innerHTML=[
+    card({label:'New appts / week',v:cur.newWk,p:prv.newWk,t:50,tTxt:'50',fmt:n1,cmpLabel:P.cmp,q:'Are we bringing in enough first-time clients?',a:'First-visit appointments per week in the period.'}),
+    card({label:'Reactivated / week',v:cur.rxWk,p:prv.rxWk,t:30,tTxt:'30',fmt:n1,cmpLabel:P.cmp,q:'Is outreach to old clients working?',a:'Clients returning after 60 or more days away, per week. Tracks the reactivation key action in the plan.'}),
+    card({label:'Conversion',v:cur.conv,p:prv.conv,t:.25,tTxt:'25%',fmt:pc,cmpLabel:P.cmp,q:'How many inquiries turn into a booked first visit?',a:'New clients booked divided by inquiries.'+shopOnly}),
+    card({label:'Same-day rebook',v:cur.rebook,p:prv.rebook,t:.70,tTxt:'70%',fmt:pc,cmpLabel:P.cmp,q:'Are clients booking their next visit before they leave?',a:'Appointments where the next visit was booked the same day, divided by completed appointments.'}),
+    card({label:'30-day retention',v:cur.ret,p:prv.ret,t:.61,tTxt:'61%',fmt:pc,cmpLabel:P.cmp,q:'Do first-time clients come back?',a:'First-time clients who return within 30 days, divided by all first-time clients.'}),
+    card({label:'Visit interval',v:cur.interval,p:prv.interval,t:4,tTxt:'Under 4 weeks',fmt:function(v){return n1(v)+' wks'},dir:'dn',cmpLabel:P.cmp,q:'How often do regulars come in?',a:'Average weeks between visits for returning clients. Lower is better.'}),
+    card({label:'App downloads / wk',v:cur.dlWk,p:prv.dlWk,t:30,tTxt:'30',fmt:n1,cmpLabel:P.cmp,q:'Are clients installing the app?',a:'New app installs per week.'+shopOnly})
+  ].join('');
+  var labels=[],a=[],b=[],end=TODAY;
+  for(var i=11;i>=0;i--){var we=add(end,-7*i),ws=add(we,-6),x=agg(ws,we,state.barber);labels.push(fmtD(ws));a.push(x.raw.nw);b.push(x.raw.rx)}
+  document.getElementById('weekly-note').textContent='Last 12 weeks, '+(state.barber==='all'?'shop-wide':BY[state.barber].name)+'. Targets are shop-wide.';
+  document.getElementById('weekly-chart').innerHTML=groupedBars({labels:labels,a:a,b:b,ta:50,tb:30});
+  var rb=[],rt=[];for(var m=0;m<=9;m++){var am=agg(D(2026,m,1),m===9?TODAY:D(2026,m+1,0),state.barber);rb.push(am.rebook);rt.push(am.ret)}
+  document.getElementById('retention-chart').innerHTML=lineChart({labels:MON.slice(0,10),min:.45,max:.85,axFmt:pc0,aria:'Rebook and retention by month',
+    targets:[{v:.70,label:'Rebook target 70%'},{v:.61,label:'Retention target 61%'}],
+    series:[{values:rb,color:'var(--ink)',labelDy:-10},{values:rt,color:'var(--muted)',labelDy:20}]});
+}
+
+var DEFS=[
+ ['Revenue per open day','$1,650','Service and add-on revenue divided by days the shop was open. Excludes tips and retail.','Booking and POS','Hourly'],
+ ['Revenue','$600,000 a year','Service and add-on revenue, before tips.','Booking and POS','Hourly'],
+ ['Average ticket','$57 shop · $50 Tier I · $60 Tier II','Revenue divided by completed appointments.','Booking and POS','Hourly'],
+ ['Appointments per day','29','Completed appointments divided by open days.','Booking','Hourly'],
+ ['Utilization','85% Tier I · 87% Tier II','Booked chair hours divided by scheduled chair hours.','Booking (schedules)','Hourly'],
+ ['Revenue per booked hour','$77','Revenue divided by booked chair hours.','Booking and POS','Hourly'],
+ ['No-show rate','Under 5%','No-shows divided by completed appointments plus no-shows.','Booking','Hourly'],
+ ['Profit margin','32%','Net profit divided by revenue for the month.','QuickBooks or monthly P&L','Monthly'],
+ ['Add-on rate','35%','Appointments with a beard, ear or nose add-on divided by completed appointments.','POS line items','Hourly'],
+ ['Revenue per barber','$2,500 Tier I · $3,000 Tier II a week','Barber revenue divided by weeks in the period.','Booking and POS','Hourly'],
+ ['New appointments','50 a week','Appointments that are a client’s first visit.','Booking (client first-visit date)','Daily'],
+ ['Reactivated clients','30 a week','Clients returning after 60 or more days away.','Booking','Daily'],
+ ['Conversion rate','25%','New clients booked divided by inquiries.','Booking plus lead source, to confirm','Daily'],
+ ['Same-day rebook','70%','Appointments where the next visit was booked the same day, divided by completed appointments.','Booking','Daily'],
+ ['30-day retention','61%','First-time clients who return within 30 days, divided by first-time clients.','Booking','Daily'],
+ ['Average visit interval','Under 4 weeks','Average weeks between visits for returning clients.','Booking','Daily'],
+ ['App downloads','30 a week','New installs.','App Store Connect and Google Play Console','Daily']
+];
+document.getElementById('defs').innerHTML='<thead><tr><th>Metric</th><th>Target</th><th>How it is calculated</th><th>Source</th><th>Refresh</th></tr></thead><tbody>'+DEFS.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td></tr>'}).join('')+'</tbody>';
+
+function render(){
+  ['pulse','barbers','clients','definitions'].forEach(function(p){document.getElementById('page-'+p).hidden=p!==state.page;document.getElementById('tab-'+p).setAttribute('aria-selected',p===state.page)});
+  document.querySelectorAll('#period button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.p===state.period)});
+  sel.value=state.barber;
+  var defs=state.page==='definitions';
+  document.getElementById('period').hidden=defs;document.querySelector('.sel').hidden=defs;
+  var P=period(state.period),T=targets(state.barber);
+  document.getElementById('context').innerHTML=defs?'<span><b>Definitions</b> · targets from the 2026 strategic plan</span><span>As of Sat Oct 31, 2026</span>':
+    '<span>Showing <b>'+P.label+'</b> · '+fmtD(P.f)+' to '+fmtD(P.t)+', 2026 · '+(state.barber==='all'?'all barbers':BY[state.barber].name)+' · compared with '+P.cmp+'</span><span>As of Sat Oct 31, 2026</span>';
+  if(defs)return;
+  var cur=agg(P.f,P.t,state.barber),prv=agg(P.pf,P.pt,state.barber);
+  if(state.page==='pulse')renderPulse(P,T,cur,prv);
+  if(state.page==='barbers')renderBarbers(P);
+  if(state.page==='clients')renderClients(P,T,cur,prv);
+  try{localStorage.setItem('sheared-wf',JSON.stringify({period:state.period,barber:state.barber}))}catch(e){}
+}
+function fromHash(){var h=location.hash.replace('#','');state.page=['pulse','barbers','clients','definitions'].indexOf(h)>-1?h:'pulse'}
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){location.hash=b.dataset.page})});
+document.querySelectorAll('#period button').forEach(function(b){b.addEventListener('click',function(){state.period=b.dataset.p;render()})});
+sel.addEventListener('change',function(){state.barber=sel.value;render()});
+window.addEventListener('hashchange',function(){fromHash();render()});
+fromHash();render();
+
+/* ---------- tooltip ---------- */
+var tip=document.getElementById('tip');
+function show(b){tip.innerHTML='<b>Question it answers</b>'+b.dataset.q+'<b>How to read it</b>'+b.dataset.a;var r=b.getBoundingClientRect();tip.classList.add('show');var tw=tip.offsetWidth,th=tip.offsetHeight;var x=Math.min(window.innerWidth-tw-12,Math.max(12,r.right-tw));var y=r.bottom+8;if(y+th>window.innerHeight-8)y=r.top-th-8;tip.style.left=x+'px';tip.style.top=y+'px'}
+function hide(){tip.classList.remove('show')}
+document.addEventListener('mouseover',function(e){var b=e.target.closest&&e.target.closest('.info');if(b)show(b)});
+document.addEventListener('mouseout',function(e){if(e.target.closest&&e.target.closest('.info'))hide()});
+document.addEventListener('focusin',function(e){if(e.target.classList&&e.target.classList.contains('info'))show(e.target)});
+document.addEventListener('focusout',hide);
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.info');if(b){show(b)}else hide()});
+window.addEventListener('scroll',hide,{passive:true});
+})();
+</script>
+</body>
+</html>
