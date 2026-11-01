@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /w/
+Disallow: /start
+Disallow: /thanks
+
+Sitemap: https://vereliaai.com/sitemap.xml

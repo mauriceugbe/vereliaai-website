@@ -287,6 +287,58 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
 .talk-form .btn{justify-self:start}
 .hp{position:absolute;left:-9999px}
 .faq a{color:var(--cyan-700);font-weight:600}
+
+/* demo report, styled like a Power BI page */
+.demo-grid{grid-template-columns:330px 1fr}
+.lab-note{font-weight:600;color:var(--muted);font-size:12px;margin-left:6px}
+.msel{width:100%;height:42px;border-radius:10px;border:1.5px solid var(--line);padding:0 10px;font:inherit;font-size:14.5px;font-weight:600;color:var(--ink);background:#fff;cursor:pointer}
+.mchips button{min-height:32px;font-size:13px;padding:0 10px}
+.mchips button[aria-pressed="true"]{background:var(--cyan-600);border-color:var(--cyan-600)}
+.demo-grid>div{min-width:0}
+.pbi{--b:#C8423D;background:#fff;border:1px solid #C8C6C4;padding:8px;display:grid;gap:6px;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;color:#252423;box-shadow:0 30px 60px -45px rgba(15,23,42,.45)}
+.pbi-band{background:#111;color:#fff;display:grid;grid-template-columns:1.1fr 1.4fr 1fr;align-items:center;gap:10px;padding:10px 14px;min-height:54px}
+.pbi-logo{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;min-width:0}
+.pbi-logo span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbi-mark{width:30px;height:30px;flex:none;background:var(--b);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+.pbi-title{text-align:center}
+.pbi-title b{display:block;font-size:17px;font-weight:600}
+.pbi-title span{font-size:11px;color:#C8C6C4}
+.pbi-as{text-align:right;font-size:11px;color:#fff;font-weight:600}
+.pbi-as span{color:#A19F9D;font-weight:400}
+.pbi-slicers{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pbi-f{border:1px solid #C8C6C4;padding:3px 7px 2px}
+.pbi-f label{display:block;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--b);text-align:center}
+.pbi-f select{width:100%;border:0;background:#fff;font:inherit;font-size:12.5px;color:#252423;outline:0;cursor:pointer;padding:1px 0}
+.pbi-insight{border:1px solid #C8C6C4;border-left:4px solid var(--b);padding:7px 10px;font-size:12.5px;line-height:1.45}
+.pbi-insight b{color:var(--b)}
+.pbi-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pbi-kpi{border:1px solid #C8C6C4;text-align:center;padding:7px 6px 6px;min-width:0}
+.pbi-kpi .t{font-size:12px;font-weight:600;color:var(--b);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbi-kpi .v{font-size:24px;font-weight:600;letter-spacing:-.4px;margin:1px 0;font-variant-numeric:tabular-nums}
+.pbi-kpi .s{font-size:10.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pbi-kpi .s2{font-size:10px;color:#605E5C;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pbi .up{color:#107C10}.pbi .dn{color:#C4314B}.pbi .wn{color:#A0670A}.pbi .mu{color:#605E5C}
+.pbi-vis{border:1px solid #C8C6C4;padding:7px 10px 8px;min-width:0}
+.pbi-vt{display:flex;align-items:center;gap:7px}
+.pbi-vt b{font-size:13px;font-weight:600;color:var(--b)}
+.pbi-tag{font-size:9.5px;border:1px solid #C8C6C4;color:#605E5C;padding:0 5px}
+.pbi-vs{font-size:11px;color:#605E5C;margin:1px 0 4px}
+.pbi-chart svg{display:block;width:100%;height:auto}
+.pbi-chart text{font-family:inherit}
+.pbi-leg{display:flex;gap:12px;flex-wrap:wrap;font-size:10.5px;color:#605E5C;margin-top:2px}
+.pbi-leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.pbi-leg i.miss{background:var(--b);opacity:.45}
+.pbi-leg i.ln{width:14px;height:0;border-radius:0;border-top:2px dashed var(--b);vertical-align:2px}
+.pbi-tbl{overflow-x:auto}
+.pbi-tbl table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pbi-tbl th{font-size:11px;font-weight:600;color:var(--b);text-align:right;padding:4px 7px;border-bottom:1px solid #C8C6C4;white-space:nowrap}
+.pbi-tbl th:first-child,.pbi-tbl td:first-child{text-align:left}
+.pbi-tbl td{font-size:12px;padding:4px 7px;border-bottom:1px solid #F3F2F1;text-align:right;white-space:nowrap}
+.pbi-tbl td.hl{background:#E7F3E8}.pbi-tbl td.wa{background:#FDF3E1}.pbi-tbl td.lo{background:#FCE9EB}
+.pbi-tbl tr.sel td{box-shadow:inset 0 0 0 9999px rgba(0,0,0,.035);font-weight:600}
+.pbi-tbl tr.tot td{font-weight:700;border-top:1px solid #252423;border-bottom:0}
+@media (max-width:1000px){.demo-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:720px){.pbi-band{grid-template-columns:1fr;text-align:left}.pbi-title,.pbi-as{text-align:left}.pbi-kpis{grid-template-columns:repeat(2,1fr)!important}.pbi-kpi .s,.pbi-kpi .s2,.pbi-kpi .t{white-space:normal}.pbi-kpi .v{font-size:22px}.pbi-slicers{grid-template-columns:1fr 1fr}}
 @media (max-width:1000px){.trust-grid,.talk-grid,.setup-grid{grid-template-columns:1fr}}
 @media (max-width:720px){.cr-cols,.tf-row{grid-template-columns:1fr}}
 </style>
@@ -370,7 +422,7 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
   <div class="wrap">
     <div class="eyebrow">Try it</div>
     <h2>See your dashboard come to life.</h2>
-    <p class="lede">Pick your type of business, add your name and brand color, and set a daily goal.</p>
+    <p class="lede">Pick your business, your brand color and the metrics you run on. This is the same kind of report we build for clients, with sample numbers.</p>
 
     <div class="demo-grid">
       <div class="panel">
@@ -383,9 +435,16 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
           <div class="chips" id="industry" role="group" aria-labelledby="indLab"></div>
         </div>
         <div class="field">
+          <span class="lab" id="kpiLab">KPI cards <small class="lab-note" id="kpiCount">pick up to 4</small></span>
+          <div class="chips mchips" id="metrics" role="group" aria-labelledby="kpiLab"></div>
+        </div>
+        <div class="field">
+          <span class="lab" id="chartLab">Main chart</span>
+          <select id="chartPick" class="msel" aria-labelledby="chartLab"></select>
+        </div>
+        <div class="field">
           <span class="lab" id="colLab">Your brand color</span>
           <div class="swatches" id="colors" role="group" aria-labelledby="colLab"></div>
-          <p class="hint">Your dashboard carries your brand, not ours.</p>
         </div>
         <div class="field">
           <span class="lab" id="goalLab">Daily revenue goal</span>
@@ -394,21 +453,32 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
       </div>
 
       <div>
-        <div class="preview" aria-live="polite">
-          <div class="pv-head" id="pvHead">
-            <div><h3 id="pvName">Your Business</h3><small id="pvSub">Business performance &middot; this month</small></div>
-            <span class="badge">Sample data</span>
+        <div class="pbi" id="pbi" aria-live="polite">
+          <div class="pbi-band">
+            <div class="pbi-logo"><span class="pbi-mark" id="pbMark">YB</span><span id="pbName">Your Business</span></div>
+            <div class="pbi-title"><b>Business Performance</b><span id="pbSub">This month &middot; vs prior period</span></div>
+            <div class="pbi-as">Sample data<br><span>Built by Verelia</span></div>
           </div>
-          <div class="pv-body">
-            <div class="insight" id="pvInsight"></div>
-            <div class="kpis" id="pvKpis"></div>
-            <div class="pv-row">
-              <div class="chartbox"><div class="ct" id="pvChartTitle">Revenue per day</div><div id="pvChart"></div></div>
-              <div class="goals"><div class="ct">Annual goals</div><div id="pvGoals"></div></div>
-            </div>
+          <div class="pbi-slicers">
+            <div class="pbi-f"><label for="pbPeriod">Period</label><select id="pbPeriod"><option value="7">This week</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select></div>
+            <div class="pbi-f"><label for="pbMember" id="pbMemberLab">Team member</label><select id="pbMember"></select></div>
+            <div class="pbi-f"><label for="pbCmp">Compare to</label><select id="pbCmp"><option value="prior">Prior period</option><option value="target">Target only</option></select></div>
+          </div>
+          <div class="pbi-insight" id="pbInsight"></div>
+          <div class="pbi-kpis" id="pbKpis"></div>
+          <div class="pbi-vis">
+            <div class="pbi-vt"><b id="pbChartTitle">Revenue per Day vs Target</b><span class="pbi-tag">Column</span></div>
+            <div class="pbi-vs" id="pbChartSub"></div>
+            <div id="pbChart" class="pbi-chart"></div>
+            <div class="pbi-leg"><span><i style="background:#2B2B2B"></i>At or above target</span><span><i class="miss"></i>Below target</span><span><i class="ln"></i>Target</span></div>
+          </div>
+          <div class="pbi-vis">
+            <div class="pbi-vt"><b id="pbTableTitle">Team Scorecard</b><span class="pbi-tag">Matrix</span></div>
+            <div class="pbi-vs">Each person against target. Green at target, amber within 5%, red below.</div>
+            <div class="pbi-tbl" id="pbTable"></div>
           </div>
         </div>
-        <p class="sample-note"><b>These are sample numbers.</b> Your dashboard is built from your own plan and targets, using the data your tools actually provide.</p>
+        <p class="sample-note"><b>These are sample numbers.</b> Your dashboard is built from your own plan and targets, using the data your tools actually provide. Any metric your tools record can go on it.</p>
         <div class="next-step">
           <div><b>Like what you see?</b><span>We'll build yours around your actual business goals.</span></div>
           <div class="ns-btns"><a class="btn btn-primary" href="#pricing">Start your dashboard</a><a class="btn btn-light" href="#talk">Talk to us first</a><a class="btn btn-light" href="/example">Full example</a></div>
@@ -627,94 +697,141 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
 
 <script>
 (function(){
+  /* metric library: f = format, t = target (or a function of the daily goal), dn = lower is better, add = scales with team size */
   var IND={
-    salon:{label:'Barbershop or salon',goal:1650,unit:'Appointments',kpis:[
-      {l:'Avg ticket',t:57,f:'$2',w:'Target $57'},{l:'Rebook rate',t:.70,f:'%',w:'Target 70%'},{l:'Chair utilization',t:.85,f:'%',w:'Target 85%'}],
-      goals:[['New clients / week',50,'n'],['Add-on rate',.35,'%'],['30-day retention',.61,'%'],['No-show rate',.05,'%d']]},
-    restaurant:{label:'Restaurant',goal:5000,kpis:[
-      {l:'Avg check',t:38,f:'$2',w:'Target $38'},{l:'Food cost',t:.30,f:'%d',w:'Under 30%'},{l:'Labor cost',t:.28,f:'%d',w:'Under 28%'}],
-      goals:[['Covers / day',130,'n'],['Online order share',.25,'%'],['Avg rating',4.5,'r'],['Table turns / night',2.5,'d']]},
-    home:{label:'Home services',goal:3000,kpis:[
-      {l:'Avg job value',t:420,f:'$0',w:'Target $420'},{l:'Close rate',t:.45,f:'%',w:'Target 45%'},{l:'Jobs per tech / day',t:3,f:'d',w:'Target 3.0'}],
-      goals:[['Leads / week',60,'n'],['Callback rate',.03,'%d'],['Repeat customers',.30,'%'],['Avg rating',4.7,'r']]},
-    agency:{label:'Agency or studio',goal:5000,kpis:[
-      {l:'Billable utilization',t:.75,f:'%',w:'Target 75%'},{l:'Effective rate',t:150,f:'$0',w:'Target $150/hr'},{l:'Pipeline coverage',t:3,f:'x',w:'Target 3.0x'}],
-      goals:[['New clients / quarter',6,'n'],['Retainer share',.60,'%'],['Project margin',.40,'%'],['Proposal win rate',.35,'%']]},
-    retail:{label:'Retail shop',goal:3000,kpis:[
-      {l:'Avg order',t:64,f:'$2',w:'Target $64'},{l:'Conversion',t:.22,f:'%',w:'Target 22%'},{l:'Items per sale',t:2.1,f:'d',w:'Target 2.1'}],
-      goals:[['Repeat customers',.35,'%'],['Online share',.20,'%'],['Gross margin',.48,'%'],['Inventory turns / yr',5,'d']]},
-    fitness:{label:'Fitness studio',goal:1500,kpis:[
-      {l:'Active members',t:420,f:'n',w:'Target 420'},{l:'Class fill rate',t:.75,f:'%',w:'Target 75%'},{l:'Monthly churn',t:.04,f:'%d',w:'Under 4%'}],
-      goals:[['Trials / week',25,'n'],['Trial conversion',.40,'%'],['Visits per member / wk',2.2,'d'],['Avg rating',4.8,'r']]}
+    salon:{label:'Barbershop or salon',goal:1650,role:'Barber',kpi:['rev','appts','ticket','rebook'],chart:'rev',m:[
+      {id:'rev',l:'Revenue / Day',f:'$0',t:'goal',add:1,day:1},{id:'appts',l:'Appointments / Day',f:'d',t:function(g){return g/57},add:1,day:1},
+      {id:'ticket',l:'Avg Ticket',f:'$2',t:57},{id:'rebook',l:'Same-day Rebook',f:'%',t:.70},{id:'util',l:'Chair Utilization',f:'%',t:.85},
+      {id:'noshow',l:'No-show Rate',f:'%',t:.05,dn:1},{id:'newc',l:'New Clients / Wk',f:'n',t:50,add:1},{id:'addon',l:'Add-on Rate',f:'%',t:.35},
+      {id:'ret',l:'30-day Retention',f:'%',t:.61},{id:'revhr',l:'Rev / Booked Hr',f:'$0',t:77},{id:'rating',l:'Google Rating',f:'r',t:4.7}]},
+    restaurant:{label:'Restaurant',goal:5000,role:'Server',kpi:['rev','covers','check','food'],chart:'rev',m:[
+      {id:'rev',l:'Revenue / Day',f:'$0',t:'goal',add:1,day:1},{id:'covers',l:'Covers / Day',f:'n',t:function(g){return g/38},add:1,day:1},
+      {id:'check',l:'Avg Check',f:'$2',t:38},{id:'food',l:'Food Cost',f:'%',t:.30,dn:1},{id:'labor',l:'Labor Cost',f:'%',t:.28,dn:1},
+      {id:'turns',l:'Table Turns',f:'d',t:2.5},{id:'online',l:'Online Order Share',f:'%',t:.25},{id:'voids',l:'Comps & Voids',f:'%',t:.02,dn:1},{id:'rating',l:'Google Rating',f:'r',t:4.5}]},
+    home:{label:'Home services',goal:3000,role:'Technician',kpi:['rev','jobs','avgjob','close'],chart:'jobs',m:[
+      {id:'rev',l:'Revenue / Day',f:'$0',t:'goal',add:1,day:1},{id:'jobs',l:'Jobs Completed / Day',f:'d',t:function(g){return g/420},add:1,day:1},
+      {id:'avgjob',l:'Avg Job Value',f:'$0',t:420},{id:'close',l:'Close Rate',f:'%',t:.45},{id:'jpt',l:'Jobs per Tech / Day',f:'d',t:3},
+      {id:'callback',l:'Callback Rate',f:'%',t:.03,dn:1},{id:'leads',l:'Leads / Wk',f:'n',t:60,add:1},{id:'resp',l:'Response Time',f:'h',t:1,dn:1},
+      {id:'repeat',l:'Repeat Customers',f:'%',t:.30},{id:'rating',l:'Google Rating',f:'r',t:4.7}]},
+    agency:{label:'Agency or studio',goal:5000,role:'Team',kpi:['rev','util','rate','margin'],chart:'rev',m:[
+      {id:'rev',l:'Billable Rev / Day',f:'$0',t:'goal',add:1,day:1},{id:'util',l:'Billable Utilization',f:'%',t:.75},{id:'rate',l:'Effective Rate',f:'$0',t:150},
+      {id:'margin',l:'Project Margin',f:'%',t:.40},{id:'pipe',l:'Pipeline Coverage',f:'x',t:3},{id:'win',l:'Proposal Win Rate',f:'%',t:.35},
+      {id:'retainer',l:'Retainer Share',f:'%',t:.60},{id:'ontime',l:'On-time Delivery',f:'%',t:.90}]},
+    retail:{label:'Retail shop',goal:3000,role:'Associate',kpi:['rev','txns','aov','conv'],chart:'rev',m:[
+      {id:'rev',l:'Revenue / Day',f:'$0',t:'goal',add:1,day:1},{id:'txns',l:'Transactions / Day',f:'n',t:function(g){return g/64},add:1,day:1},
+      {id:'aov',l:'Avg Order',f:'$2',t:64},{id:'conv',l:'Conversion',f:'%',t:.22},{id:'ipt',l:'Items per Sale',f:'d',t:2.1},{id:'gm',l:'Gross Margin',f:'%',t:.48},
+      {id:'repeat',l:'Repeat Customers',f:'%',t:.35},{id:'online',l:'Online Share',f:'%',t:.20},{id:'shrink',l:'Shrink',f:'%',t:.015,dn:1}]},
+    fitness:{label:'Fitness studio',goal:1500,role:'Coach',kpi:['rev','members','fill','churn'],chart:'rev',m:[
+      {id:'rev',l:'Revenue / Day',f:'$0',t:'goal',add:1,day:1},{id:'members',l:'Active Members',f:'n',t:420,add:1},{id:'fill',l:'Class Fill Rate',f:'%',t:.75},
+      {id:'churn',l:'Monthly Churn',f:'%',t:.04,dn:1},{id:'trials',l:'Trials / Wk',f:'n',t:25,add:1},{id:'tconv',l:'Trial Conversion',f:'%',t:.40},
+      {id:'visits',l:'Visits / Member / Wk',f:'d',t:2.2},{id:'pt',l:'PT Revenue Share',f:'%',t:.18},{id:'rating',l:'Google Rating',f:'r',t:4.8}]}
   };
-  var COLORS=['#B33A35','#0E7490','#1D4ED8','#15803D','#7C3AED','#111827'];
+  var COLORS=['#C8423D','#0E7490','#1D4ED8','#15803D','#7C3AED','#111827'];
   var GOALS=[500,1000,1650,3000,5000];
-  var st={ind:'salon',color:COLORS[0],goal:1650,name:'Your Business'};
+  var st={ind:'salon',color:COLORS[0],goal:1650,name:'Your Business',kpi:IND.salon.kpi.slice(),chart:'rev',period:30,member:'all',cmp:'prior'};
+  var DAYS=180,END=new Date(2026,9,31),MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-  function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+  function hash(x){var h=2166136261;for(var i=0;i<x.length;i++){h^=x.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
   function rng(seed){var a=seed;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function day(i){return new Date(END.getFullYear(),END.getMonth(),END.getDate()-(DAYS-1-i))}
   function fmt(v,f){
     if(f==='$2')return '$'+v.toFixed(2);
     if(f==='$0')return '$'+Math.round(v).toLocaleString('en-US');
-    if(f==='%'||f==='%d')return (v*100).toFixed(1)+'%';
+    if(f==='%')return (v*100).toFixed(1)+'%';
     if(f==='x')return v.toFixed(1)+'x';
     if(f==='d')return v.toFixed(1);
-    if(f==='r')return v.toFixed(1)+' stars';
+    if(f==='r')return v.toFixed(2);
+    if(f==='h')return v.toFixed(1)+' hrs';
     return Math.round(v).toLocaleString('en-US');
   }
-  function status(v,t,low){var r=low?t/v:v/t;return r>=1?'on':r>=.95?'watch':'off'}
-  var LBL={on:'On track',watch:'Watch',off:'Off track'};
-  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function axf(v,f){if(f==='$0'||f==='$2')return v>=1000?'$'+(v/1000).toFixed(v>=10000?0:1).replace(/\.0$/,'')+'K':'$'+Math.round(v);if(f==='%')return Math.round(v*100)+'%';return f==='n'?Math.round(v)+'':v.toFixed(1)}
+  function status(v,t,dn){var r=dn?t/v:v/t;return r>=1?'on':r>=.95?'wa':'lo'}
+  var CLS={on:'up',wa:'wn',lo:'dn'};
+  function esc(x){return x.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function initials(n){var p=n.trim().split(/\s+/);return((p[0]||'Y')[0]+((p[1]||'')[0]||'')).toUpperCase()}
 
-  function chips(id,items,cur,onPick){
-    var el=document.getElementById(id);el.innerHTML='';
-    items.forEach(function(it){var b=document.createElement('button');b.type='button';b.textContent=it.label;b.setAttribute('aria-pressed',String(it.value===cur));
-      b.addEventListener('click',function(){onPick(it.value)});el.appendChild(b)});
+  /* deterministic sample series per metric, so switching metrics never changes the numbers */
+  var cache={};
+  function series(m){
+    var key=st.ind+'|'+st.name+'|'+st.goal+'|'+m.id;if(cache[key])return cache[key];
+    var R=rng(hash(key)),T=tgt(m),bias=R()*0.17-0.10,out=[];
+    for(var i=0;i<DAYS;i++){var d=day(i).getDay(),w=m.day?[1.0,0.86,0.9,0.95,1.0,1.08,1.16][d]:1,trend=1+(i-DAYS)/DAYS*0.04,n=(R()-.5)*(m.f==='r'?0.02:0.14);
+      var v=m.dn?T*(1-bias)*(1+n):T*(1+bias)*w*trend*(1+n);if(m.f==='%')v=Math.min(.99,Math.max(.001,v));if(m.f==='r')v=Math.min(5,v);out.push(v)}
+    var mem=[];for(var k=0;k<4;k++)mem.push(1+(R()-.5)*0.22);
+    return cache[key]={v:out,mem:mem};
   }
+  function tgt(m){return m.t==='goal'?st.goal:typeof m.t==='function'?m.t(st.goal):m.t}
+  function metric(id){return IND[st.ind].m.filter(function(x){return x.id===id})[0]}
+  function val(m,from,to,mi){var s=series(m),sum=0,n=0;for(var i=from;i<=to;i++){sum+=s.v[i];n++}var v=sum/n;
+    if(mi!=null){var f=s.mem[mi];v=m.dn?v/f:v*f;if(m.add)v=v/4}else if(st.member!=='all'){var f2=s.mem[+st.member];v=m.dn?v/f2:v*f2;if(m.add)v=v/4}
+    if(m.f==='%')v=Math.min(.99,v);if(m.f==='r')v=Math.min(5,v);return v}
+  function tval(m){var t=tgt(m);return (st.member!=='all'&&m.add)?t/4:t}
+
+  function chipRow(id,items,isOn,onPick){var el=document.getElementById(id);el.innerHTML='';items.forEach(function(it){var b=document.createElement('button');b.type='button';b.textContent=it.label;b.setAttribute('aria-pressed',String(isOn(it.value)));b.addEventListener('click',function(){onPick(it.value)});el.appendChild(b)})}
   function drawControls(){
-    chips('industry',Object.keys(IND).map(function(k){return{label:IND[k].label,value:k}}),st.ind,function(v){st.ind=v;st.goal=IND[v].goal;drawControls();render()});
-    chips('goal',GOALS.map(function(g){return{label:'$'+g.toLocaleString('en-US'),value:g}}),st.goal,function(v){st.goal=v;drawControls();render()});
-    var c=document.getElementById('colors');c.innerHTML='';
-    COLORS.forEach(function(col){var b=document.createElement('button');b.type='button';b.style.background=col;b.setAttribute('aria-label','Brand color '+col);b.setAttribute('aria-pressed',String(col===st.color));
-      b.addEventListener('click',function(){st.color=col;drawControls();render()});c.appendChild(b)});
+    var I=IND[st.ind];
+    chipRow('industry',Object.keys(IND).map(function(k){return{label:IND[k].label,value:k}}),function(v){return v===st.ind},function(v){st.ind=v;st.goal=IND[v].goal;st.kpi=IND[v].kpi.slice();st.chart=IND[v].chart;st.member='all';drawControls();render()});
+    chipRow('metrics',I.m.map(function(m){return{label:m.l,value:m.id}}),function(v){return st.kpi.indexOf(v)>-1},function(v){var i=st.kpi.indexOf(v);if(i>-1){if(st.kpi.length>1)st.kpi.splice(i,1)}else{st.kpi.push(v);if(st.kpi.length>4)st.kpi.shift()}drawControls();render()});
+    document.getElementById('kpiCount').textContent=st.kpi.length+' of 4 selected';
+    var cp=document.getElementById('chartPick');cp.innerHTML=I.m.map(function(m){return '<option value="'+m.id+'">'+m.l+'</option>'}).join('');cp.value=st.chart;
+    chipRow('goal',GOALS.map(function(g){return{label:'$'+g.toLocaleString('en-US'),value:g}}),function(v){return v===st.goal},function(v){st.goal=v;drawControls();render()});
+    var c=document.getElementById('colors');c.innerHTML='';COLORS.forEach(function(col){var b=document.createElement('button');b.type='button';b.style.background=col;b.setAttribute('aria-label','Brand color '+col);b.setAttribute('aria-pressed',String(col===st.color));b.addEventListener('click',function(){st.color=col;drawControls();render()});c.appendChild(b)});
+    var ms=document.getElementById('pbMember');ms.innerHTML='<option value="all">All '+I.role.toLowerCase()+(I.role==='Team'?'s':'s')+'</option>'+[0,1,2,3].map(function(k){return '<option value="'+k+'">'+I.role+' '+'ABCD'[k]+'</option>'}).join('');ms.value=st.member;
+    document.getElementById('pbMemberLab').textContent=I.role==='Team'?'Team':I.role;
+  }
+
+  function columns(m,from,to){
+    var W=760,H=220,L=48,R=10,T=14,B=22,iw=W-L-R,ih=H-T-B,labels=[],vals=[];
+    if(st.period===90){for(var w=from;w<=to;w+=7){var e=Math.min(to,w+6);labels.push(MON[day(w).getMonth()]+' '+day(w).getDate());vals.push(val(m,w,e))}}
+    else{for(var i=from;i<=to;i++){var d=day(i);labels.push(st.period===7?DOW[d.getDay()]:String(d.getDate()));vals.push(val(m,i,i))}}
+    var t=tval(m),mx=Math.max.apply(null,vals.concat([t]))*1.15,p=Math.pow(10,Math.floor(Math.log10(mx))),nn=mx/p,step=[1,1.2,1.5,2,2.5,3,4,5,6,8,10].filter(function(x){return x>=nn})[0]*p,max=step;
+    var s='',n=vals.length,bw=iw/n,gap=Math.max(2,bw*.26);
+    for(var g=0;g<=4;g++){var y=T+ih*(1-g/4);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" stroke="#EDEBE9"/><text x="'+(L-6)+'" y="'+(y+3.5)+'" text-anchor="end" font-size="10" fill="#605E5C">'+axf(max*g/4,m.f)+'</text>'}
+    vals.forEach(function(v,i){var ok=m.dn?v<=t:v>=t,h=ih*v/max,x=L+i*bw+gap/2;
+      s+='<rect x="'+x.toFixed(1)+'" y="'+(T+ih-h).toFixed(1)+'" width="'+(bw-gap).toFixed(1)+'" height="'+h.toFixed(1)+'" fill="'+(ok?'#2B2B2B':st.color)+'" fill-opacity="'+(ok?1:.45)+'"><title>'+labels[i]+': '+fmt(v,m.f)+'</title></rect>';
+      if(n<=14)s+='<text x="'+(x+(bw-gap)/2)+'" y="'+(T+ih-h-4)+'" text-anchor="middle" font-size="10" fill="#252423">'+axf(v,m.f)+'</text>';
+      var every=Math.ceil(n/15);if(i%every===0)s+='<text x="'+(x+(bw-gap)/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="#605E5C">'+labels[i]+'</text>'});
+    var ty=T+ih*(1-t/max);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+ty+'" y2="'+ty+'" stroke="'+st.color+'" stroke-width="1.6" stroke-dasharray="5 4"/><text x="'+(W-R)+'" y="'+(ty-5)+'" text-anchor="end" font-size="10" font-weight="600" fill="'+st.color+'">Target '+axf(t,m.f)+'</text>';
+    return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(m.l)+' against target">'+s+'</svg>';
   }
 
   function render(){
-    var T=IND[st.ind],R=rng(hash(st.name+st.ind+st.goal));
-    document.getElementById('pvHead').style.background=st.color;
-    document.getElementById('pvName').textContent=st.name||'Your Business';
-    document.getElementById('pvSub').textContent=T.label+' · business performance · this month';
-    // KPI 1 is the daily revenue goal
-    var days=[],sum=0;for(var i=0;i<14;i++){var v=st.goal*(0.82+R()*0.36);days.push(v);sum+=v}
-    var avg=sum/14,s1=status(avg,st.goal);
-    var UPI='<svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#16A34A"/><path d="M8 11.5V4.8M5.2 7.4L8 4.6l2.8 2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',DNI='<svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    var res=[{l:'Revenue per day',v:avg,t:st.goal,low:false,f:'$0'}];
-    T.kpis.forEach(function(k){var low=k.f==='%d';var v=k.t*(low?(0.9+R()*0.22):(0.9+R()*0.16));res.push({l:k.l,v:v,t:k.t,low:low,f:k.f,w:k.w})});
-    var html='';res.forEach(function(r,i){var s=status(r.v,r.t,r.low),good=s==='on';
-      html+='<div class="kpi"><div class="l">'+r.l+'</div><div class="v">'+(good?UPI:DNI)+fmt(r.v,r.f)+'</div><div class="t">'+(i===0?'Target '+fmt(st.goal,'$0'):r.w)+'</div><span class="tag '+s+'">'+LBL[s]+'</span></div>'});
-    document.getElementById('pvKpis').innerHTML=html;
-    var gap=res.map(function(r){var d=r.low?(r.t-r.v)/r.t:(r.v-r.t)/r.t;return{r:r,d:d}});
-    var worst=gap.slice().sort(function(a,b){return a.d-b.d})[0],best=gap.slice().sort(function(a,b){return b.d-a.d})[0];
-    function phr(g){var pct=Math.abs(Math.round(g.d*100));if(pct===0)return g.r.l.toLowerCase()+' is right on target';return g.r.l.toLowerCase()+' is '+pct+'% '+(g.d>=0?'better than':'short of')+' target'}
-    var ins=worst.d>=0?'What this tells you: everything is at or above target this month. The question now is whether the targets are high enough.':
-      best.d<0?'What this tells you: every number is short of target, and '+phr(worst)+'. Start there.':
-      'What this tells you: '+phr(best).replace(/^./,function(c){return c.toUpperCase()})+', but '+phr(worst)+'. That gap is where to look first.';
-    document.getElementById('pvInsight').innerHTML='<b>What this tells you:</b>'+ins.slice(ins.indexOf(':')+1);
+    var I=IND[st.ind],P=st.period,to=DAYS-1,from=DAYS-P,pf=from-P,pt=from-1;
+    var pbi=document.getElementById('pbi');pbi.style.setProperty('--b',st.color);
+    document.getElementById('pbName').textContent=st.name||'Your Business';
+    document.getElementById('pbMark').textContent=initials(st.name||'Your Business');
+    var who=st.member==='all'?'all '+I.role.toLowerCase()+'s':I.role+' '+'ABCD'[+st.member];
+    document.getElementById('pbSub').textContent=(P===7?'This week':P===30?'Last 30 days':'Last 90 days')+' · '+who+(st.cmp==='prior'?' · vs prior period':'');
+    // KPI cards
+    var res=[],html='';
+    st.kpi.forEach(function(id){var m=metric(id),v=val(m,from,to),pv=val(m,pf,pt),t=tval(m),s=status(v,t,m.dn);res.push({m:m,v:v,t:t,s:s,d:m.dn?(t-v)/t:(v-t)/t});
+      var pct=m.dn?'Target under '+fmt(t,m.f):Math.floor(v/t*100)+'% of target '+fmt(t,m.f);
+      var ch=(v-pv)/pv,good=m.dn?ch<0:ch>0;
+      html+='<div class="pbi-kpi"><div class="t">'+m.l+'</div><div class="v">'+fmt(v,m.f)+'</div><div class="s '+CLS[s]+'">'+pct+'</div>'+(st.cmp==='prior'?'<div class="s2"><span class="'+(Math.abs(ch)<.0005?'mu':good?'up':'dn')+'">'+(ch>=0?'+':'')+(ch*100).toFixed(1)+'%</span> vs prior period</div>':'')+'</div>'});
+    var kp=document.getElementById('pbKpis');kp.innerHTML=html;kp.style.gridTemplateColumns='repeat('+Math.min(4,res.length)+',1fr)';
+    // insight
+    var sorted=res.slice().sort(function(a,b){return a.d-b.d}),worst=sorted[0],best=sorted[sorted.length-1];
+    function ph(r){var p=Math.abs(Math.round(r.d*100));return p===0?r.m.l+' is on target':r.m.l+' is '+p+'% '+(r.d>=0?'better than':'short of')+' target'}
+    var ins=worst.d>=0?'Every card is at or above target. Worth checking whether the targets are high enough.':best.d<0?'Every card is short of target. '+ph(worst)+', so start there.':ph(best)+', but '+ph(worst)+'. That gap is where to look first.';
+    document.getElementById('pbInsight').innerHTML='<b>Insight</b> &nbsp;'+esc(ins);
     // chart
-    var W=420,H=215,max=st.goal*1.3,bw=W/14,s='';
-    days.forEach(function(v,i){var h=(H-16)*v/max,x=i*bw+3;s+='<rect x="'+x.toFixed(1)+'" y="'+(H-h).toFixed(1)+'" width="'+(bw-6).toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2" fill="'+(v>=st.goal?'#111827':'#D1D5DB')+'"><title>Day '+(i+1)+': '+fmt(v,'$0')+'</title></rect>'});
-    var ty=H-(H-16)*st.goal/max;
-    s+='<line x1="0" x2="'+W+'" y1="'+ty.toFixed(1)+'" y2="'+ty.toFixed(1)+'" stroke="'+st.color+'" stroke-width="2" stroke-dasharray="6 4"/>';
-    s+='<text x="'+W+'" y="'+(ty-6).toFixed(1)+'" text-anchor="end" font-size="11" font-weight="700" fill="'+st.color+'" font-family="Inter,sans-serif">Goal '+fmt(st.goal,'$0')+'</text>';
-    document.getElementById('pvChart').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Last 14 days of revenue against the daily goal">'+s+'</svg>';
-    document.getElementById('pvChartTitle').textContent='Last 14 days vs '+fmt(st.goal,'$0')+' goal';
-    // goals
-    var g='';T.goals.forEach(function(q){var low=q[2]==='%d';var v=q[1]*(low?(0.85+R()*0.3):(0.86+R()*0.2));var s2=status(v,q[1],low);
-      g+='<div class="goal"><span>'+q[0]+'</span><span class="gv">'+fmt(v,q[2])+' of '+fmt(q[1],q[2])+'<br><span class="tag '+s2+'" style="margin-top:3px">'+LBL[s2]+'</span></span></div>'});
-    document.getElementById('pvGoals').innerHTML=g;
+    var cm=metric(st.chart);
+    document.getElementById('pbChartTitle').textContent=cm.l.replace(' / ',' per ')+' vs Target';
+    document.getElementById('pbChartSub').textContent=(P===90?'Weekly average':'Daily')+', '+who;
+    document.getElementById('pbChart').innerHTML=columns(cm,from,to);
+    // team matrix: chosen KPIs by person
+    document.getElementById('pbTableTitle').textContent=(I.role==='Team'?'Team':I.role)+' Scorecard';
+    var t='<table><thead><tr><th>'+(I.role==='Team'?'Team':I.role)+'</th>'+res.map(function(r){return '<th>'+r.m.l+'</th>'}).join('')+'</tr></thead><tbody>';
+    for(var k=0;k<4;k++){t+='<tr'+(st.member===String(k)?' class="sel"':'')+'><td><b>'+I.role+' '+'ABCD'[k]+'</b></td>';res.forEach(function(r){var v=val(r.m,from,to,k),tg=r.m.add?tgt(r.m)/4:tgt(r.m);t+='<td class="'+{on:'hl',wa:'wa',lo:'lo'}[status(v,tg,r.m.dn)]+'">'+fmt(v,r.m.f)+'</td>'});t+='</tr>'}
+    t+='<tr class="tot"><td>Total</td>'+res.map(function(r){var mm=st.member;st.member='all';var v=val(r.m,from,to);st.member=mm;return '<td>'+fmt(v,r.m.f)+'</td>'}).join('')+'</tr></tbody></table>';
+    document.getElementById('pbTable').innerHTML=t;
   }
   var nameEl=document.getElementById('bizName');
   nameEl.addEventListener('input',function(){st.name=nameEl.value.trim()||'Your Business';render()});
+  document.getElementById('chartPick').addEventListener('change',function(e){st.chart=e.target.value;render()});
+  document.getElementById('pbPeriod').addEventListener('change',function(e){st.period=+e.target.value;render()});
+  document.getElementById('pbMember').addEventListener('change',function(e){st.member=e.target.value;render()});
+  document.getElementById('pbCmp').addEventListener('change',function(e){st.cmp=e.target.value;render()});
   drawControls();render();
 })();
 </script>
