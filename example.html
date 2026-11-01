@@ -161,7 +161,7 @@ td .sm{color:var(--muted);font-size:10.5px;margin-left:4px}
 <div class="shell">
   <nav class="rail" aria-label="Report pages">
     <h4>Report pages</h4>
-    <button data-page="pulse" id="nav-pulse">Pulse <span class="n">1</span></button>
+    <button data-page="pulse" id="nav-pulse">Overview <span class="n">1</span></button>
     <button data-page="technicians" id="nav-technicians">Technicians <span class="n">2</span></button>
     <button data-page="customers" id="nav-customers">Customers <span class="n">3</span></button>
     <h4>Reference</h4>
@@ -350,7 +350,7 @@ var S={page:'pulse',period:'month',barber:'all',cmp:'prior'};
 var sB=document.getElementById('sBarber');
 sB.innerHTML='<option value="all">All technicians</option>'+TECHS.map(function(b){return '<option value="'+b.id+'">'+b.name+' ('+b.lvl+')</option>'}).join('');
 var PAGES={
-  pulse:{t:'Pulse',n:'The daily scoreboard: the master critical number, the year against $1.1M, and the seven annual goals.',bt:'Business Performance'},
+  pulse:{t:'Overview',n:'The daily scoreboard: the master critical number, the year against $1.1M, and the seven annual goals.',bt:'Business Performance'},
   technicians:{t:'Technicians',n:'Each technician against the target for their level, and the work they do.',bt:'Technician Performance'},
   customers:{t:'Customers',n:'Leads, bookings, sold estimates, maintenance plans and callbacks.',bt:'Customers & Growth'},
   definitions:{t:'Definitions',n:'How every number is calculated and where it comes from.',bt:'Metric Definitions'}
