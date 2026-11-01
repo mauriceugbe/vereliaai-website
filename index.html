@@ -91,7 +91,7 @@ section{padding:100px 0}
 .mock{background:#fff;color:var(--ink);border-radius:20px;box-shadow:0 40px 90px -30px rgba(2,6,23,.75),0 0 0 1px rgba(255,255,255,.08);overflow:hidden}
 .mock-bar{height:36px;background:#F3F4F6;display:flex;align-items:center;gap:6px;padding:0 14px;border-bottom:1px solid var(--line)}
 .mock-bar i{width:9px;height:9px;border-radius:50%;background:#D1D5DB;display:inline-block}
-.mock-bar span{margin-left:10px;font-size:11.5px;color:var(--muted);font-weight:600}
+.mock-bar span{margin-left:10px;font-size:11.5px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mock-head{background:#0E7490;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
 .mock-head b{font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
 .mock-head small{font-size:11px;opacity:.85;font-weight:600}
@@ -238,6 +238,33 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
   .top .signin{display:none}
 }
 @media (max-width:440px){.strip .wrap{grid-template-columns:1fr}.hero h1{font-size:38px}}
+
+/* hero report preview, Power BI style */
+.rp{background:#EEF0F2;padding:8px;display:grid;gap:6px;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;color:#252423}
+.rp-band{background:#111;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px}
+.rp-lg{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}.rp-lg span{display:grid;place-items:center;width:24px;height:24px;background:#0E7490;font-size:10px}
+.rp-tt{text-align:right}.rp-tt b{display:block;font-size:13.5px;font-weight:600}.rp-tt small{font-size:10px;color:#C8C6C4}
+.rp-sl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.rp-sl div{background:#fff;border:1px solid #C8C6C4;padding:3px 8px 4px}.rp-sl label{display:block;text-align:center;font-size:8.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#0E7490}
+.rp-sl span{font-size:11px;display:flex;justify-content:space-between}.rp-sl span:after{content:"";width:6px;height:6px;border-right:1.5px solid #605E5C;border-bottom:1.5px solid #605E5C;transform:rotate(45deg) translateY(-2px)}
+.rp-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.rp-kpi{background:#fff;border:1px solid #C8C6C4;padding:7px 6px;text-align:center;font-variant-numeric:tabular-nums}
+.rp-kpi:first-child{box-shadow:inset 0 0 0 1.5px #0E7490}
+.rp-kt{font-size:10.5px;font-weight:600;color:#0E7490}.rp-kv{font-size:21px;font-weight:600;margin:1px 0;letter-spacing:-.3px}
+.rp-ks{font-size:9.5px;font-weight:600}.rp-kd{font-size:9px;color:#605E5C;margin-top:1px}
+.rp .up{color:#107C10}.rp .wn{color:#A0670A}.rp .dn{color:#C4314B}
+.rp-vis{background:#fff;border:1px solid #C8C6C4;padding:7px 9px}
+.rp-vt{display:flex;align-items:center;gap:6px}.rp-vt b{font-size:12px;font-weight:600;color:#0E7490}.rp-vt i{font-style:normal;font-size:8.5px;border:1px solid #C8C6C4;color:#605E5C;padding:0 4px}
+.rp-vs{font-size:9.5px;color:#605E5C;margin:1px 0 2px}
+.rp-vis svg{display:block;width:100%;height:auto}.rp-vis .ax{font-size:8.5px;fill:#605E5C}.rp-vis .tl{font-size:8.5px;fill:#0E7490;font-weight:600}
+.rp-lgd{display:flex;gap:12px;font-size:9px;color:#605E5C;margin-top:2px}.rp-lgd span{display:flex;align-items:center;gap:4px}.rp-lgd em{width:8px;height:8px;border-radius:50%}.rp-lgd em.ln{width:12px;height:0;border-top:1.6px dashed #0E7490;border-radius:0}
+.rp-tb{width:100%;border-collapse:collapse;font-size:10.5px;margin-top:4px;font-variant-numeric:tabular-nums}
+.rp-tb th{font-size:9.5px;font-weight:600;color:#0B5C72;text-align:left;padding:2px 6px;border-bottom:1px solid #C8C6C4}
+.rp-tb td{padding:2.5px 6px;border-bottom:1px solid #F3F2F1;white-space:nowrap}.rp-tb .n{text-align:right}
+.rp-tb td.hl{background:#E7F3E8}.rp-tb td.lo{background:#FCE9EB}.rp-tb tr.tot td{font-weight:700;border-top:1px solid #2B2B2B;border-bottom:0}
+.rp-tabs{display:flex;gap:2px;background:#F3F2F1;border-top:1px solid #E1DFDD;padding:0 8px;font-family:"Segoe UI",-apple-system,Roboto,Arial,sans-serif}
+.rp-tabs span{font-size:10.5px;color:#605E5C;padding:6px 10px;border-bottom:2px solid transparent}.rp-tabs span.on{color:#252423;font-weight:600;background:#fff;border-bottom-color:#0E7490}
+@media (max-width:560px){.rp-kpis{grid-template-columns:repeat(2,1fr)}.rp-tt small{display:none}.rp-tb th:nth-child(2),.rp-tb td:nth-child(2){display:none}.rp-tabs span{padding:6px 7px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 h2{font-size:44px}
 
@@ -391,26 +418,18 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
       <p class="fine">Custom dashboards from $349 a month. Your wireframe comes first, and the setup fee is due only once you approve it.</p>
     </div>
 
-    <div class="mock" aria-label="Example dashboard for a home services company">
+    <div class="mock" aria-label="Example Power BI style dashboard for a home services company">
       <div class="mock-bar"><i></i><i></i><i></i><span>app.vereliaai.com &middot; example home services company</span></div>
-      <div class="mock-head"><b>Business performance</b><small>This month &middot; vs Sept</small></div>
-      <div class="mock-body">
-        <div class="kpis">
-          <div class="kpi"><div class="l">Revenue per day</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#16A34A"/><path d="M8 11.5V4.8M5.2 7.4L8 4.6l2.8 2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>$3,120</div><div class="t">Target $3,000</div><span class="tag on">On track</span></div>
-          <div class="kpi"><div class="l">Avg job value</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>$402</div><div class="t">Target $420</div><span class="tag watch">Watch</span></div>
-          <div class="kpi"><div class="l">Jobs per day</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#16A34A"/><path d="M8 11.5V4.8M5.2 7.4L8 4.6l2.8 2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>7.6</div><div class="t">Target 7</div><span class="tag on">On track</span></div>
-          <div class="kpi"><div class="l">Close rate</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>41%</div><div class="t">Target 45%</div><span class="tag off">Off track</span></div>
-        </div>
-        <div class="chartbox">
-          <div class="ct">Revenue per day vs $3,000</div>
-          <svg viewBox="0 0 420 110" role="img" aria-label="Daily revenue bars against a target line">
-            <g fill="#D1D5DB">
-              <rect x="6" y="52" width="16" height="50" rx="2"/><rect x="33" y="40" width="16" height="62" rx="2" fill="#111827"/><rect x="60" y="30" width="16" height="72" rx="2" fill="#111827"/><rect x="87" y="54" width="16" height="48" rx="2"/><rect x="114" y="57" width="16" height="45" rx="2"/><rect x="141" y="50" width="16" height="52" rx="2"/><rect x="168" y="36" width="16" height="66" rx="2" fill="#111827"/><rect x="195" y="28" width="16" height="74" rx="2" fill="#111827"/><rect x="222" y="55" width="16" height="47" rx="2"/><rect x="249" y="52" width="16" height="50" rx="2"/><rect x="276" y="46" width="16" height="56" rx="2" fill="#111827"/><rect x="303" y="34" width="16" height="68" rx="2" fill="#111827"/><rect x="330" y="26" width="16" height="76" rx="2" fill="#111827"/><rect x="357" y="53" width="16" height="49" rx="2"/><rect x="384" y="44" width="16" height="58" rx="2" fill="#111827"/>
-            </g>
-            <line x1="0" x2="420" y1="47" y2="47" stroke="#0E7490" stroke-width="2" stroke-dasharray="6 4"/>
-          </svg>
-        </div>
+      <div class="rp">
+        <div class="rp-band"><div class="rp-lg"><span>YC</span>Your Company</div><div class="rp-tt"><b>Business Performance</b><small>This month &middot; Oct 1 to 31 &middot; vs September</small></div></div>
+        <div class="rp-sl"><div><label>Period</label><span>This month</span></div><div><label>Technician</label><span>All technicians</span></div><div><label>Compare to</label><span>Prior period</span></div></div>
+        <div class="rp-kpis"><div class="rp-kpi"><div class="rp-kt">Revenue / Day</div><div class="rp-kv">$2,951</div><div class="rp-ks wn">98% of target $3,000</div><div class="rp-kd"><span class="dn">-5.4%</span> vs Sep</div></div><div class="rp-kpi"><div class="rp-kt">Avg Job Value</div><div class="rp-kv">$425</div><div class="rp-ks up">101% of target $420</div><div class="rp-kd"><span class="dn">-0.5%</span> vs Sep</div></div><div class="rp-kpi"><div class="rp-kt">Jobs / Day</div><div class="rp-kv">6.9</div><div class="rp-ks wn">99% of target 7.0</div><div class="rp-kd"><span class="dn">-5.0%</span> vs Sep</div></div><div class="rp-kpi"><div class="rp-kt">Callback Rate</div><div class="rp-kv">3.7%</div><div class="rp-ks dn">Target under 3%</div><div class="rp-kd"><span class="up">-18.5%</span> vs Sep</div></div></div>
+        <div class="rp-vis"><div class="rp-vt"><b>Revenue per Day vs Target</b><i>Column</i></div><div class="rp-vs">Revenue each day, company-wide</div><svg viewBox="0 0 480 150" role="img" aria-label="Revenue each day in October against the $3,000 daily target"><line x1="34" x2="474" y1="132.0" y2="132.0" stroke="#EDEBE9"/><text x="29" y="135.0" text-anchor="end" class="ax">$0</text><line x1="34" x2="474" y1="101.0" y2="101.0" stroke="#EDEBE9"/><text x="29" y="104.0" text-anchor="end" class="ax">$1.5K</text><line x1="34" x2="474" y1="70.0" y2="70.0" stroke="#EDEBE9"/><text x="29" y="73.0" text-anchor="end" class="ax">$3K</text><line x1="34" x2="474" y1="39.0" y2="39.0" stroke="#EDEBE9"/><text x="29" y="42.0" text-anchor="end" class="ax">$4.5K</text><line x1="34" x2="474" y1="8.0" y2="8.0" stroke="#EDEBE9"/><text x="29" y="11.0" text-anchor="end" class="ax">$6K</text><rect x="35.8" y="52.4" width="10.5" height="79.6" fill="#2B2B2B"/><text x="41.1" y="145" text-anchor="middle" class="ax">1</text><rect x="50.0" y="49.9" width="10.5" height="82.1" fill="#2B2B2B"/><rect x="64.2" y="70.8" width="10.5" height="61.2" fill="#9FCBD6"/><rect x="78.4" y="83.7" width="10.5" height="48.3" fill="#9FCBD6"/><rect x="92.6" y="72.3" width="10.5" height="59.7" fill="#9FCBD6"/><rect x="106.8" y="55.8" width="10.5" height="76.2" fill="#2B2B2B"/><text x="112.1" y="145" text-anchor="middle" class="ax">6</text><rect x="121.0" y="75.9" width="10.5" height="56.1" fill="#9FCBD6"/><rect x="135.2" y="89.1" width="10.5" height="42.9" fill="#9FCBD6"/><rect x="149.4" y="50.4" width="10.5" height="81.6" fill="#2B2B2B"/><rect x="163.6" y="74.7" width="10.5" height="57.3" fill="#9FCBD6"/><rect x="177.8" y="88.4" width="10.5" height="43.6" fill="#9FCBD6"/><text x="183.0" y="145" text-anchor="middle" class="ax">11</text><rect x="192.0" y="72.0" width="10.5" height="60.0" fill="#9FCBD6"/><rect x="206.2" y="95.8" width="10.5" height="36.2" fill="#9FCBD6"/><rect x="220.4" y="66.7" width="10.5" height="65.3" fill="#2B2B2B"/><rect x="234.6" y="87.0" width="10.5" height="45.0" fill="#9FCBD6"/><rect x="248.7" y="24.9" width="10.5" height="107.1" fill="#2B2B2B"/><text x="254.0" y="145" text-anchor="middle" class="ax">16</text><rect x="262.9" y="62.5" width="10.5" height="69.5" fill="#2B2B2B"/><rect x="277.1" y="107.2" width="10.5" height="24.8" fill="#9FCBD6"/><rect x="291.3" y="76.0" width="10.5" height="56.0" fill="#9FCBD6"/><rect x="305.5" y="87.9" width="10.5" height="44.1" fill="#9FCBD6"/><rect x="319.7" y="94.5" width="10.5" height="37.5" fill="#9FCBD6"/><text x="325.0" y="145" text-anchor="middle" class="ax">21</text><rect x="333.9" y="73.0" width="10.5" height="59.0" fill="#9FCBD6"/><rect x="348.1" y="54.0" width="10.5" height="78.0" fill="#2B2B2B"/><rect x="362.3" y="86.8" width="10.5" height="45.2" fill="#9FCBD6"/><rect x="376.5" y="80.7" width="10.5" height="51.3" fill="#9FCBD6"/><rect x="390.7" y="53.4" width="10.5" height="78.6" fill="#2B2B2B"/><text x="395.9" y="145" text-anchor="middle" class="ax">26</text><rect x="404.9" y="79.4" width="10.5" height="52.6" fill="#9FCBD6"/><rect x="419.1" y="85.4" width="10.5" height="46.6" fill="#9FCBD6"/><rect x="433.3" y="51.1" width="10.5" height="80.9" fill="#2B2B2B"/><rect x="447.5" y="53.6" width="10.5" height="78.4" fill="#2B2B2B"/><rect x="461.7" y="46.0" width="10.5" height="86.0" fill="#2B2B2B"/><text x="466.9" y="145" text-anchor="middle" class="ax">31</text><line x1="34" x2="474" y1="70.0" y2="70.0" stroke="#0E7490" stroke-width="1.6" stroke-dasharray="5 3"/></svg>
+          <div class="rp-lgd"><span><em style="background:#2B2B2B"></em>At or above target</span><span><em style="background:#9FCBD6"></em>Below target</span><span><em class="ln"></em>Target $3,000</span></div></div>
+        <div class="rp-vis"><div class="rp-vt"><b>Technician Scorecard</b><i>Matrix</i></div>
+          <table class="rp-tb"><thead><tr><th>Technician</th><th>Level</th><th class="n">Rev / Week</th><th class="n">Target</th><th class="n">% of Target</th></tr></thead><tbody><tr><td><b>Technician A</b></td><td>Senior</td><td class="n">$5,955</td><td class="n">$5,700</td><td class="n hl">104%</td></tr><tr><td><b>Technician B</b></td><td>Senior</td><td class="n">$5,237</td><td class="n">$5,700</td><td class="n lo">91%</td></tr><tr><td><b>Technician C</b></td><td>Tech</td><td class="n">$5,192</td><td class="n">$4,800</td><td class="n hl">108%</td></tr><tr><td><b>Technician D</b></td><td>Tech</td><td class="n">$4,271</td><td class="n">$4,800</td><td class="n lo">88%</td></tr><tr class="tot"><td>Company</td><td></td><td class="n">$20,655</td><td class="n">$21,000</td><td class="n">98%</td></tr></tbody></table></div>
       </div>
+      <div class="rp-tabs"><span class="on">Pulse</span><span>Technicians</span><span>Customers</span><span>Definitions</span></div>
     </div>
   </div>
 </section>
