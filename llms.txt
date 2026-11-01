@@ -21,7 +21,7 @@ This file describes Verelia as of November 1, 2026. Verelia leads with the Busin
 
 ## Verelia Pulse
 
-- A weekly Business Pulse Score out of 1,000 showing how customers find and judge a business from the outside: Google reviews and rating against nearby competitors, local search rank, whether AI assistants recommend the business, and the three changes worth the most points.
+- A weekly Business Pulse Score out of 1,000 showing how customers discover a business, how it compares with competitors, and where it can improve: Google reviews and rating against nearby competitors, local search rank, whether AI assistants recommend the business, and the three changes worth the most points.
 - $99 per month, no setup fee, cancel anytime. Needs no access to the business's systems.
 - Included with every dashboard plan. Customers can install the Verelia app on their phone from app.vereliaai.com without an app store.
 
