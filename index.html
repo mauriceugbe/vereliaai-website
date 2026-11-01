@@ -239,6 +239,64 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
 }
 @media (max-width:440px){.strip .wrap{grid-template-columns:1fr}.hero h1{font-size:38px}}
 
+
+/* build-it moment */
+.built[hidden],.buildlog[hidden],.next-step[hidden],.panel[hidden]{display:none!important}
+.pbi-band{grid-template-columns:minmax(0,1.3fr) minmax(0,1.3fr) auto}
+.pbi-logo span:last-child{white-space:normal;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.leftcol{min-width:0}
+.builder .b-head{margin-bottom:6px}.b-step{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan-dk,#0E7490)}
+.builder h3{font-size:21px;letter-spacing:-.02em;margin-top:4px}
+.builder input[type=text]{font-size:16px}
+.logo-drop{display:flex;align-items:center;gap:12px;border:1.5px dashed #CBD5E1;border-radius:12px;padding:11px 13px;cursor:pointer;transition:border-color .15s,background .15s}
+.logo-drop:hover{border-color:#0891B2;background:#F0FDFF}.logo-drop input{position:absolute;opacity:0;width:1px;height:1px}
+.logo-drop:focus-within{outline:2px solid #0891B2;outline-offset:2px}
+.ld-ic{width:38px;height:38px;flex:none;border-radius:9px;background:#F1F5F9;color:#475569;display:grid;place-items:center;overflow:hidden}.ld-ic img{max-width:34px;max-height:34px}
+.ld-t b{display:block;font-size:14px}.ld-t small{font-size:12px;color:var(--muted)}
+.b-sw{margin-top:10px}.b-sw button{width:28px;height:28px}
+.b-go{width:100%;margin-top:6px;font-size:16px;padding:15px}
+.ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.ctl-head b{font-size:17px}
+.rebuild{background:none;border:0;color:#0891B2;font-weight:700;font-size:13.5px;cursor:pointer;text-decoration:underline}
+.pbi-stage{position:relative}
+.pbi.ghost{filter:grayscale(1) blur(2.5px);opacity:.35;pointer-events:none;user-select:none}
+.ghost-msg{position:absolute;inset:0;display:grid;place-items:start center;padding-top:150px;z-index:2;pointer-events:none}
+.ghost-msg div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;text-align:center;box-shadow:0 20px 50px -25px rgba(15,23,42,.45)}
+.ghost-msg b{display:block;font-size:16px}.ghost-msg span{font-size:13.5px;color:var(--muted)}
+.ghost-msg[hidden]{display:none}
+.buildlog{background:#0B1220;color:#E2E8F0;border-radius:14px;padding:14px 18px;margin-bottom:12px;font-size:13.5px}
+.bl-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}.bl-top b{font-size:14.5px;color:#fff}
+.bl-spin{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.2);border-top-color:#22D3EE;animation:spin .8s linear infinite}
+.buildlog.done .bl-spin{animation:none;border-color:#22C55E;background:#22C55E}
+@keyframes spin{to{transform:rotate(360deg)}}
+.buildlog ol{list-style:none;display:grid;gap:5px;padding:0;margin:0}
+.buildlog li{display:flex;gap:9px;align-items:center;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;color:#94A3B8}
+.buildlog li.on{opacity:1;transform:none}.buildlog li.ok{color:#E2E8F0}
+.buildlog li i{width:15px;height:15px;flex:none;border-radius:50%;border:1.5px solid #475569;display:grid;place-items:center}
+.buildlog li.ok i{background:#22D3EE;border-color:#22D3EE}.buildlog li.ok i:after{content:"";width:6px;height:3px;border-left:1.8px solid #0B1220;border-bottom:1.8px solid #0B1220;transform:rotate(-45deg) translate(1px,-1px)}
+.built{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:#ECFEFF;border:1px solid #A5F3FC;border-radius:14px;padding:14px 18px;margin-bottom:12px;animation:rise .45s ease-out}
+.built b{display:block;font-size:17px}.built span{font-size:13.5px;color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pbi-mark.img{background:#fff;width:auto;min-width:30px;max-width:76px;padding:2px 5px}.pbi-mark.img img{display:block;max-height:26px;max-width:66px}
+/* staged reveal */
+.pbi.building .pbi-band>*,.pbi.building .pbi-slicers,.pbi.building .pbi-kpi,.pbi.building .pbi-vis,.pbi.building .pbi-insight{opacity:0;transform:translateY(8px)}
+.pbi.building .pbi-band{background:#2B2B2B}
+.pbi .pbi-band,.pbi .pbi-band>*,.pbi .pbi-slicers,.pbi .pbi-kpi,.pbi .pbi-vis,.pbi .pbi-insight{transition:opacity .45s ease,transform .45s ease,background .6s ease}
+.pbi.s1 .pbi-band{background:#111}.pbi.s1 .pbi-band>*{opacity:1;transform:none}
+.pbi.s1 .pbi-mark{animation:pop .55s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(.2)}100%{transform:scale(1)}}
+.pbi.s2 .pbi-slicers,.pbi.s2 .pbi-kpi{opacity:1;transform:none}
+.pbi.s2 .pbi-kpi:nth-child(2){transition-delay:.12s}.pbi.s2 .pbi-kpi:nth-child(3){transition-delay:.24s}.pbi.s2 .pbi-kpi:nth-child(4){transition-delay:.36s}
+.pbi.s3 #pbVisChart{opacity:1;transform:none}
+.pbi.building #pbChart rect{transform:scaleY(0);transform-origin:50% 100%;transform-box:fill-box}
+.pbi.building #pbChart line[stroke-dasharray]{stroke-dashoffset:800;stroke-dasharray:800}
+.pbi.s3 #pbChart rect{transform:scaleY(1);transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.pbi.s3 #pbChart line[stroke-dasharray]{stroke-dashoffset:0;transition:stroke-dashoffset 1s ease .5s}
+.pbi.s4 #pbVisTable{opacity:1;transform:none}
+.pbi.building .pbi-tbl tr{opacity:0}.pbi.s4 .pbi-tbl tr{opacity:1;transition:opacity .35s}
+.pbi.s5 .pbi-insight{opacity:1;transform:none}
+.pbi.glow{box-shadow:0 0 0 3px var(--b),0 30px 60px -30px rgba(15,23,42,.5);transition:box-shadow .5s}
+@media (prefers-reduced-motion:reduce){.pbi.building *{transition:none!important;animation:none!important}}
+
 /* hero report preview, Power BI style */
 .rp{background:#EEF0F2;padding:8px;display:grid;gap:6px;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;color:#252423}
 .rp-band{background:#111;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px}
@@ -446,12 +504,31 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
 <section class="mist demo-sec" id="demo">
   <div class="wrap">
     <div class="eyebrow">Try it</div>
-    <h2>See your dashboard come to life.</h2>
-    <p class="lede">Pick your business, your brand color and the metrics you run on. This is the same kind of report we build for clients, with sample numbers.</p>
+    <h2>Watch your dashboard build itself.</h2>
+    <p class="lede">Tell us your business name and type, add your logo if you like, and see your own branded report come together in seconds. It's the same kind of report we build for clients, with sample numbers.</p>
     <p class="fits"><b>Built for any business that runs on numbers:</b> professional services firms, agencies, healthcare practices, home services, restaurants, retail, fitness studios, salons and multi-location groups.</p>
 
-    <div class="demo-grid">
-      <div class="panel">
+    <div class="demo-grid" id="demoGrid">
+      <div class="leftcol">
+      <form class="panel builder" id="builder" autocomplete="off">
+        <div class="b-head"><span class="b-step">Build it in 10 seconds</span><h3>Your business, your dashboard</h3></div>
+        <div class="field">
+          <label for="bName">1. Business name</label>
+          <input type="text" id="bName" placeholder="e.g. Northside Plumbing" maxlength="32" autocomplete="organization">
+        </div>
+        <div class="field">
+          <span class="lab" id="bIndLab">2. Type of business</span>
+          <div class="chips" id="bIndustry" role="group" aria-labelledby="bIndLab"></div>
+        </div>
+        <div class="field">
+          <span class="lab">3. Your brand <small class="lab-note">optional</small></span>
+          <label class="logo-drop" id="logoDrop"><input type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp" id="bLogo"><span class="ld-ic" id="ldIc"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg></span><span class="ld-t"><b id="ldTitle">Add your logo</b><small id="ldSub">We'll match your brand color. It stays in your browser.</small></span></label>
+          <div class="swatches b-sw" id="bColors" role="group" aria-label="Or pick a brand color"></div>
+        </div>
+        <button type="submit" class="btn btn-primary b-go" id="bGo">Build my dashboard</button>
+      </form>
+      <div class="panel" id="ctlPanel" hidden>
+        <div class="ctl-head"><b>Customize it</b><button type="button" class="rebuild" id="rebuild">Rebuild</button></div>
         <div class="field">
           <label for="bizName">Business name</label>
           <input type="text" id="bizName" value="Your Business" maxlength="32" autocomplete="organization">
@@ -477,9 +554,14 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
           <div class="chips" id="goal" role="group" aria-labelledby="goalLab"></div>
         </div>
       </div>
+      </div>
 
       <div>
-        <div class="pbi" id="pbi" aria-live="polite">
+        <div class="buildlog" id="buildLog" hidden aria-live="polite"><div class="bl-top"><span class="bl-spin"></span><b id="blTitle">Building your dashboard</b></div><ol id="blSteps"></ol></div>
+        <div class="built" id="built" hidden><div><b id="builtTitle">This is your dashboard.</b><span>Built from sample numbers in seconds. Yours is built from your real ones.</span></div><div class="ns-btns"><a class="btn btn-primary" href="#pricing">Make it real</a><button type="button" class="btn btn-light" id="tweak">Customize it</button></div></div>
+        <div class="pbi-stage" id="pbiStage">
+        <div class="ghost-msg" id="ghostMsg"><div><b>Your dashboard appears here</b><span>Enter your business name and press Build.</span></div></div>
+        <div class="pbi ghost" id="pbi">
           <div class="pbi-band">
             <div class="pbi-logo"><span class="pbi-mark" id="pbMark">YB</span><span id="pbName">Your Business</span></div>
             <div class="pbi-title"><b>Business Performance</b><span id="pbSub">This month &middot; vs prior period</span></div>
@@ -492,20 +574,21 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
           </div>
           <div class="pbi-insight" id="pbInsight"></div>
           <div class="pbi-kpis" id="pbKpis"></div>
-          <div class="pbi-vis">
+          <div class="pbi-vis" id="pbVisChart">
             <div class="pbi-vt"><b id="pbChartTitle">Revenue per Day vs Target</b><span class="pbi-tag">Column</span></div>
             <div class="pbi-vs" id="pbChartSub"></div>
             <div id="pbChart" class="pbi-chart"></div>
             <div class="pbi-leg"><span><i style="background:#2B2B2B"></i>At or above target</span><span><i class="miss"></i>Below target</span><span><i class="ln"></i>Target</span></div>
           </div>
-          <div class="pbi-vis">
+          <div class="pbi-vis" id="pbVisTable">
             <div class="pbi-vt"><b id="pbTableTitle">Team Scorecard</b><span class="pbi-tag">Matrix</span></div>
             <div class="pbi-vs">Each person against target. Green at target, amber within 5%, red below.</div>
             <div class="pbi-tbl" id="pbTable"></div>
           </div>
         </div>
+        </div>
         <p class="sample-note"><b>These are sample numbers.</b> Your dashboard is built from your own plan and targets, using the data your tools actually provide. Any metric your tools record can go on it.</p>
-        <div class="next-step">
+        <div class="next-step" id="nextStep" hidden>
           <div><b>Like what you see?</b><span>We'll build yours around your actual business goals.</span></div>
           <div class="ns-btns"><a class="btn btn-primary" href="#pricing">Start your dashboard</a><a class="btn btn-light" href="#talk">Talk to us first</a><a class="btn btn-light" href="/example">Full example</a></div>
         </div>
@@ -829,7 +912,7 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
     var I=IND[st.ind],P=st.period,to=DAYS-1,from=DAYS-P,pf=from-P,pt=from-1;
     var pbi=document.getElementById('pbi');pbi.style.setProperty('--b',st.color);
     document.getElementById('pbName').textContent=st.name||'Your Business';
-    document.getElementById('pbMark').textContent=initials(st.name||'Your Business');
+    var mk=document.getElementById('pbMark');if(st.logo){mk.className='pbi-mark img';mk.innerHTML='<img alt="" src="'+st.logo+'">'}else{mk.className='pbi-mark';mk.textContent=initials(st.name||'Your Business')}
     var who=st.member==='all'?'all '+I.role.toLowerCase()+'s':I.role+' '+'ABCD'[+st.member];
     document.getElementById('pbSub').textContent=(P===7?'This week':P===30?'Last 30 days':'Last 90 days')+' · '+who+(st.cmp==='prior'?' · vs prior period':'');
     // KPI cards
@@ -863,6 +946,62 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
   document.getElementById('pbMember').addEventListener('change',function(e){st.member=e.target.value;render()});
   document.getElementById('pbCmp').addEventListener('change',function(e){st.cmp=e.target.value;render()});
   drawControls();render();
+
+  /* ---------- build-it moment ---------- */
+  var builder=document.getElementById('builder'),ctl=document.getElementById('ctlPanel'),pbiEl=document.getElementById('pbi'),ghost=document.getElementById('ghostMsg'),
+      logEl=document.getElementById('buildLog'),stepsEl=document.getElementById('blSteps'),builtEl=document.getElementById('built'),nextEl=document.getElementById('nextStep'),
+      bName=document.getElementById('bName'),reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,busy=false;
+  var TYPE_NOUN={salon:'barbershop or salon',restaurant:'restaurant',home:'home services company',agency:'agency or professional services firm',health:'healthcare practice',retail:'retail shop',fitness:'fitness studio'};
+  function drawBuilder(){
+    chipRow('bIndustry',Object.keys(IND).map(function(k){return{label:IND[k].label,value:k}}),function(v){return v===st.ind},function(v){st.ind=v;st.goal=IND[v].goal;st.kpi=IND[v].kpi.slice();st.chart=IND[v].chart;st.member='all';drawBuilder()});
+    var c=document.getElementById('bColors');c.innerHTML='';COLORS.forEach(function(col){var b=document.createElement('button');b.type='button';b.style.background=col;b.setAttribute('aria-label','Brand color '+col);b.setAttribute('aria-pressed',String(col===st.color));b.addEventListener('click',function(){st.color=col;drawBuilder()});c.appendChild(b)});
+  }
+  function hexOf(r,g,b){return '#'+[r,g,b].map(function(x){return ('0'+Math.round(x).toString(16)).slice(-2)}).join('')}
+  function brandColor(img){
+    try{var cv=document.createElement('canvas'),n=48;cv.width=n;cv.height=n;var cx=cv.getContext('2d');cx.drawImage(img,0,0,n,n);var d=cx.getImageData(0,0,n,n).data,bk={};
+      for(var i=0;i<d.length;i+=4){if(d[i+3]<128)continue;var r=d[i],g=d[i+1],b=d[i+2],mx=Math.max(r,g,b),mn=Math.min(r,g,b);if(mx-mn<40||mx<45||mn>225)continue;var k=(r>>4)+'-'+(g>>4)+'-'+(b>>4);(bk[k]=bk[k]||[0,0,0,0]);bk[k][0]++;bk[k][1]+=r;bk[k][2]+=g;bk[k][3]+=b}
+      var best=null;for(var k2 in bk)if(!best||bk[k2][0]>best[0])best=bk[k2];if(!best)return null;
+      var R=best[1]/best[0],G=best[2]/best[0],B=best[3]/best[0],L=(.2126*R+.7152*G+.0722*B)/255;if(L>.55){var f=.55/L;R*=f;G*=f;B*=f}return hexOf(R,G,B)}catch(e){return null}
+  }
+  document.getElementById('bLogo').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>5e6){document.getElementById('ldSub').textContent='That file is over 5 MB. Try a smaller logo.';return}
+    var rd=new FileReader();rd.onload=function(){var img=new Image();img.onload=function(){st.logo=rd.result;document.getElementById('ldIc').innerHTML='<img alt="" src="'+rd.result+'">';document.getElementById('ldTitle').textContent='Logo added';
+      var col=brandColor(img);if(col){if(COLORS.indexOf(col)<0)COLORS.unshift(col);st.color=col;document.getElementById('ldSub').textContent='Brand color matched from your logo.'}else document.getElementById('ldSub').textContent='Pick the color closest to your brand below.';drawBuilder()};img.src=rd.result};rd.readAsDataURL(f)});
+  function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms)})}
+  function addStep(t){var li=document.createElement('li');li.innerHTML='<i></i><span></span>';li.lastChild.textContent=t;stepsEl.appendChild(li);requestAnimationFrame(function(){li.classList.add('on')});return li}
+  function typeInto(el,text,ms){return new Promise(function(res){if(reduce){el.textContent=text;return res()}var i=0;el.textContent='';var iv=setInterval(function(){i++;el.textContent=text.slice(0,i);if(i>=text.length){clearInterval(iv);res()}},ms)})}
+  function countUp(el){var txt=el.textContent,m=txt.match(/^([^0-9\-]*)(-?[0-9,]*\.?[0-9]+)(.*)$/);if(!m||reduce)return;var pre=m[1],num=parseFloat(m[2].replace(/,/g,'')),suf=m[3],dec=(m[2].split('.')[1]||'').length,comma=m[2].indexOf(',')>-1||num>=1000,t0=performance.now(),dur=900;
+    function f(now){var p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3),v=num*e,s=dec?v.toFixed(dec):Math.round(v).toString();if(comma&&!dec)s=Math.round(v).toLocaleString('en-US');el.textContent=pre+s+suf;if(p<1)requestAnimationFrame(f);else el.textContent=txt}
+    el.textContent=pre+(dec?(0).toFixed(dec):'0')+suf;requestAnimationFrame(f)}
+  async function build(){
+    if(busy)return;busy=true;
+    st.name=(bName.value.trim()||'Your Business').slice(0,32);document.getElementById('bizName').value=st.name;
+    var noun=TYPE_NOUN[st.ind]||'business',first=st.name;
+    stepsEl.innerHTML='';logEl.classList.remove('done');document.getElementById('blTitle').textContent='Building '+first+"'s dashboard";
+    logEl.hidden=false;builtEl.hidden=true;nextEl.hidden=true;ghost.hidden=true;pbiEl.classList.remove('glow','s1','s2','s3','s4','s5');
+    var btn=document.getElementById('bGo');btn.disabled=true;btn.textContent='Building...';
+    if(innerWidth<1000)logEl.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    pbiEl.classList.add('building');pbiEl.classList.remove('ghost');render();
+    var ins=document.getElementById('pbInsight'),insHTML=ins.innerHTML,insText=ins.textContent.replace(/^Insight\s*/,'');ins.innerHTML='<b>Insight</b> &nbsp;<span></span>';
+    var nameEl2=document.getElementById('pbName');nameEl2.textContent='';
+    var s1=addStep('Creating '+first+"'s workspace");await wait(500);s1.classList.add('ok');
+    var s2=addStep(st.logo?'Adding your logo and brand color':'Applying your brand color');pbiEl.classList.add('s1');await typeInto(nameEl2,st.name,38);await wait(250);s2.classList.add('ok');
+    var s3=addStep('Choosing the metrics a '+noun+' runs on');pbiEl.classList.add('s2');document.querySelectorAll('#pbKpis .v').forEach(countUp);await wait(1050);s3.classList.add('ok');
+    var s4=addStep('Setting daily targets and loading sample data');var rs=document.querySelectorAll('#pbChart rect');rs.forEach(function(r,i){r.style.transitionDelay=(i*22)+'ms'});pbiEl.classList.add('s3');await wait(950);s4.classList.add('ok');
+    var s5=addStep('Building your '+(IND[st.ind].role==='Team'?'team':IND[st.ind].role.toLowerCase())+' scorecard');document.querySelectorAll('#pbTable tr').forEach(function(r,i){r.style.transitionDelay=(i*110)+'ms'});pbiEl.classList.add('s4');await wait(850);s5.classList.add('ok');
+    var s6=addStep('Writing your first insight');pbiEl.classList.add('s5');await typeInto(ins.querySelector('span'),insText,12);await wait(200);s6.classList.add('ok');
+    logEl.classList.add('done');document.getElementById('blTitle').textContent='Built in 6 seconds';
+    await wait(600);
+    ins.innerHTML=insHTML;pbiEl.classList.remove('building','s1','s2','s3','s4','s5');pbiEl.classList.add('glow');
+    logEl.hidden=true;document.getElementById('builtTitle').textContent='This is '+first+"'s dashboard.";builtEl.hidden=false;nextEl.hidden=false;
+    builder.hidden=true;ctl.hidden=false;drawControls();
+    btn.disabled=false;btn.textContent='Build my dashboard';busy=false;
+    setTimeout(function(){pbiEl.classList.remove('glow')},2200);
+  }
+  builder.addEventListener('submit',function(e){e.preventDefault();build()});
+  document.getElementById('rebuild').addEventListener('click',function(){bName.value=st.name;ctl.hidden=true;builder.hidden=false;builtEl.hidden=true;drawBuilder();bName.focus()});
+  document.getElementById('tweak').addEventListener('click',function(){var t=document.getElementById('bizName');t.scrollIntoView({behavior:'smooth',block:'center'});t.focus()});
+  document.querySelectorAll('a[href="#demo"]').forEach(function(a){a.addEventListener('click',function(){setTimeout(function(){if(!builder.hidden)bName.focus({preventScroll:true})},650)})});
+  drawBuilder();
 })();
 </script>
 </body>
