@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sheared Performance Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#252423; --muted:#605E5C; --rule:#C8C6C4; --soft:#EDEBE9; --canvas:#EEF0F2; --band:#F4F6F8;
+  --brand:#C8423D; --brand-dk:#A5322E; --char:#2B2B2B; --miss:#E5A3A0; --grey:#B3B9C0; --grey-lt:#DCE0E4;
+  --good:#107C10; --bad:#C4314B; --warn:#A0670A; --hl:#E7F3E8; --lo:#FCE9EB;
+  --ui:"Segoe UI","Segoe UI Web (West European)",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --script:'Yellowtail','Brush Script MT',cursive;
+  /* layout: Power BI report shell. Black chrome bar, page rail, fixed 1280x720 canvas scaled to fit */
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--ui);background:var(--canvas);color:var(--ink);font-size:12px;line-height:1.35}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+
+/* chrome */
+.chrome{height:44px;background:#1B1A19;color:#fff;display:flex;align-items:center;gap:12px;padding:0 16px}
+.chrome b{font-size:14px;font-weight:600;letter-spacing:-.1px}
+.chip{font-size:11px;border:1px solid #484644;background:#292827;border-radius:10px;padding:2px 9px;color:#E1DFDD}
+.chrome .sp{margin-left:auto;font-size:11.5px;color:#C8C6C4}
+.shell{display:flex;min-height:calc(100% - 44px)}
+.rail{width:196px;flex:0 0 196px;background:#FAF9F8;border-right:1px solid var(--rule);padding:10px 0}
+.rail h4{font-size:10.5px;font-weight:600;color:#8A8886;text-transform:uppercase;letter-spacing:.6px;padding:8px 16px 6px}
+.rail button{display:flex;justify-content:space-between;width:100%;text-align:left;background:none;border:0;padding:7px 16px;cursor:pointer;border-left:3px solid transparent;font-size:13px}
+.rail button:hover{background:#F3F2F1}
+.rail button[aria-current="true"]{background:#F3E3E2;border-left-color:var(--brand);font-weight:600}
+.rail .n{font-size:10.5px;color:#8A8886}
+.main{flex:1;min-width:0;padding:14px 18px 24px}
+.pghead{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.pghead h2{font-size:15px;font-weight:600}
+.pghead span{font-size:11.5px;color:var(--muted)}
+.stage{position:relative}
+
+/* canvas */
+.canvas{width:1280px;height:720px;background:#fff;border:1px solid var(--rule);padding:8px;display:flex;flex-direction:column;gap:6px;transform-origin:top left;overflow:hidden}
+.band{height:56px;flex:0 0 56px;background:#111;color:#fff;display:grid;grid-template-columns:240px 1fr 240px;align-items:center;padding:0 16px}
+.band .lg{font-family:var(--script);font-size:34px;line-height:1;color:#fff}
+.band .lg small{display:block;font-family:var(--ui);font-size:7.5px;letter-spacing:2.4px;margin-top:-2px;color:#D2D0CE}
+.band .tt{text-align:center}
+.band .tt b{display:block;font-size:19px;font-weight:600;letter-spacing:-.2px}
+.band .tt span{font-size:11.5px;color:#C8C6C4}
+.band .as{text-align:right;font-size:11px;color:#C8C6C4;line-height:1.4}
+.band .as b{color:#fff;font-weight:600}
+.fbar{height:40px;flex:0 0 40px;display:flex;gap:6px}
+.f{flex:1;min-width:0;border:1px solid var(--rule);padding:3px 7px 2px;background:#fff}
+.f label{display:block;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--brand-dk);text-align:center}
+.f select{width:100%;border:0;background:#fff;font-size:12px;outline:0;cursor:pointer;padding:1px 0}
+.f.static div{font-size:12px;padding-top:2px;color:var(--muted)}
+.sec{flex:0 0 24px;height:24px;background:var(--band);border:1px solid var(--rule);padding:4px 10px;font-size:11px;font-weight:700;color:var(--char)}
+.kpis{flex:0 0 84px;height:84px;display:grid;gap:6px}
+.kpi{border:1px solid var(--rule);text-align:center;padding:6px 6px 4px;position:relative;display:flex;flex-direction:column;justify-content:center}
+.kpi .t{font-size:12px;color:var(--brand-dk);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 12px}
+.kpi .v{font-size:25px;font-weight:600;letter-spacing:-.4px;margin:1px 0;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:10.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .s2{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi.master{border:2px solid var(--brand)}
+.up{color:var(--good)} .dn{color:var(--bad)} .wn{color:var(--warn)} .mu{color:var(--muted)}
+.row{display:grid;gap:6px;min-height:0}
+.vis{border:1px solid var(--rule);padding:6px 9px 6px;position:relative;display:flex;flex-direction:column;min-height:0;min-width:0}
+.vt{display:flex;align-items:center;gap:6px;padding-right:20px}
+.vt b{font-size:13px;font-weight:600;color:var(--brand-dk);white-space:nowrap}
+.vt .tag{font-size:9.5px;border:1px solid var(--rule);color:var(--muted);padding:0 5px;border-radius:2px;white-space:nowrap}
+.vs{font-size:11px;color:var(--muted);margin:1px 0 3px}
+.vb{flex:1;min-height:0;position:relative}
+.vb svg{position:absolute;inset:0;width:100%;height:100%}
+.leg{display:flex;gap:12px;font-size:10.5px;color:var(--muted);margin-top:2px;flex-wrap:wrap}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.leg i.ln{width:14px;height:0;border-radius:0;border-top:2px dashed var(--brand);vertical-align:2px}
+svg text{font-family:var(--ui)}
+.ax{font-size:10px;fill:var(--muted)}
+.dl{font-size:10px;fill:var(--ink)}
+.gl{stroke:var(--soft);stroke-width:1}
+.tl{stroke:var(--brand);stroke-width:1.6;stroke-dasharray:5 4}
+.tlab{font-size:10px;fill:var(--brand-dk);font-weight:600}
+
+/* info */
+.i{position:absolute;top:6px;right:7px;width:15px;height:15px;border-radius:50%;border:1px solid #A19F9D;background:#fff;color:#605E5C;font-size:9.5px;font-weight:700;line-height:13px;text-align:center;cursor:help;padding:0}
+.i:hover,.i:focus-visible{border-color:var(--brand);color:var(--brand)}
+.kpi .i{top:4px;right:4px}
+#tip{position:fixed;z-index:60;max-width:290px;background:#252423;color:#fff;padding:9px 11px;font-size:11.5px;line-height:1.45;border-radius:2px;pointer-events:none;opacity:0;transition:opacity .1s;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+#tip.on{opacity:1}
+#tip b{display:block;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:#F1B5B2;margin-top:6px;font-weight:600}
+#tip b:first-child{margin-top:0}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:11px;font-weight:600;color:var(--brand-dk);text-align:left;padding:4px 6px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{font-size:11.5px;padding:2.5px 6px;border-bottom:1px solid #F3F2F1;white-space:nowrap}
+th.n,td.n{text-align:right}
+td.hl{background:var(--hl)} td.lo{background:var(--lo)} td.wa{background:#FDF3E1}
+tr.tot td{font-weight:700;border-top:1px solid var(--char);border-bottom:0}
+tr.sel td{box-shadow:inset 0 0 0 9999px rgba(200,66,61,.06)}
+td .sm{color:var(--muted);font-size:10.5px;margin-left:4px}
+.pill{display:inline-block;font-size:10px;font-weight:600;padding:0 6px;border-radius:2px}
+.pill.on{background:var(--hl);color:var(--good)} .pill.watch{background:#FDF3E1;color:var(--warn)} .pill.off{background:var(--lo);color:var(--bad)} .pill.tbd{background:var(--soft);color:var(--muted)}
+.defs td{white-space:normal;vertical-align:top;padding:4px 6px}
+.qs{font-size:11.5px;line-height:1.45;padding-left:16px;display:grid;gap:6px;margin-top:4px}
+.foot{font-size:11px;color:var(--muted);margin-top:8px}
+[hidden]{display:none!important}
+
+@media (max-width:860px){
+  .shell{flex-direction:column}
+  .rail{width:auto;flex:none;display:flex;overflow-x:auto;padding:0;border-right:0;border-bottom:1px solid var(--rule)}
+  .rail h4{display:none}
+  .rail button{border-left:0;border-bottom:3px solid transparent;white-space:nowrap;width:auto}
+  .rail button[aria-current="true"]{border-bottom-color:var(--brand)}
+  .rail .n{display:none}
+  .main{padding:10px}
+  .chrome .sp{display:none}
+}
+
+/* phone and tablet: drop the fixed Power BI canvas and stack the visuals */
+@media (max-width:900px){
+  .stage{height:auto!important}
+  .canvas{width:100%;height:auto;transform:none!important;overflow:visible;padding:6px}
+  .band{height:auto;flex:none;grid-template-columns:1fr;gap:4px;padding:10px 12px}
+  .band .tt,.band .as{text-align:left}
+  .band .tt b{font-size:17px}
+  .fbar{height:auto;flex:none;flex-wrap:wrap}
+  .f{flex:1 1 45%}
+  .kpis{height:auto;flex:none;grid-template-columns:repeat(2,1fr)!important}
+  .kpi{padding:8px 6px}
+  .row{grid-template-columns:1fr!important;height:auto!important;flex:none!important}
+  .vb{flex:none;height:230px}
+  #goals,#btab,#ctab{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .sec{height:auto;flex:none}
+  .vt b{white-space:normal}
+  .foot{padding:0 4px}
+}
+@media (prefers-reduced-motion:reduce){#tip{transition:none}}
+</style>
+</head>
+<body>
+<div style="background:#ECFEFF;border-bottom:1px solid #A5F3FC;color:#0F172A;font-size:13px">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px 16px;flex-wrap:wrap;padding:9px 16px">
+    <span><b>Your wireframe, prepared for Sheared by Verelia.</b> Every number is sample data. Use the filters and tap the i on any visual.</span>
+    <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><a href="https://buy.stripe.com/3cIeVf0PU8DZgyE8FN4Rq02" style="background:#0891B2;color:#fff;text-decoration:none;font-weight:600;padding:6px 12px;border-radius:6px">Subscribe to start, $349/mo</a><a href="https://vereliaai.com" style="color:#0E7490;font-weight:600">About Verelia</a><span style="color:#475569">support@vereliaai.com</span></span>
+  </div>
+</div>
+<header class="chrome">
+  <b>Sheared &middot; Business Performance</b>
+  <span class="chip">Wireframe v2 &middot; sample data</span>
+  <span class="sp">Drawn at 1280 x 720, the size of a Power BI page</span>
+</header>
+<div class="shell">
+  <nav class="rail" aria-label="Report pages">
+    <h4>Report pages</h4>
+    <button data-page="pulse" id="nav-pulse">Pulse <span class="n">1</span></button>
+    <button data-page="barbers" id="nav-barbers">Barbers <span class="n">2</span></button>
+    <button data-page="clients" id="nav-clients">Clients <span class="n">3</span></button>
+    <h4>Reference</h4>
+    <button data-page="definitions" id="nav-definitions">Definitions <span class="n">4</span></button>
+  </nav>
+  <main class="main">
+    <div class="pghead"><h2 id="pgTitle"></h2><span id="pgNote"></span></div>
+    <div class="stage" id="stage">
+      <div class="canvas" id="canvas">
+        <div class="band">
+          <div class="lg">Sheared<small>THE BARBERSHOP</small></div>
+          <div class="tt"><b id="bandTitle">Business Performance</b><span id="bandSub"></span></div>
+          <div class="as">Data as of <b>Sat Oct 31, 2026</b><br>Sample data, illustrative only</div>
+        </div>
+        <div class="fbar" id="fbar">
+          <div class="f"><label for="sPeriod">Period</label><select id="sPeriod"><option value="week">This week</option><option value="month">This month</option><option value="90">Last 90 days</option><option value="ytd">Year to date</option></select></div>
+          <div class="f"><label for="sBarber">Barber</label><select id="sBarber"></select></div>
+          <div class="f"><label for="sCmp">Compare to</label><select id="sCmp"><option value="prior">Prior period</option><option value="ly">Same period last year</option></select></div>
+          <div class="f static"><label>Location</label><div>Sheared &middot; all chairs</div></div>
+        </div>
+        <div id="body" style="display:flex;flex-direction:column;gap:6px;flex:1;min-height:0"></div>
+      </div>
+    </div>
+    <p class="foot">Every number is generated sample data. After sign-off each visual is rebuilt on Sheared's live data from the booking system, POS and books.</p>
+  </main>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+(function(){
+/* ---------- seeded sample data ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var rnd=mulberry32(20261031);
+function nrm(){var u=0,v=0;while(!u)u=rnd();while(!v)v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+var BARBERS=[
+  {id:'a',name:'Barber A',tier:'I', off:1,base:47.5,u:.87,add:.37,reb:.73,newS:.24,ret:.63,int:3.8,mix:[.46,.30,.18]},
+  {id:'b',name:'Barber B',tier:'I', off:2,base:43.5,u:.81,add:.29,reb:.64,newS:.27,ret:.56,int:4.4,mix:[.30,.38,.24]},
+  {id:'c',name:'Barber C',tier:'II',off:3,base:54.5,u:.89,add:.38,reb:.75,newS:.18,ret:.66,int:3.7,mix:[.55,.25,.12]},
+  {id:'d',name:'Barber D',tier:'II',off:4,base:51.0,u:.84,add:.33,reb:.68,newS:.20,ret:.60,int:4.1,mix:[.38,.34,.20]}
+];
+var BY={};BARBERS.forEach(function(b){BY[b.id]=b});
+function D(y,m,d){return new Date(y,m,d)}
+function add(dt,n){return new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()+n)}
+var TODAY=D(2026,9,31),START=D(2025,0,1),DAYS=[],MARGIN={};
+for(var dt=START;dt<=TODAY;dt=add(dt,1)){
+  var dow=dt.getDay(),y26=dt.getFullYear()===2026,doy=(dt-D(dt.getFullYear(),0,1))/864e5;
+  var seas=1+0.05*Math.sin(doy/365*2*Math.PI-1.2),dowF=[1.0,0.92,0.93,0.96,0.99,1.05,1.12][dow],yr=y26?1.06:1;
+  var ym=dt.getFullYear()*100+dt.getMonth();
+  if(MARGIN[ym]==null)MARGIN[ym]=(y26?0.305:0.285)+nrm()*0.018;
+  var rec={t:+dt,ym:ym,b:{},leads:0,dl:0},nwDay=0;
+  BARBERS.forEach(function(B){
+    if(B.off===dow)return;
+    var hrs=dow===6?8.25:7.5,slots=hrs*60/45;
+    var util=Math.min(.98,Math.max(.55,B.u*seas*dowF*(y26?1:.97)+nrm()*.05));
+    var appts=Math.round(slots*util),ns=Math.max(0,Math.round(appts*(0.045+nrm()*.02)));
+    var adds=Math.min(appts,Math.max(0,Math.round(appts*B.add+nrm()*1.1)));
+    var rev=appts*B.base*yr*(1+nrm()*.03)+adds*12;
+    var nw=Math.max(0,Math.round(appts*B.newS*(y26?1:.9)+nrm())),rx=Math.max(0,Math.round(appts*.11+nrm()*.8));
+    var rb=Math.min(appts,Math.max(0,Math.round(appts*B.reb+nrm()*1.2))),r30=Math.min(nw,Math.max(0,Math.round(nw*B.ret+nrm()*.7)));
+    var retn=Math.max(0,appts-nw);
+    rec.b[B.id]={appts:appts,ns:ns,adds:adds,rev:rev,ha:hrs,hb:appts*.75,sc:Math.round(appts*B.mix[0]),fd:Math.round(appts*B.mix[1]),cl:Math.round(appts*B.mix[2]),nw:nw,rx:rx,rb:rb,r30:r30,coh:nw,retn:retn,iw:retn*(B.int+nrm()*.15)};
+    nwDay+=nw;
+  });
+  rec.leads=Math.round(nwDay/Math.max(.18,0.245+nrm()*.02));
+  rec.dl=Math.max(0,Math.round((y26?4.1:2.6)+nrm()*1.6));
+  DAYS.push(rec);
+}
+function agg(f,t,bid){
+  var s={appts:0,ns:0,adds:0,rev:0,ha:0,hb:0,sc:0,fd:0,cl:0,nw:0,rx:0,rb:0,r30:0,coh:0,retn:0,iw:0,leads:0,dl:0,open:0,bdays:0,cal:0,shopNw:0,mrev:{}};
+  for(var i=0;i<DAYS.length;i++){var r=DAYS[i];if(r.t<+f||r.t>+t)continue;s.cal++;s.open++;s.leads+=r.leads;s.dl+=r.dl;
+    for(var id in r.b){var x=r.b[id];s.shopNw+=x.nw;if(bid!=='all'&&id!==bid)continue;s.bdays++;for(var k in x)s[k]+=x[k];s.mrev[r.ym]=(s.mrev[r.ym]||0)+x.rev}}
+  var days=bid==='all'?s.open:s.bdays,wk=s.cal/7,m=0,mw=0;for(var k2 in s.mrev){m+=MARGIN[k2]*s.mrev[k2];mw+=s.mrev[k2]}
+  return{raw:s,rev:s.rev,revDay:days?s.rev/days:0,apptDay:days?s.appts/days:0,ticket:s.appts?s.rev/s.appts:0,util:s.ha?s.hb/s.ha:0,revHr:s.hb?s.rev/s.hb:0,
+    noShow:(s.appts+s.ns)?s.ns/(s.appts+s.ns):0,addRate:s.appts?s.adds/s.appts:0,rebook:s.appts?s.rb/s.appts:0,ret:s.coh?s.r30/s.coh:0,interval:s.retn?s.iw/s.retn:0,
+    newWk:wk?s.nw/wk:0,rxWk:wk?s.rx/wk:0,dlWk:wk?s.dl/wk:0,conv:s.leads?s.shopNw/s.leads:0,revWk:wk?s.rev/wk:0,margin:mw?m/mw:0,appts:s.appts,days:days,
+    mix:s.appts?[s.sc/s.appts,s.fd/s.appts,s.cl/s.appts]:[0,0,0]};
+}
+
+/* ---------- periods, targets, format ---------- */
+var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function fd(d){return MON[d.getMonth()]+' '+d.getDate()}
+function period(p,cmp){
+  var o;
+  if(p==='week'){var f=add(TODAY,-6);o={f:f,t:TODAY,pf:add(f,-7),pt:add(f,-1),label:'This week',pl:'prior week'}}
+  else if(p==='month'){o={f:D(2026,9,1),t:TODAY,pf:D(2026,8,1),pt:D(2026,8,30),label:'This month',pl:'September'}}
+  else if(p==='90'){var f9=add(TODAY,-89),p9=add(f9,-1);o={f:f9,t:TODAY,pf:add(p9,-89),pt:p9,label:'Last 90 days',pl:'prior 90 days'}}
+  else o={f:D(2026,0,1),t:TODAY,pf:D(2025,0,1),pt:D(2025,9,31),label:'Year to date',pl:'2025 YTD'};
+  if(cmp==='ly'){o.pf=D(o.f.getFullYear()-1,o.f.getMonth(),o.f.getDate());o.pt=D(o.t.getFullYear()-1,o.t.getMonth(),o.t.getDate());o.pl='last year'}
+  return o;
+}
+function tgt(bid){
+  var T={revDay:1650,apptDay:29,ticket:57,util:.86,revHr:77,noShow:.05,add:.35,rebook:.70,ret:.61,interval:4,newWk:50,rxWk:30,conv:.25,dlWk:30,margin:.32};
+  if(bid!=='all'){var t1=BY[bid].tier==='I';T.revDay=t1?2500/6:3000/6;T.apptDay=8.5;T.ticket=t1?50:60;T.util=t1?.85:.87}
+  return T;
+}
+function tWk(B){return B.tier==='I'?2500:3000} function tTk(B){return B.tier==='I'?50:60} function tUt(B){return B.tier==='I'?.85:.87}
+var $0=function(v){return '$'+Math.round(v).toLocaleString('en-US')};
+var $k=function(v){return Math.abs(v)>=1000?'$'+(v/1000).toFixed(v>=100000?0:1).replace(/\.0$/,'')+'K':'$'+Math.round(v)};
+var $2=function(v){return '$'+v.toFixed(2)};
+var pc=function(v){return (v*100).toFixed(1)+'%'};
+var pc0=function(v){return Math.round(v*100)+'%'};
+var n1=function(v){return v.toFixed(1)};
+function st(v,t,dn){if(t==null||!v)return 'tbd';var r=dn?t/v:v/t;return r>=1?'on':r>=.95?'watch':'off'}
+var SL={on:'On track',watch:'Watch',off:'Off track',tbd:'Confirm'};
+var SC={on:'up',watch:'wn',off:'dn',tbd:'mu'};
+function chg(v,p,dn){if(!p)return '<span class="mu">no comparison</span>';var d=(v-p)/p,g=dn?d<0:d>0;return '<span class="'+(Math.abs(d)<.0005?'mu':g?'up':'dn')+'">'+(d>=0?'+':'')+(d*100).toFixed(1)+'%</span>'}
+function esc(s){return String(s).replace(/"/g,'&quot;')}
+function info(q,a){return '<button class="i" data-q="'+esc(q)+'" data-a="'+esc(a)+'" aria-label="About this visual">i</button>'}
+
+function kpi(o){
+  var s=o.st||st(o.v,o.t,o.dn),pctOf=o.t?(o.dn?'Target '+o.tt:Math.floor(o.v/o.t*100)+'% of target '+o.tt):o.tt;
+  return '<div class="kpi'+(o.master?' master':'')+'">'+info(o.q,o.a)+'<div class="t">'+o.l+'</div><div class="v">'+o.f(o.v)+'</div>'+
+    '<div class="s '+SC[s]+'">'+pctOf+'</div><div class="s2">'+chg(o.v,o.p,o.dn)+' vs '+o.pl+'</div></div>';
+}
+function vis(o){return '<div class="vis" style="'+(o.style||'')+'">'+info(o.q,o.a)+'<div class="vt"><b>'+o.title+'</b>'+(o.tag?'<span class="tag">'+o.tag+'</span>':'')+'</div>'+(o.sub?'<div class="vs">'+o.sub+'</div>':'')+'<div class="vb" id="'+o.id+'"></div>'+(o.leg||'')+'</div>'}
+function leg(items){return '<div class="leg">'+items.map(function(x){return x[0]==='line'?'<span><i class="ln"></i>'+x[1]+'</span>':'<span><i style="background:'+x[0]+'"></i>'+x[1]+'</span>'}).join('')+'</div>'}
+
+/* ---------- charts (SVG drawn to the real box size) ---------- */
+function box(id){var el=document.getElementById(id);return{el:el,w:Math.max(200,el.clientWidth),h:Math.max(80,el.clientHeight)}}
+function niceMax(v){if(v<=0)return 1;var p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p,s=[1,1.2,1.5,2,2.5,3,4,5,6,8,10];for(var i=0;i<s.length;i++)if(n<=s[i])return s[i]*p;return 10*p}
+function yGrid(L,T,W,H,min,max,fmt,steps){var s='';for(var i=0;i<=steps;i++){var v=min+(max-min)*i/steps,y=T+H*(1-i/steps);s+='<line class="gl" x1="'+L+'" x2="'+(L+W)+'" y1="'+y+'" y2="'+y+'"/><text class="ax" x="'+(L-6)+'" y="'+(y+3.5)+'" text-anchor="end">'+fmt(v)+'</text>'}return s}
+function columns(id,o){
+  var b=box(id),L=46,R=8,T=14,B=20,W=b.w-L-R,H=b.h-T-B,n=o.labels.length;
+  var max=niceMax(Math.max.apply(null,o.values.concat([o.target]))*1.12),bw=W/n,gap=Math.max(2,bw*.28),s=yGrid(L,T,W,H,0,max,o.fmt,4);
+  o.values.forEach(function(v,i){var x=L+i*bw+gap/2,w=bw-gap,h=H*v/max,ok=v>=o.target;
+    s+='<rect x="'+x.toFixed(1)+'" y="'+(T+H-h).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" fill="'+(ok?'var(--char)':'var(--miss)')+'"><title>'+o.labels[i]+': '+o.tip(v)+'</title></rect>';
+    if(n<=14)s+='<text class="dl" x="'+(x+w/2)+'" y="'+(T+H-h-4)+'" text-anchor="middle">'+o.fmt(v)+'</text>';
+    var every=Math.ceil(n/16);if(i%every===0)s+='<text class="ax" x="'+(x+w/2)+'" y="'+(b.h-6)+'" text-anchor="middle">'+o.labels[i]+'</text>'});
+  var ty=T+H*(1-o.target/max);s+='<line class="tl" x1="'+L+'" x2="'+(L+W)+'" y1="'+ty+'" y2="'+ty+'"/><text class="tlab" x="'+(L+W)+'" y="'+(ty-4)+'" text-anchor="end">Target '+o.fmt(o.target)+'</text>';
+  b.el.innerHTML='<svg viewBox="0 0 '+b.w+' '+b.h+'" role="img" aria-label="'+o.aria+'">'+s+'</svg>';
+}
+function lines(id,o){
+  var b=box(id),L=50,R=o.R||12,T=12,B=20,W=b.w-L-R,H=b.h-T-B,n=o.labels.length,st2=W/(n-1),min=o.min||0,max=o.max;
+  function X(i){return L+i*st2} function Y(v){return T+H*(1-(v-min)/(max-min))}
+  var s=yGrid(L,T,W,H,min,max,o.fmt,4);
+  o.labels.forEach(function(l,i){s+='<text class="ax" x="'+X(i)+'" y="'+(b.h-6)+'" text-anchor="middle">'+l+'</text>'});
+  (o.targets||[]).forEach(function(t){var y=Y(t.v);s+='<line class="tl" x1="'+L+'" x2="'+(L+W)+'" y1="'+y+'" y2="'+y+'"/><text class="tlab" x="'+(L+4)+'" y="'+(y-4)+'">'+t.l+'</text>'});
+  o.series.forEach(function(S){var p=[],last=null,first=-1;S.v.forEach(function(v,i){if(v!=null){if(first<0)first=i;p.push(X(i).toFixed(1)+','+Y(v).toFixed(1));last=[i,v]}});if(!p.length)return;
+    if(S.area)s+='<polygon points="'+X(first)+','+Y(min)+' '+p.join(' ')+' '+X(last[0])+','+Y(min)+'" fill="'+S.c+'" opacity=".08"/>';
+    s+='<polyline points="'+p.join(' ')+'" fill="none" stroke="'+S.c+'" stroke-width="'+(S.w||2)+'"'+(S.dash?' stroke-dasharray="'+S.dash+'"':'')+'/>';
+    if(S.dots)S.v.forEach(function(v,i){if(v!=null)s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="2.6" fill="'+S.c+'"><title>'+o.labels[i]+': '+o.fmt(v)+'</title></circle>'});
+    if(S.end)s+='<circle cx="'+X(last[0])+'" cy="'+Y(last[1])+'" r="3.5" fill="'+S.c+'"/><text class="dl" x="'+(X(last[0])-6)+'" y="'+(Y(last[1])+(S.dy||-7))+'" text-anchor="end" style="font-weight:600">'+S.end+'</text>'});
+  b.el.innerHTML='<svg viewBox="0 0 '+b.w+' '+b.h+'" role="img" aria-label="'+o.aria+'">'+s+'</svg>';
+}
+function bullets(id,rows){
+  var b=box(id),L=96,R=66,T=6,B=18,W=b.w-L-R,H=b.h-T-B,rh=H/rows.length,max=niceMax(Math.max.apply(null,rows.map(function(r){return Math.max(r.v,r.t)}))*1.08),s='';
+  for(var g=0;g<=4;g++){var gx=L+W*g/4;s+='<line class="gl" x1="'+gx+'" x2="'+gx+'" y1="'+T+'" y2="'+(T+H)+'"/><text class="ax" x="'+gx+'" y="'+(b.h-5)+'" text-anchor="middle">'+$k(max*g/4)+'</text>'}
+  rows.forEach(function(r,i){var y=T+i*rh,bh=Math.min(22,rh*.5),by=y+(rh-bh)/2,w=W*r.v/max,tx=L+W*r.t/max,ok=r.v>=r.t;
+    s+='<text x="0" y="'+(by+bh/2-1)+'" class="dl" style="font-weight:'+(r.sel?700:600)+'">'+r.name+'</text><text x="0" y="'+(by+bh/2+11)+'" class="ax">Tier '+r.tier+'</text>';
+    s+='<rect x="'+L+'" y="'+by.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="'+(ok?'var(--char)':'var(--miss)')+'"'+(r.sel?' stroke="var(--brand)" stroke-width="2"':'')+'><title>'+r.name+': '+$0(r.v)+' a week, target '+$0(r.t)+'</title></rect>';
+    s+='<line x1="'+tx+'" x2="'+tx+'" y1="'+(by-4)+'" y2="'+(by+bh+4)+'" stroke="var(--brand)" stroke-width="2.5"/>';
+    s+='<text class="dl" x="'+(L+W+8)+'" y="'+(by+bh/2+3.5)+'" style="font-weight:600">'+$0(r.v)+'</text>'});
+  b.el.innerHTML='<svg viewBox="0 0 '+b.w+' '+b.h+'" role="img" aria-label="Weekly revenue by barber against tier targets">'+s+'</svg>';
+}
+function stack100(id,rows){
+  var b=box(id),L=96,R=6,T=4,B=4,W=b.w-L-R,H=b.h-T-B,rh=H/rows.length,cols=['var(--brand)','var(--char)','var(--grey)','var(--grey-lt)'],nm=['Scissor haircut','Bald fade','Clipper haircut','Other'],s='';
+  rows.forEach(function(r,i){var y=T+i*rh,bh=Math.min(22,rh*.55),by=y+(rh-bh)/2,x=L,parts=r.mix.concat([Math.max(0,1-r.mix[0]-r.mix[1]-r.mix[2])]);
+    s+='<text x="0" y="'+(by+bh/2+3.5)+'" class="dl" style="font-weight:'+(r.sel||r.shop?700:600)+'">'+r.name+'</text>';
+    parts.forEach(function(p,j){var w=W*p;s+='<rect x="'+x.toFixed(1)+'" y="'+by.toFixed(1)+'" width="'+Math.max(0,w-1).toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="'+cols[j]+'"><title>'+r.name+', '+nm[j]+': '+pc0(p)+'</title></rect>';
+      if(w>30)s+='<text x="'+(x+w/2)+'" y="'+(by+bh/2+3.5)+'" text-anchor="middle" style="font-size:10px;font-weight:600;fill:'+(j===3?'var(--ink)':'#fff')+'">'+pc0(p)+'</text>';x+=w});
+  });
+  b.el.innerHTML='<svg viewBox="0 0 '+b.w+' '+b.h+'" role="img" aria-label="Service mix by barber">'+s+'</svg>';
+}
+function clustered(id,o){
+  var b=box(id),L=34,R=8,T=12,B=20,W=b.w-L-R,H=b.h-T-B,n=o.labels.length,max=niceMax(Math.max.apply(null,o.a.concat(o.b,[o.ta]))*1.12),gw=W/n,gap=gw*.24,w=(gw-gap)/2,s=yGrid(L,T,W,H,0,max,function(v){return Math.round(v)},4);
+  o.labels.forEach(function(l,i){var x=L+i*gw+gap/2,ha=H*o.a[i]/max,hb=H*o.b[i]/max;
+    s+='<rect x="'+x.toFixed(1)+'" y="'+(T+H-ha).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+ha.toFixed(1)+'" fill="'+(o.a[i]>=o.ta?'var(--char)':'var(--miss)')+'"><title>Week of '+l+': '+o.a[i]+' new</title></rect>';
+    s+='<rect x="'+(x+w).toFixed(1)+'" y="'+(T+H-hb).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+hb.toFixed(1)+'" fill="var(--grey)"><title>Week of '+l+': '+o.b[i]+' reactivated</title></rect>';
+    s+='<text class="dl" x="'+(x+w/2)+'" y="'+(T+H-ha-3)+'" text-anchor="middle" style="font-size:9px">'+o.a[i]+'</text>';
+    if(i%2===0)s+='<text class="ax" x="'+(x+w)+'" y="'+(b.h-6)+'" text-anchor="middle">'+l+'</text>'});
+  [[o.ta,'New target '+o.ta],[o.tb,'Reactivated target '+o.tb]].forEach(function(t){var y=T+H*(1-t[0]/max);s+='<line class="tl" x1="'+L+'" x2="'+(L+W)+'" y1="'+y+'" y2="'+y+'"/><text class="tlab" x="'+(L+W)+'" y="'+(y-4)+'" text-anchor="end">'+t[1]+'</text>'});
+  b.el.innerHTML='<svg viewBox="0 0 '+b.w+' '+b.h+'" role="img" aria-label="New and reactivated clients by week">'+s+'</svg>';
+}
+function funnel(id,steps){
+  var b=box(id),L=150,R=110,T=4,B=4,W=b.w-L-R,H=b.h-T-B,rh=H/steps.length,max=steps[0].v,s='';
+  steps.forEach(function(st3,i){var y=T+i*rh,bh=Math.min(24,rh*.62),by=y+(rh-bh)/2,w=W*st3.v/max,x=L+(W-w)/2;
+    s+='<text x="0" y="'+(by+bh/2+3.5)+'" class="dl" style="font-weight:600">'+st3.l+'</text>';
+    s+='<rect x="'+x.toFixed(1)+'" y="'+by.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="'+(i===steps.length-1?'var(--brand)':'var(--char)')+'"><title>'+st3.l+': '+st3.v+'</title></rect>';
+    s+='<text x="'+(L+W/2)+'" y="'+(by+bh/2+3.5)+'" text-anchor="middle" style="font-size:10.5px;font-weight:600;fill:#fff">'+st3.v.toLocaleString('en-US')+'</text>';
+    if(i>0)s+='<text class="ax" x="'+(L+W+10)+'" y="'+(by+bh/2+3.5)+'">'+pc(st3.v/steps[i-1].v)+' of previous</text>'});
+  b.el.innerHTML='<svg viewBox="0 0 '+b.w+' '+b.h+'" role="img" aria-label="Client funnel from inquiry to return visit">'+s+'</svg>';
+}
+
+/* ---------- state ---------- */
+var S={page:'pulse',period:'month',barber:'all',cmp:'prior'};
+var sB=document.getElementById('sBarber');
+sB.innerHTML='<option value="all">All barbers</option>'+BARBERS.map(function(b){return '<option value="'+b.id+'">'+b.name+' (Tier '+b.tier+')</option>'}).join('');
+var PAGES={
+  pulse:{t:'Pulse',n:'The daily scoreboard: the master critical number, the year against $600,000, and the seven annual goals.',bt:'Business Performance'},
+  barbers:{t:'Barbers',n:'Each barber against the target for their tier, and what they sell.',bt:'Barber Performance'},
+  clients:{t:'Clients',n:'Acquisition, reactivation, rebooking and retention.',bt:'Client Growth & Retention'},
+  definitions:{t:'Definitions',n:'How every number is calculated and where it comes from.',bt:'Metric Definitions'}
+};
+var body=document.getElementById('body');
+
+function renderPulse(P,T,c,p){
+  var lab=S.barber==='all'?'Revenue / Open Day':'Revenue / Working Day';
+  body.innerHTML='<div class="kpis" style="grid-template-columns:repeat(8,1fr)">'+[
+    kpi({master:1,l:lab,v:c.revDay,p:p.revDay,t:T.revDay,tt:$0(T.revDay),f:$0,pl:P.pl,q:'Are we making the master critical number?',a:'Service and add-on revenue divided by days worked. $1,650 a day across the year lands $600,000.'}),
+    kpi({l:'Revenue',v:c.rev,p:p.rev,t:T.revDay*c.days,tt:$k(T.revDay*c.days),f:$k,pl:P.pl,q:'How much have we taken in?',a:'Total service and add-on revenue in the period, against the daily target times days worked.'}),
+    kpi({l:'Avg Ticket',v:c.ticket,p:p.ticket,t:T.ticket,tt:$0(T.ticket),f:$2,pl:P.pl,q:'Are clients spending enough per visit?',a:'Revenue divided by completed appointments.'}),
+    kpi({l:'Appts / Day',v:c.apptDay,p:p.apptDay,t:T.apptDay,tt:n1(T.apptDay),f:n1,pl:P.pl,q:'Are the chairs busy enough?',a:'Completed appointments divided by days worked.'}),
+    kpi({l:'Utilization',v:c.util,p:p.util,t:T.util,tt:S.barber==='all'?'85/87%':pc0(T.util),f:pc,pl:P.pl,q:'How much scheduled chair time is booked?',a:'Booked chair hours over scheduled chair hours. Tier I target 85%, Tier II 87%.'}),
+    kpi({l:'Rev / Booked Hr',v:c.revHr,p:p.revHr,t:T.revHr,tt:'$77',f:$2,pl:P.pl,q:'What is an hour in the chair worth?',a:'Revenue divided by booked chair hours.'}),
+    kpi({l:'No-Show Rate',v:c.noShow,p:p.noShow,t:T.noShow,tt:'under 5%',f:pc,dn:1,pl:P.pl,q:'How many booked clients are not showing up?',a:'No-shows over completed appointments plus no-shows. Lower is better.'}),
+    kpi({l:'Profit Margin',v:c.margin,p:p.margin,t:T.margin,tt:'32%',f:pc,pl:P.pl,q:'Are we keeping enough of what we earn?',a:'Net profit over revenue from the monthly books. Shop-wide only.'})
+  ].join('')+'</div>'+
+  '<div class="row" style="grid-template-columns:1.62fr 1fr;height:268px">'+
+    vis({id:'cRev',title:'Revenue per Day vs Target',tag:'Column',sub:' ',q:'Are we hitting the daily number?',a:'Each column is one day, or the average per day for longer periods. Dark columns cleared the target; light red columns missed it.',leg:leg([['var(--char)','At or above target'],['var(--miss)','Below target'],['line','Target']])})+
+    vis({id:'cPace',title:'2026 Revenue vs $600K Goal',tag:'Line',sub:'Cumulative, shop-wide. Dotted line projects the year at the current run rate.',q:'Will we finish the year at $600,000?',a:'Solid line is revenue banked. Dashed red is the pace needed to land $600,000. The dotted projection shows where the current run rate ends the year.',leg:leg([['var(--char)','Actual'],['var(--grey)','Projection'],['line','Goal pace']])})+
+  '</div>'+
+  '<div class="row" style="grid-template-columns:1fr;flex:1">'+
+    '<div class="vis">'+info('Which annual goals are on track?','One row per goal from the strategic plan, year to date. Green meets the goal, amber is within 5%, red is further off.')+'<div class="vt"><b>Annual Goals Scorecard</b><span class="tag">Matrix</span></div><div class="vs">2026 year to date, shop-wide</div><div id="goals"></div></div>'+
+  '</div>';
+  document.getElementById('cRev').parentNode.querySelector('.vs').textContent=(S.period==='week'||S.period==='month'?'Revenue each day':S.period==='90'?'Average per day, by week':'Average per day, by month')+(S.barber==='all'?', shop-wide':', '+BY[S.barber].name);
+  var labels=[],values=[];
+  if(S.period==='week'||S.period==='month'){for(var d=P.f;d<=P.t;d=add(d,1)){var a=agg(d,d,S.barber);if(S.barber!=='all'&&!a.days)continue;labels.push(S.period==='week'?DOW[d.getDay()]:String(d.getDate()));values.push(a.rev)}}
+  else if(S.period==='90'){for(var w=P.f;w<=P.t;w=add(w,7)){var we=add(w,6)>P.t?P.t:add(w,6);labels.push(fd(w));values.push(agg(w,we,S.barber).revDay)}}
+  else{for(var m=0;m<=9;m++){labels.push(MON[m]);values.push(agg(D(2026,m,1),m===9?TODAY:D(2026,m+1,0),S.barber).revDay)}}
+  columns('cRev',{labels:labels,values:values,target:T.revDay,fmt:$k,tip:$0,aria:'Revenue per day against target'});
+  var cum=0,act=[],goal=[],proj=[];
+  for(var mm=0;mm<12;mm++){goal.push(50000*(mm+1));if(mm<=9){cum+=agg(D(2026,mm,1),mm===9?TODAY:D(2026,mm+1,0),'all').rev;act.push(cum)}else act.push(null)}
+  var ytd=agg(D(2026,0,1),TODAY,'all'),rr=ytd.rev/304,fy=act[9]+rr*61;
+  for(var k=0;k<12;k++)proj.push(k<9?null:k===9?act[9]:act[9]+rr*[0,0,0,0,0,0,0,0,0,0,30,61][k]);
+  lines('cPace',{labels:MON.map(function(x){return x[0]}),min:0,max:700000,fmt:$k,aria:'Cumulative revenue against the annual goal',
+    series:[{v:goal,c:'var(--brand)',dash:'5 4',w:1.6},{v:act,c:'var(--char)',area:1,end:$k(act[9]),dy:16},{v:proj,c:'var(--grey)',dash:'2 4',w:2.2,end:'Proj. '+$k(fy),dy:-8}]});
+  var t1=['a','b'].map(function(id){return agg(D(2026,0,1),TODAY,id)}),t2=['c','d'].map(function(id){return agg(D(2026,0,1),TODAY,id)});
+  var u1=(t1[0].raw.hb+t1[1].raw.hb)/(t1[0].raw.ha+t1[1].raw.ha),u2=(t2[0].raw.hb+t2[1].raw.hb)/(t2[0].raw.ha+t2[1].raw.ha);
+  var us=[st(u1,.85),st(u2,.87)],uS=us.indexOf('off')>-1?'off':us.indexOf('watch')>-1?'watch':'on';
+  var rows=[
+    ['Revenue','$600,000',$0(ytd.rev),'Projected '+$0(fy)+' for the year',st(fy,600000),Math.floor(fy/600000*100)+'%'],
+    ['Profit margin','32%',pc(ytd.margin),'From the monthly books',st(ytd.margin,.32),Math.floor(ytd.margin/.32*100)+'%'],
+    ['Master critical number','$1,650 / day',$0(ytd.revDay),'Per open day',st(ytd.revDay,1650),Math.floor(ytd.revDay/1650*100)+'%'],
+    ['Marketing number','2,000 new appts / month',Math.round(ytd.raw.nw/10)+' / month',Math.round(ytd.appts/10)+' total appointments a month. Target to confirm with Sheared','tbd','n/a'],
+    ['Sales number','Over $57 avg ticket',$2(ytd.ticket),'All services and add-ons',st(ytd.ticket,57),Math.floor(ytd.ticket/57*100)+'%'],
+    ['Customer success number','70% same-day rebook',pc(ytd.rebook),'Next visit booked before leaving',st(ytd.rebook,.70),Math.floor(ytd.rebook/.7*100)+'%'],
+    ['Operational number','85% Tier I / 87% Tier II',pc(u1)+' / '+pc(u2),'Booked over scheduled chair hours',uS,Math.floor(Math.min(u1/.85,u2/.87)*100)+'%']
+  ];
+  var cls={on:'hl',watch:'wa',off:'lo',tbd:''};
+  document.getElementById('goals').innerHTML='<table><thead><tr><th>#</th><th>Goal</th><th>2026 Target</th><th class="n">YTD Actual</th><th class="n">% of Target</th><th>Context</th><th>Status</th></tr></thead><tbody>'+
+    rows.map(function(r,i){return '<tr><td>'+(i+1)+'</td><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td class="n"><b>'+r[2]+'</b></td><td class="n '+cls[r[4]]+'">'+r[5]+'</td><td>'+r[3]+'</td><td><span class="pill '+r[4]+'">'+SL[r[4]]+'</span></td></tr>'}).join('')+'</tbody></table>';
+}
+
+function cell(v,t,f,dn,tt){var s=st(v,t,dn);return '<td class="n '+({on:'hl',watch:'wa',off:'lo'}[s]||'')+'">'+f(v)+'<span class="sm">'+tt+'</span></td>'}
+function renderBarbers(P){
+  var R=BARBERS.map(function(B){var a=agg(P.f,P.t,B.id);a.B=B;return a}),shop=agg(P.f,P.t,'all');
+  body.innerHTML='<div class="sec">Tier performance &middot; '+P.label+' &middot; cells shaded green at target, amber within 5%, red below</div>'+
+  '<div class="row" style="grid-template-columns:1fr;height:190px"><div class="vis">'+info('Which barbers are hitting their tier targets, and where are the gaps?','One row per barber, each number against the target for their tier. Read across a row to see whether a gap is volume (utilization), price (ticket and add-ons) or retention (rebook).')+
+  '<div class="vt"><b>Barber Scorecard</b><span class="tag">Matrix</span></div><div class="vs">Targets in grey beside each value</div><div id="btab"></div></div></div>'+
+  '<div class="row" style="grid-template-columns:1fr 1fr;flex:1">'+
+    vis({id:'cRpw',title:'Revenue per Week vs Tier Target',tag:'Bar',sub:'Red tick is the tier target: Tier I $2,500, Tier II $3,000',q:'Is each barber earning their weekly number?',a:'Bar length is average weekly revenue in the period. The red tick is the tier target.',leg:leg([['var(--char)','At or above target'],['var(--miss)','Below target']])})+
+    vis({id:'cMix',title:'Best Sellers Mix',tag:'100% stacked bar',sub:'Share of completed appointments by service',q:'Is each barber selling what Sheared is known for?',a:'The plan names scissor haircut, bald fade and clipper haircut as best sellers. A scissor-led shop should see the scissor share hold up across barbers.',leg:leg([['var(--brand)','Scissor haircut'],['var(--char)','Bald fade'],['var(--grey)','Clipper haircut'],['var(--grey-lt)','Other']])})+
+  '</div>';
+  document.getElementById('btab').innerHTML='<table><thead><tr><th>Barber</th><th>Tier</th><th class="n">Revenue / Week</th><th class="n">Avg Ticket</th><th class="n">Add-on Rate</th><th class="n">Utilization</th><th class="n">Rev / Booked Hr</th><th class="n">Same-day Rebook</th><th class="n">No-show</th></tr></thead><tbody>'+
+    R.map(function(a){var B=a.B;return '<tr'+(S.barber===B.id?' class="sel"':'')+'><td><b>'+B.name+'</b></td><td>Tier '+B.tier+'</td>'+cell(a.revWk,tWk(B),$0,0,$k(tWk(B)))+cell(a.ticket,tTk(B),$2,0,'$'+tTk(B))+cell(a.addRate,.35,pc0,0,'35%')+cell(a.util,tUt(B),pc0,0,pc0(tUt(B)))+cell(a.revHr,77,$0,0,'$77')+cell(a.rebook,.70,pc0,0,'70%')+cell(a.noShow,.05,pc,1,'5%')+'</tr>'}).join('')+
+    '<tr class="tot"><td>Shop</td><td></td><td class="n">'+$0(shop.revWk)+'</td><td class="n">'+$2(shop.ticket)+'</td><td class="n">'+pc0(shop.addRate)+'</td><td class="n">'+pc0(shop.util)+'</td><td class="n">'+$0(shop.revHr)+'</td><td class="n">'+pc0(shop.rebook)+'</td><td class="n">'+pc(shop.noShow)+'</td></tr></tbody></table>';
+  bullets('cRpw',R.map(function(a){return{name:a.B.name,tier:a.B.tier,v:a.revWk,t:tWk(a.B),sel:S.barber===a.B.id}}));
+  stack100('cMix',R.map(function(a){return{name:a.B.name,mix:a.mix,sel:S.barber===a.B.id}}).concat([{name:'Shop',mix:shop.mix,shop:1}]));
+}
+
+function renderClients(P,T,c,p){
+  var so=S.barber!=='all'?' Shop-wide; does not split by barber.':'';
+  body.innerHTML='<div class="kpis" style="grid-template-columns:repeat(7,1fr)">'+[
+    kpi({l:'New Appts / Week',v:c.newWk,p:p.newWk,t:50,tt:'50',f:n1,pl:P.pl,q:'Are we bringing in enough first-time clients?',a:'First-visit appointments per week.'}),
+    kpi({l:'Reactivated / Week',v:c.rxWk,p:p.rxWk,t:30,tt:'30',f:n1,pl:P.pl,q:'Is outreach to old clients working?',a:'Clients back after 60 or more days away, per week.'}),
+    kpi({l:'Conversion',v:c.conv,p:p.conv,t:.25,tt:'25%',f:pc,pl:P.pl,q:'How many inquiries become a booked first visit?',a:'New clients booked over inquiries.'+so}),
+    kpi({l:'Same-day Rebook',v:c.rebook,p:p.rebook,t:.70,tt:'70%',f:pc,pl:P.pl,q:'Do clients book their next visit before leaving?',a:'Appointments with the next visit booked the same day, over completed appointments.'}),
+    kpi({l:'30-day Retention',v:c.ret,p:p.ret,t:.61,tt:'61%',f:pc,pl:P.pl,q:'Do first-time clients come back?',a:'First-time clients who return within 30 days.'}),
+    kpi({l:'Visit Interval',v:c.interval,p:p.interval,t:4,tt:'under 4 wks',f:function(v){return n1(v)+' wks'},dn:1,pl:P.pl,q:'How often do regulars come in?',a:'Average weeks between visits for returning clients. Lower is better.'}),
+    kpi({l:'App Downloads / Wk',v:c.dlWk,p:p.dlWk,t:30,tt:'30',f:n1,pl:P.pl,q:'Are clients installing the app?',a:'New app installs per week.'+so})
+  ].join('')+'</div>'+
+  '<div class="row" style="grid-template-columns:1.62fr 1fr;height:290px">'+
+    vis({id:'cWk',title:'New vs Reactivated Clients by Week',tag:'Clustered column',sub:'Last 12 weeks'+(S.barber==='all'?', shop-wide':', '+BY[S.barber].name),q:'Are we adding and winning back enough clients?',a:'Each pair is one week. Dark is first visits against 50 a week (light red when short); grey is reactivated clients against 30.',leg:leg([['var(--char)','New, at target'],['var(--miss)','New, below target'],['var(--grey)','Reactivated'],['line','Targets']])})+
+    vis({id:'cRet',title:'Rebook & 30-day Retention',tag:'Line',sub:'2026 by month',q:'Are clients coming back?',a:'Dark line is same-day rebook against 70%. Grey line is first-time clients returning within 30 days against 61%.',leg:leg([['var(--char)','Same-day rebook'],['var(--grey)','30-day retention'],['line','Targets']])})+
+  '</div>'+
+  '<div class="row" style="grid-template-columns:1fr 1fr;flex:1">'+
+    vis({id:'cFun',title:'Inquiry to Return Visit',tag:'Funnel',sub:P.label+', shop-wide',q:'Where do new clients drop out?',a:'From inquiries, to booked first visits, to completed first visits, to clients who came back within 30 days. Each step shows the share kept from the step before.'})+
+    '<div class="vis">'+info('Which barbers bring clients back?','New and reactivated clients, rebook rate, retention and visit interval by barber. Shaded against the shop targets.')+'<div class="vt"><b>Clients by Barber</b><span class="tag">Matrix</span></div><div class="vs">'+P.label+'</div><div id="ctab"></div></div>'+
+  '</div>';
+  var lb=[],a=[],b=[];for(var i=11;i>=0;i--){var we=add(TODAY,-7*i),ws=add(we,-6),x=agg(ws,we,S.barber);lb.push(fd(ws));a.push(x.raw.nw);b.push(x.raw.rx)}
+  clustered('cWk',{labels:lb,a:a,b:b,ta:S.barber==='all'?50:13,tb:S.barber==='all'?30:8});
+  var rb=[],rt=[];for(var m=0;m<=9;m++){var am=agg(D(2026,m,1),m===9?TODAY:D(2026,m+1,0),S.barber);rb.push(am.rebook);rt.push(am.ret)}
+  lines('cRet',{labels:MON.slice(0,10),min:.45,max:.85,fmt:pc0,aria:'Rebook and retention by month',targets:[{v:.70,l:'Rebook 70%'},{v:.61,l:'Retention 61%'}],
+    series:[{v:rb,c:'var(--char)',dots:1,end:pc0(rb[9]),dy:-8},{v:rt,c:'var(--grey)',dots:1,end:pc0(rt[9]),dy:16}]});
+  var sh=agg(P.f,P.t,'all').raw;
+  funnel('cFun',[{l:'Inquiries',v:sh.leads},{l:'Booked first visits',v:sh.nw},{l:'Completed first visits',v:Math.round(sh.nw*.95)},{l:'Back within 30 days',v:sh.r30}]);
+  document.getElementById('ctab').innerHTML='<table><thead><tr><th>Barber</th><th class="n">New</th><th class="n">Reactivated</th><th class="n">Rebook</th><th class="n">30-day Ret.</th><th class="n">Interval</th></tr></thead><tbody>'+
+    BARBERS.map(function(B){var q=agg(P.f,P.t,B.id),s1=st(q.rebook,.70),s2=st(q.ret,.61),s3=st(q.interval,4,1),k={on:'hl',watch:'wa',off:'lo'};
+      return '<tr'+(S.barber===B.id?' class="sel"':'')+'><td><b>'+B.name+'</b></td><td class="n">'+q.raw.nw+'</td><td class="n">'+q.raw.rx+'</td><td class="n '+k[s1]+'">'+pc0(q.rebook)+'</td><td class="n '+k[s2]+'">'+pc0(q.ret)+'</td><td class="n '+k[s3]+'">'+n1(q.interval)+' wks</td></tr>'}).join('')+
+    '<tr class="tot"><td>Shop</td><td class="n">'+sh.nw+'</td><td class="n">'+sh.rx+'</td><td class="n">'+pc0(sh.rb/sh.appts)+'</td><td class="n">'+pc0(sh.r30/sh.coh)+'</td><td class="n">'+n1(sh.iw/sh.retn)+' wks</td></tr></tbody></table>';
+}
+
+var DEFS=[
+ ['Revenue / open day','$1,650','Service and add-on revenue over days open. Excludes tips and retail.','Booking & POS','Hourly'],
+ ['Revenue','$600,000 / yr','Service and add-on revenue, before tips.','Booking & POS','Hourly'],
+ ['Avg ticket','$57 shop; $50 T1; $60 T2','Revenue over completed appointments.','Booking & POS','Hourly'],
+ ['Appts / day','29','Completed appointments over open days.','Booking','Hourly'],
+ ['Utilization','85% T1; 87% T2','Booked chair hours over scheduled chair hours.','Booking schedules','Hourly'],
+ ['Rev / booked hr','$77','Revenue over booked chair hours.','Booking & POS','Hourly'],
+ ['No-show rate','Under 5%','No-shows over completed plus no-shows.','Booking','Hourly'],
+ ['Profit margin','32%','Net profit over revenue for the month.','QuickBooks / P&L','Monthly'],
+ ['Add-on rate','35%','Appointments with a beard, ear or nose add-on over completed appointments.','POS line items','Hourly'],
+ ['Revenue / barber','$2,500 T1; $3,000 T2 / wk','Barber revenue over weeks in the period.','Booking & POS','Hourly'],
+ ['New appointments','50 / wk','Appointments that are a client’s first visit.','Booking','Daily'],
+ ['Reactivated','30 / wk','Clients back after 60+ days away.','Booking','Daily'],
+ ['Conversion','25%','New clients booked over inquiries.','Booking + lead source','Daily'],
+ ['Same-day rebook','70%','Next visit booked the same day, over completed appointments.','Booking','Daily'],
+ ['30-day retention','61%','First-time clients returning within 30 days.','Booking','Daily'],
+ ['Visit interval','Under 4 wks','Average weeks between visits for returning clients.','Booking','Daily'],
+ ['App downloads','30 / wk','New installs.','App Store / Google Play','Daily']
+];
+function renderDefs(){
+  body.innerHTML='<div class="row" style="grid-template-columns:1.75fr 1fr;flex:1">'+
+    '<div class="vis"><div class="vt"><b>Metric Definitions</b><span class="tag">Table</span></div><div class="vs">Targets from the 2026 strategic plan</div><table class="defs"><thead><tr><th>Metric</th><th>Target</th><th>Calculation</th><th>Source</th><th>Refresh</th></tr></thead><tbody>'+
+      DEFS.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td></tr>'}).join('')+'</tbody></table></div>'+
+    '<div class="vis"><div class="vt"><b>Open Questions Before the Build</b></div><div class="vs">Answers lock the definitions on the left</div><ol class="qs">'+
+      '<li>Marketing goal: 2,000 new appointments a month, or 50 a week (about 215 a month)? Does 2,000 mean all appointments?</li>'+
+      '<li>Are the $2,500 and $3,000 revenue per barber targets weekly? Assumed weekly, six working days.</li>'+
+      '<li>Which booking and POS system holds appointments, tickets and add-ons?</li>'+
+      '<li>Profit margin source: QuickBooks, or a monthly P&amp;L from the accountant?</li>'+
+      '<li>App downloads: the booking app or a Sheared app? Read access to its store consoles?</li>'+
+      '<li>Conversion of 25%: from inquiries to booked first visits?</li>'+
+      '<li>Reactivated client: how long away to count? Assumed 60 days.</li>'+
+      '<li>Utilization: confirm each barber’s normal shift hours.</li></ol></div>'+
+  '</div>';
+}
+
+function render(){
+  Object.keys(PAGES).forEach(function(k){document.getElementById('nav-'+k).setAttribute('aria-current',String(k===S.page))});
+  var pg=PAGES[S.page],P=period(S.period,S.cmp),T=tgt(S.barber);
+  document.getElementById('pgTitle').textContent=pg.t;document.getElementById('pgNote').textContent=pg.n;
+  document.getElementById('bandTitle').textContent=pg.bt;
+  document.getElementById('bandSub').textContent=S.page==='definitions'?'Targets, calculations and data sources':P.label+' · '+fd(P.f)+' to '+fd(P.t)+', 2026 · '+(S.barber==='all'?'all barbers':BY[S.barber].name)+' · vs '+P.pl;
+  document.getElementById('fbar').style.display=S.page==='definitions'?'none':'flex';
+  document.getElementById('sPeriod').value=S.period;sB.value=S.barber;document.getElementById('sCmp').value=S.cmp;
+  var c=agg(P.f,P.t,S.barber),p=agg(P.pf,P.pt,S.barber);
+  if(S.page==='pulse')renderPulse(P,T,c,p);else if(S.page==='barbers')renderBarbers(P);else if(S.page==='clients')renderClients(P,T,c,p);else renderDefs();
+}
+var MOB=null;function fit(){var st4=document.getElementById('stage'),cv=document.getElementById('canvas'),m=innerWidth<=900;if(m){cv.style.transform='none';st4.style.height='auto'}else{var sc=Math.min(1,st4.clientWidth/1282);cv.style.transform='scale('+sc+')';st4.style.height=(722*sc)+'px'}var changed=MOB!==null&&MOB!==m;MOB=m;return changed}
+function fromHash(){var h=location.hash.replace('#','');S.page=PAGES[h]?h:'pulse'}
+document.querySelectorAll('.rail button').forEach(function(b){b.addEventListener('click',function(){location.hash=b.dataset.page})});
+document.getElementById('sPeriod').addEventListener('change',function(e){S.period=e.target.value;render()});
+sB.addEventListener('change',function(e){S.barber=e.target.value;render()});
+document.getElementById('sCmp').addEventListener('change',function(e){S.cmp=e.target.value;render()});
+window.addEventListener('hashchange',function(){fromHash();render()});
+var rt;window.addEventListener('resize',function(){var c=fit();clearTimeout(rt);rt=setTimeout(function(){if(c||MOB)render()},150)});
+fromHash();fit();render();
+
+/* tooltip */
+var tip=document.getElementById('tip');
+function show(b){tip.innerHTML='<b>Question it answers</b>'+b.dataset.q+'<b>How to read it</b>'+b.dataset.a;tip.classList.add('on');var r=b.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,x=Math.min(innerWidth-tw-10,Math.max(10,r.right-tw)),y=r.bottom+6;if(y+th>innerHeight-8)y=r.top-th-6;tip.style.left=x+'px';tip.style.top=y+'px'}
+function hide(){tip.classList.remove('on')}
+document.addEventListener('mouseover',function(e){var b=e.target.closest&&e.target.closest('.i');if(b)show(b)});
+document.addEventListener('mouseout',function(e){if(e.target.closest&&e.target.closest('.i'))hide()});
+document.addEventListener('focusin',function(e){if(e.target.classList&&e.target.classList.contains('i'))show(e.target)});
+document.addEventListener('focusout',hide);
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.i');b?show(b):hide()});
+window.addEventListener('scroll',hide,{passive:true});
+})();
+</script>
+</body>
+</html>
