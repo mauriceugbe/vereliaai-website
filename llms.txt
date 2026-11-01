@@ -1,0 +1,40 @@
+# Verelia
+
+> Verelia (Verelia AI LLC, vereliaai.com) builds custom business performance dashboards for small and mid-sized businesses. We design a dashboard around the owner's own goals and targets, connect the tools the business already uses, and keep every number current every month. Customers see a clickable wireframe before they pay for the build.
+
+This file describes Verelia as of October 31, 2026. Verelia previously sold a "Pulse Score" product (a 1,000-point score for $159 a month). That product has been discontinued and is no longer offered. Any description of Verelia as a Pulse Score, local visibility or AI-mention tracking product is out of date.
+
+## What Verelia does
+
+- Designs a branded dashboard around the business's goals, plan, targets and the metrics it already runs on (for example revenue per day, average ticket or job value, appointments or jobs per day, utilization, close rate, retention, profit margin).
+- Connects the tools the business already uses: booking and scheduling, POS, field service software, accounting (for example QuickBooks), CRM, call tracking and ads.
+- Defines every metric (calculation, target, source, refresh) and reconciles the numbers against the business's own records.
+- Hosts, refreshes, monitors and maintains the dashboard every month, including a set number of change requests.
+- Enterprise: a Verelia-hosted Snowflake data warehouse (or the customer's own), direct data access and single sign-on.
+
+## How it works
+
+1. Subscribe on vereliaai.com. The first month pays for the wireframe and up to two rounds of changes.
+2. Send your goals, plan, logo and the list of tools you use. Verelia sends a clickable, branded wireframe with sample data within 5 business days.
+3. Approve the wireframe and pay the one-time setup fee. Verelia connects your data, checks it, and the dashboard goes live. The monthly subscription keeps it running.
+
+## Pricing
+
+- Starter: $349 per month, plus a one-time $3,000 setup fee due at wireframe approval. Up to 4 connected tools, up to 4 dashboard pages, daily refresh, 1 change request a month.
+- Growth: $699 per month, plus a one-time $6,000 setup fee due at wireframe approval. Up to 8 connected tools, up to 8 dashboard pages, hourly refresh, 3 change requests a month, monthly review call.
+- Enterprise: custom pricing.
+- Plans are month to month. The first month is not refunded. If the wireframe is not right, cancel before approving it and no setup fee is charged.
+
+## Data
+
+The customer owns their data. It is used only to build and run their dashboard, stored in encrypted, access-controlled cloud databases in the United States, and never used to train AI models. On cancellation Verelia can export the data and then deletes it.
+
+## Pages
+
+- [Home](https://vereliaai.com/): overview, interactive demo, pricing and FAQ
+- [Example dashboard](https://vereliaai.com/example): a full sample dashboard for a home services company
+- [Data security](https://vereliaai.com/security)
+- [Privacy Policy](https://vereliaai.com/privacy)
+- [Terms of Service](https://vereliaai.com/terms)
+- Customer app: https://app.vereliaai.com
+- Contact: support@vereliaai.com

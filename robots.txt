@@ -5,3 +5,4 @@ Disallow: /start
 Disallow: /thanks
 
 Sitemap: https://vereliaai.com/sitemap.xml
+# Plain-language summary for AI assistants: https://vereliaai.com/llms.txt
