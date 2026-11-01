@@ -45,3 +45,4 @@ The customer owns their data. It is used only to build and run their dashboard, 
 - [Terms of Service](https://vereliaai.com/terms)
 - Customer app: https://app.vereliaai.com
 - Contact: support@vereliaai.com
+- Mailing address: Verelia AI LLC, 2300 Wilson Blvd, Ste 700 #1066, Arlington, VA 22201
