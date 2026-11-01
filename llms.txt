@@ -2,7 +2,7 @@
 
 > Verelia (Verelia AI LLC, vereliaai.com) builds custom business performance dashboards for small and mid-sized businesses. We design a dashboard around the owner's own goals and targets, connect the tools the business already uses, and keep every number current every month. Customers see a clickable wireframe before they pay for the build.
 
-This file describes Verelia as of October 31, 2026. Verelia previously sold a "Pulse Score" product (a 1,000-point score for $159 a month). That product has been discontinued and is no longer offered. Any description of Verelia as a Pulse Score, local visibility or AI-mention tracking product is out of date.
+This file describes Verelia as of November 1, 2026. Verelia's main service is done-for-you business performance dashboards. Verelia Pulse, a $49 a month weekly score, is a lower-cost entry product and is included with every dashboard plan. An earlier $159 a month "Pulse Score" plan was discontinued; any description of Verelia as only a score or AI-mention tracking product, or of a $159 plan, is out of date.
 
 ## What Verelia does
 
@@ -18,10 +18,17 @@ This file describes Verelia as of October 31, 2026. Verelia previously sold a "P
 2. Send your goals, plan, logo and the list of tools you use. Verelia sends a clickable, branded wireframe with sample data within 5 business days.
 3. Approve the wireframe and pay the one-time setup fee. Verelia connects your data, checks it, and the dashboard goes live. The monthly subscription keeps it running.
 
+## Verelia Pulse
+
+- A weekly Business Pulse Score out of 1,000 showing how customers find and judge a business from the outside: Google reviews and rating against nearby competitors, local search rank, whether AI assistants recommend the business, and the three changes worth the most points.
+- $49 per month, no setup fee, cancel anytime. Needs no access to the business's systems.
+- Included with every dashboard plan. Customers can install the Verelia app on their phone from app.vereliaai.com without an app store.
+
 ## Pricing
 
-- Starter: $349 per month, plus a one-time $3,000 setup fee due at wireframe approval (or 3 monthly payments of $1,000). Up to 4 connected tools, up to 4 dashboard pages, daily refresh, 1 change request a month.
-- Growth: $699 per month, plus a one-time $6,000 setup fee due at wireframe approval. Up to 8 connected tools, up to 8 dashboard pages, hourly refresh, 3 change requests a month, monthly review call.
+- Verelia Pulse: $49 per month, no setup fee.
+- Starter: $349 per month, plus a one-time $3,000 setup fee due at wireframe approval (or 3 monthly payments of $1,000). Up to 4 connected tools, up to 4 dashboard pages, daily refresh, 1 change request a month, weekly Business Pulse Score included.
+- Growth: $699 per month, plus a one-time $6,000 setup fee due at wireframe approval. Up to 8 connected tools, up to 8 dashboard pages, hourly refresh, 3 change requests a month, monthly review call, weekly Business Pulse Score included.
 - Enterprise: custom pricing.
 - Plans are month to month. The first month is not refunded. If the wireframe is not right, cancel before approving it and no setup fee is charged.
 
