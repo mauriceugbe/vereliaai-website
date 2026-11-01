@@ -200,6 +200,41 @@ section{padding:100px 0}
 .plan li svg{flex:none;margin-top:3px}
 .plan .btn{margin-top:auto;width:100%}
 .guarantee{margin-top:22px;text-align:center;font-size:15px;color:var(--muted)}
+/* Pulse Score hero */
+.pulse-hero{background:linear-gradient(180deg,#F0FBFD 0%,#FFFFFF 70%);border-bottom:1px solid var(--line);padding:96px 0}
+.pulse-hero .wrap{display:grid;grid-template-columns:1fr 1.02fr;gap:56px;align-items:center}
+.pulse-hero h2{font-size:50px;letter-spacing:-.04em;line-height:1.04}
+.pulse-hero h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pulse-hero .lede{max-width:520px}
+.ph-list{list-style:none;display:grid;gap:10px;margin-top:22px;font-size:15.5px}
+.ph-list li{display:flex;gap:10px;line-height:1.45}.ph-list svg{flex:none;margin-top:3px}
+.ph-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-top:28px}
+.ph-price{font-size:14.5px;color:var(--muted)}.ph-price b{color:var(--ink);font-size:22px;letter-spacing:-.02em}
+.ph-note{margin-top:14px;font-size:13.5px;color:var(--muted)}
+.ps{background:#fff;border:1px solid #DADCE0;border-radius:18px;box-shadow:0 40px 80px -40px rgba(15,23,42,.35);overflow:hidden;font-size:13px}
+.ps-band{background:#111827;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ps-band b{font-size:14px}.ps-band small{color:rgba(255,255,255,.65);font-size:11.5px}
+.ps-kpis{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:10px;padding:14px}
+.ps-k{border:1px solid #E1DFDD;border-radius:6px;padding:12px;text-align:center}
+.ps-k.main{border:2px solid #0E7490}
+.ps-k .l{font-size:11.5px;font-weight:700;color:#0E7490}
+.ps-k .v{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-top:4px}
+.ps-k.main .v{font-size:38px}
+.ps-k .s{font-size:11.5px;color:#605E5C}.ps-k .g{color:#15803D;font-weight:700}
+.ps-sec{border-top:1px solid #EDEBE9;padding:12px 16px}
+.ps-sec h4{font-size:12.5px;font-weight:700;color:#0E7490;margin-bottom:8px}
+.ps-row{display:grid;grid-template-columns:118px 1fr 30px 66px;gap:10px;align-items:center;margin:7px 0;font-size:12.5px}
+.ps-bar{height:9px;background:#F3F2F1;border-radius:2px;overflow:hidden}.ps-bar i{display:block;height:100%;background:#252423}
+.ps-bar i.w{background:#0E7490}.ps-bar i.r{background:#C4314B}
+.ps-row .n{text-align:right;font-weight:700}
+.ps-tag{font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:4px;text-align:center}
+.ps-tag.ok{background:#E6F4EA;color:#15803D}.ps-tag.wt{background:#FFF4E5;color:#B45309}.ps-tag.rk{background:#FDECEE;color:#B91C1C}
+.ps-row.lk{color:#8A8886}.ps-row.lk .ps-bar{background:repeating-linear-gradient(45deg,#F3F2F1 0 6px,#fff 6px 12px)}
+.ps-moves{list-style:none;display:grid;gap:6px;font-size:12.5px}
+.ps-moves li{display:flex;justify-content:space-between;gap:10px;border:1px solid #EDEBE9;border-radius:6px;padding:8px 10px}
+.ps-moves b{color:#15803D;white-space:nowrap}
+@media (max-width:1000px){.pulse-hero .wrap{grid-template-columns:1fr;gap:40px}.pulse-hero h2{font-size:40px}}
+@media (max-width:520px){.pulse-hero{padding:72px 0}.pulse-hero h2{font-size:34px!important}.ps-kpis{grid-template-columns:1fr 1fr}.ps-k.main{grid-column:1/-1}.ps-row{grid-template-columns:92px 1fr 24px 64px;gap:8px}.ph-cta .btn{width:100%}}
 .pulse-band{margin-top:34px;display:grid;grid-template-columns:1.25fr 1fr auto;gap:28px;align-items:center;background:var(--night);color:#fff;border-radius:22px;padding:30px 32px}
 .pulse-band .k{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#67E8F9}
 .pulse-band h3{font-size:22px;letter-spacing:-.02em;margin-top:6px;line-height:1.25}
@@ -519,6 +554,51 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
   </div>
 </section>
 
+<section class="pulse-hero" id="pulse">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Verelia Pulse</div>
+      <h2>Know how customers see you. <span>Every week.</span></h2>
+      <p class="lede">Your Business Pulse Score rates how customers find and judge your business, out of 1,000, against the businesses competing for the same customers. Each week it shows what moved and the three changes worth the most points.</p>
+      <ul class="ph-list">
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Your reviews and rating against nearby competitors</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Where you rank when customers search for what you do</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Whether AI assistants like ChatGPT recommend you</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>The next three moves, ranked by points</li>
+      </ul>
+      <div class="ph-cta">
+        <a class="btn btn-primary" href="https://buy.stripe.com/fZufZj0PU3jF82809h4Rq07">Get your Pulse Score</a>
+        <span class="ph-price"><b>$49</b> / month · no setup fee</span>
+      </div>
+      <p class="ph-note">Included free with every dashboard plan. Your first score is ready in about a minute. Cancel anytime.</p>
+    </div>
+    <div class="ps" role="img" aria-label="Example Business Pulse Score report: 648 of 1,000, third of 11 nearby, with scores by area and the next three moves">
+      <div class="ps-band"><div><b>Business Pulse</b> · Your Business</div><small>Refreshes weekly</small></div>
+      <div class="ps-kpis">
+        <div class="ps-k main"><div class="l">Pulse Score</div><div class="v">648</div><div class="s">of 1,000 · <span class="g">+12 this week</span></div></div>
+        <div class="ps-k"><div class="l">Local standing</div><div class="v">#3</div><div class="s">of 11 nearby</div></div>
+        <div class="ps-k"><div class="l">Room to grow</div><div class="v">+94</div><div class="s">points reachable</div></div>
+      </div>
+      <div class="ps-sec">
+        <h4>Score by area</h4>
+        <div class="ps-row"><span>Reputation</span><div class="ps-bar"><i style="width:78%"></i></div><span class="n">78</span><span class="ps-tag ok">Strong</span></div>
+        <div class="ps-row"><span>Search Visibility</span><div class="ps-bar"><i class="w" style="width:61%"></i></div><span class="n">61</span><span class="ps-tag wt">Watch</span></div>
+        <div class="ps-row"><span>AI Visibility</span><div class="ps-bar"><i class="r" style="width:34%"></i></div><span class="n">34</span><span class="ps-tag rk">At risk</span></div>
+        <div class="ps-row"><span>Competitive Set</span><div class="ps-bar"><i class="w" style="width:66%"></i></div><span class="n">66</span><span class="ps-tag wt">Watch</span></div>
+        <div class="ps-row lk"><span>Revenue and repeat customers</span><div class="ps-bar"></div><span class="n">—</span><span class="ps-tag" style="background:#F3F2F1;color:#605E5C">Dashboard</span></div>
+      </div>
+      <div class="ps-sec">
+        <h4>Your next three moves</h4>
+        <ul class="ps-moves">
+          <li><span>Get named by AI assistants for your service</span><b>+38</b></li>
+          <li><span>Reply to your recent unanswered reviews</span><b>+24</b></li>
+          <li><span>Complete your Google listing details</span><b>+16</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="mist demo-sec" id="demo">
   <div class="wrap">
     <div class="eyebrow">Try it</div>
@@ -741,7 +821,7 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
     </div>
     <p class="guarantee"><b>Monthly, cancel anytime.</b> Not ready to subscribe? <a href="#talk">Talk to us first</a>.</p>
 
-    <div class="pulse-band" id="pulse">
+    <div class="pulse-band" id="pulse-plan">
       <div>
         <div class="k">Not ready for a dashboard?</div>
         <h3>Start with Verelia Pulse.</h3>
