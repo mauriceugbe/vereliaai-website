@@ -235,6 +235,60 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
 @media (max-width:440px){.strip .wrap{grid-template-columns:1fr}.hero h1{font-size:38px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 h2{font-size:44px}
+
+.ar{flex:none;vertical-align:-2px;margin-right:6px}
+.kpi .v{display:flex;align-items:center}
+.strip{padding:40px 0}
+.demo-sec{padding-top:72px}
+.demo-grid{grid-template-columns:330px 1fr}
+.hint{font-size:12.5px;color:var(--muted);margin-top:8px}
+.preview{background:#F5F6F8}
+.pv-body{background:#F5F6F8}
+.pv-body .kpi,.pv-body .chartbox,.pv-body .goals{background:#fff;border-color:#E3E6EA}
+.pv-body .kpi .v{font-size:25px}
+.insight{background:#fff;border:1px solid #E3E6EA;border-left:4px solid var(--cyan-600);border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.5}
+.insight b{font-weight:700}
+.sample-note{margin-top:12px;font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--soft);border-radius:10px;padding:10px 14px}
+.sample-note b{color:var(--ink)}
+.next-step{margin-top:14px;background:var(--night);color:#F8FAFC;border-radius:16px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px 20px;flex-wrap:wrap}
+.next-step b{display:block;font-size:17px}
+.next-step span{font-size:14px;color:rgba(248,250,252,.72)}
+.ns-btns{display:flex;gap:10px;flex-wrap:wrap}
+.next-step .btn{height:44px;padding:0 16px;font-size:14.5px}
+.next-step .btn-light{background:transparent;color:#fff;border-color:rgba(148,163,184,.45)}
+.trust-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.defcard{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 30px 60px -45px rgba(15,23,42,.45)}
+.dc-head{background:#111;color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:12px 16px}
+.defcard table{width:100%;border-collapse:collapse;font-size:13.5px}
+.defcard th{text-align:left;font-size:11.5px;color:#A5322E;font-weight:700;padding:10px 16px 6px;border-bottom:1px solid var(--line)}
+.defcard td{padding:9px 16px;border-bottom:1px solid #F1F2F4;vertical-align:top}
+.defcard td:first-child{font-weight:700;white-space:nowrap}
+.defcard p{font-size:13.5px;color:var(--muted);padding:12px 16px 16px}
+.dec{margin-top:12px!important;font-size:14px!important;color:var(--ink)!important;background:var(--mist);border-radius:10px;padding:10px 12px}
+.compare table{min-width:520px}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.setup-card{border:1px solid var(--line);border-radius:22px;padding:26px;background:#fff}
+.setup-card h3{font-size:21px}
+.setup-card>p{font-size:15px;color:var(--muted);margin-top:6px}
+ul.plain{list-style:none;margin-top:14px;display:grid;gap:10px;font-size:14.5px;line-height:1.5}
+ul.plain li{padding-left:14px;position:relative}
+ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--cyan-600)}
+.cr-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}
+.cr-cols b{font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.cr-yes{color:var(--cyan-700)} .cr-no{color:var(--good)}
+.guarantee a{color:var(--cyan-700);font-weight:700}
+.talk-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.talk-form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:14px}
+.tf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tf{display:flex;flex-direction:column;gap:6px}
+.tf label{font-size:14px;font-weight:800}
+.tf input,.tf textarea{border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font:inherit;font-size:15px;color:var(--ink);background:#fff;resize:vertical}
+.tf input:focus,.tf textarea:focus{outline:none;border-color:var(--cyan-600)}
+.talk-form .btn{justify-self:start}
+.hp{position:absolute;left:-9999px}
+.faq a{color:var(--cyan-700);font-weight:600}
+@media (max-width:1000px){.trust-grid,.talk-grid,.setup-grid{grid-template-columns:1fr}}
+@media (max-width:720px){.cr-cols,.tf-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -258,7 +312,7 @@ h2{font-size:44px}
       <a href="#how">How it works</a>
       <a href="/example">Example</a>
       <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
+      <a href="#talk">Talk to us</a>
     </nav>
     <a class="signin" href="https://app.vereliaai.com/sign-in">Sign in</a>
     <a class="btn btn-primary" href="#pricing">Start your dashboard</a>
@@ -269,14 +323,14 @@ h2{font-size:44px}
 <section class="hero dark" id="top">
   <div class="wrap">
     <div>
-      <span class="pill"><i></i>Done-for-you performance dashboards</span>
+      <span class="pill"><i></i>Business Performance Intelligence</span>
       <h1>Your business plan, <span>live.</span></h1>
-      <p class="lede">Send us the goals you run your business on. We design your dashboard around them, connect the tools you already use, and keep every number current, so you can see how today is going without building a spreadsheet.</p>
+      <p class="lede">Your goals, your numbers, your dashboard. Verelia brings together data from the tools you already use, so you can see how your business is performing, where you're falling behind, and what needs your attention. We build it and keep it running.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#pricing">Start your dashboard</a>
         <a class="btn btn-ghost" href="#demo">Try it with your business</a>
       </div>
-      <p class="fine">From $349 a month. Your wireframe comes first. The setup fee is only due once you approve it.</p>
+      <p class="fine">Custom dashboards from $349 a month. Your wireframe comes first, and the setup fee is due only once you approve it.</p>
     </div>
 
     <div class="mock" aria-label="Example dashboard for a barbershop">
@@ -284,10 +338,10 @@ h2{font-size:44px}
       <div class="mock-head"><b>Business performance</b><small>This month &middot; vs Sept</small></div>
       <div class="mock-body">
         <div class="kpis">
-          <div class="kpi"><div class="l">Revenue per day</div><div class="v">$1,640</div><div class="t">Target $1,650</div><span class="tag watch">Watch</span></div>
-          <div class="kpi"><div class="l">Avg ticket</div><div class="v">$56.25</div><div class="t">Target $57</div><span class="tag watch">Watch</span></div>
-          <div class="kpi"><div class="l">Appts per day</div><div class="v">29.1</div><div class="t">Target 29</div><span class="tag on">On track</span></div>
-          <div class="kpi"><div class="l">Profit margin</div><div class="v">29.5%</div><div class="t">Target 32%</div><span class="tag off">Off track</span></div>
+          <div class="kpi"><div class="l">Revenue per day</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>$1,640</div><div class="t">Target $1,650</div><span class="tag watch">Watch</span></div>
+          <div class="kpi"><div class="l">Avg ticket</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>$56.25</div><div class="t">Target $57</div><span class="tag watch">Watch</span></div>
+          <div class="kpi"><div class="l">Appts per day</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#16A34A"/><path d="M8 11.5V4.8M5.2 7.4L8 4.6l2.8 2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>29.1</div><div class="t">Target 29</div><span class="tag on">On track</span></div>
+          <div class="kpi"><div class="l">Profit margin</div><div class="v"><svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>29.5%</div><div class="t">Target 32%</div><span class="tag off">Off track</span></div>
         </div>
         <div class="chartbox">
           <div class="ct">Revenue per day vs $1,650</div>
@@ -305,18 +359,18 @@ h2{font-size:44px}
 
 <section class="strip">
   <div class="wrap">
-    <div><b>Your goals, not a template</b><p>Built from your plan, your targets and your words.</p></div>
+    <div><b>Built around how you run your business</b><p>Your goals, targets and words. Not a template.</p></div>
     <div><b>See it before you commit</b><p>A clickable wireframe within 5 business days.</p></div>
-    <div><b>Connected to your tools</b><p>Booking, POS, accounting, CRM and ads. No exports.</p></div>
-    <div><b>Kept running for you</b><p>Refreshes, fixes and changes are part of the monthly.</p></div>
+    <div><b>Your numbers, together in one place</b><p>Booking, POS, accounting, CRM and ads, connected.</p></div>
+    <div><b>We build it. We maintain it.</b><p>Refreshes, fixes and changes are part of the monthly.</p></div>
   </div>
 </section>
 
-<section class="mist" id="demo">
+<section class="mist demo-sec" id="demo">
   <div class="wrap">
     <div class="eyebrow">Try it</div>
-    <h2>See what yours could look like.</h2>
-    <p class="lede">Pick your type of business, add your name and color, and set a daily goal. This is a preview with sample numbers. Your real dashboard is designed around your own plan.</p>
+    <h2>See your dashboard come to life.</h2>
+    <p class="lede">Pick your type of business, add your name and brand color, and set a daily goal.</p>
 
     <div class="demo-grid">
       <div class="panel">
@@ -329,8 +383,9 @@ h2{font-size:44px}
           <div class="chips" id="industry" role="group" aria-labelledby="indLab"></div>
         </div>
         <div class="field">
-          <span class="lab" id="colLab">Brand color</span>
+          <span class="lab" id="colLab">Your brand color</span>
           <div class="swatches" id="colors" role="group" aria-labelledby="colLab"></div>
+          <p class="hint">Your dashboard carries your brand, not ours.</p>
         </div>
         <div class="field">
           <span class="lab" id="goalLab">Daily revenue goal</span>
@@ -345,6 +400,7 @@ h2{font-size:44px}
             <span class="badge">Sample data</span>
           </div>
           <div class="pv-body">
+            <div class="insight" id="pvInsight"></div>
             <div class="kpis" id="pvKpis"></div>
             <div class="pv-row">
               <div class="chartbox"><div class="ct" id="pvChartTitle">Revenue per day</div><div id="pvChart"></div></div>
@@ -352,12 +408,36 @@ h2{font-size:44px}
             </div>
           </div>
         </div>
-        <div class="demo-cta">
-          <a class="btn btn-primary" href="#pricing">Start your dashboard</a>
-          <a class="btn btn-light" href="/example">Open a full example</a>
-          <p>The full example has four pages, filters and definitions.</p>
+        <p class="sample-note"><b>These are sample numbers.</b> Your dashboard is built from your own plan and targets, using the data your tools actually provide.</p>
+        <div class="next-step">
+          <div><b>Like what you see?</b><span>We'll build yours around your actual business goals.</span></div>
+          <div class="ns-btns"><a class="btn btn-primary" href="#pricing">Start your dashboard</a><a class="btn btn-light" href="#talk">Talk to us first</a><a class="btn btn-light" href="/example">Full example</a></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap trust-grid">
+    <div>
+      <div class="eyebrow">Our approach</div>
+      <h2>Good decisions start with numbers you trust.</h2>
+      <p class="lede">Most businesses already have more than enough data. The problem is knowing which numbers matter, whether they're accurate, and what they're telling you.</p>
+      <p class="lede">We start with your goals, define how success is measured, and bring the relevant data together. Every metric has a clear definition, every target has context, and every dashboard is built around the decisions you need to make. The result is more than a report. It's a reliable way to understand how your business is doing.</p>
+    </div>
+    <div class="defcard" aria-label="Example metric definitions">
+      <div class="dc-head">Definitions page &middot; every dashboard includes one</div>
+      <table>
+        <thead><tr><th>Metric</th><th>Calculation</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Average ticket</td><td>Revenue over completed appointments</td><td>POS</td></tr>
+          <tr><td>Same-day rebook</td><td>Next visit booked before leaving, over completed appointments</td><td>Booking</td></tr>
+          <tr><td>Utilization</td><td>Booked hours over scheduled hours</td><td>Booking</td></tr>
+          <tr><td>Profit margin</td><td>Net profit over revenue, monthly</td><td>Accounting</td></tr>
+        </tbody>
+      </table>
+      <p>Every metric has an agreed calculation and a known source, so everyone reads the same number the same way.</p>
     </div>
   </div>
 </section>
@@ -370,7 +450,7 @@ h2{font-size:44px}
       <div class="step">
         <div class="n">1</div>
         <h3>Subscribe and send your goals</h3>
-        <p>Pick a plan, then send us whatever you run the business on: a one-page plan, a scorecard, or just a list of the numbers you check.</p>
+        <p>Pick a plan, then send us whatever you run the business on: a one-page plan, a scorecard, or a list of the numbers you check. Your first month covers the wireframe.</p>
         <span class="when">Takes 10 minutes</span>
       </div>
       <div class="step">
@@ -382,7 +462,7 @@ h2{font-size:44px}
       <div class="step">
         <div class="n">3</div>
         <h3>Go live</h3>
-        <p>We connect your tools and replace the sample numbers with your real ones. From then on we keep it refreshed, fix anything that breaks and make your changes.</p>
+        <p>We connect your tools, check the numbers against your records, and replace the sample data with yours. From then on we keep it refreshed, fix anything that breaks and make your changes.</p>
         <span class="when">2 to 3 weeks after approval</span>
       </div>
     </div>
@@ -393,12 +473,12 @@ h2{font-size:44px}
   <div class="wrap">
     <div class="eyebrow">What you get</div>
     <h2>One place for the numbers that decide your month.</h2>
-    <p class="lede">Every dashboard is designed for the business it serves. Most start with these four views.</p>
+    <p class="lede">Every dashboard is designed for the business it serves. Most start with these four views, each tied to a decision you make.</p>
     <div class="feat-grid">
-      <div class="feat"><div class="k">Pulse</div><h3>How today is going</h3><p>Your daily number against target, revenue against the year's goal, and every annual goal marked on track, watch or off track.</p></div>
-      <div class="feat"><div class="k">Team</div><h3>Who is hitting their numbers</h3><p>Each person or location against their own targets, so a conversation starts with the gap, not a guess.</p></div>
-      <div class="feat"><div class="k">Customers</div><h3>Who is coming back</h3><p>New customers, returning customers, rebooking and retention, week by week.</p></div>
-      <div class="feat"><div class="k">Definitions</div><h3>What every number means</h3><p>How each metric is calculated and where it comes from, so everyone reads it the same way.</p></div>
+      <div class="feat"><div class="k">Pulse</div><h3>See how today is going</h3><p>Your daily number against target, revenue against the year's goal, and every annual goal marked on track, watch or off track.</p><p class="dec"><b>Decision it supports:</b> fill slow days with bookings before the week is lost.</p></div>
+      <div class="feat"><div class="k">Team</div><h3>See how your team is performing</h3><p>Each person or location against their own targets, so a conversation starts with the gap, not a guess.</p><p class="dec"><b>Decision it supports:</b> coach the one team member below target on the exact gap, whether that's price, volume or rebooking.</p></div>
+      <div class="feat"><div class="k">Customers</div><h3>Understand who returns, and who doesn't</h3><p>New customers, returning customers, rebooking and retention, week by week.</p><p class="dec"><b>Decision it supports:</b> spot rebooking slipping early and fix the checkout habit before it costs a month.</p></div>
+      <div class="feat"><div class="k">Definitions</div><h3>Know exactly where every number comes from</h3><p>How each metric is calculated and which system it comes from, agreed with you before anything is built.</p><p class="dec"><b>Decision it supports:</b> stop debating whose spreadsheet is right and act on one number.</p></div>
     </div>
     <div class="tools">
       <b>We connect the tools you already use, for example</b>
@@ -409,19 +489,21 @@ h2{font-size:44px}
   </div>
 </section>
 
-<section class="mist" id="compare">
+<section class="mist" id="partner">
   <div class="wrap">
     <div class="eyebrow">Why Verelia</div>
-    <h2>The dashboard without the project.</h2>
+    <h2>Business intelligence, without building a data team.</h2>
+    <p class="lede">You already have the data. It's spread across your booking system, accounting software, sales tools and spreadsheets. Verelia brings it together into a dashboard designed around how you actually run your business, and stays on as your analytics partner. We handle the technical work so you can focus on the decisions.</p>
     <div class="compare">
       <table>
-        <thead><tr><th></th><th class="us">Verelia</th><th>Build it yourself</th><th>Hire a consultant</th></tr></thead>
+        <thead><tr><th>What we deliver</th><th class="us">What it gives you</th></tr></thead>
         <tbody>
-          <tr><td>Who designs it</td><td class="us">We do, from your goals</td><td>You</td><td>The consultant</td></tr>
-          <tr><td>First look</td><td class="us">Within 5 business days</td><td>When you find the time</td><td>After scoping</td></tr>
-          <tr><td>See it before paying for the build</td><td class="us">Yes, setup is due at approval</td><td>Not applicable</td><td>Usually not</td></tr>
-          <tr><td>Who keeps it running</td><td class="us">We do, every month</td><td>You</td><td>Extra hours, billed</td></tr>
-          <tr><td>Changes later</td><td class="us">Included each month</td><td>Your time</td><td>A new quote</td></tr>
+          <tr><td>A dashboard designed around your goals</td><td class="us">Visibility into how the business is performing</td></tr>
+          <tr><td>Your tools connected in one place</td><td class="us">One set of numbers instead of conflicting reports</td></tr>
+          <tr><td>Agreed metric definitions</td><td class="us">Confidence in what every number means</td></tr>
+          <tr><td>Actual against target, everywhere</td><td class="us">Gaps spotted early, while there's time to act</td></tr>
+          <tr><td>Ongoing maintenance and changes</td><td class="us">Reliable reporting without hiring a technical team</td></tr>
+          <tr><td>Monthly reviews on Growth</td><td class="us">Better-informed management decisions</td></tr>
         </tbody>
       </table>
     </div>
@@ -432,7 +514,7 @@ h2{font-size:44px}
   <div class="wrap">
     <div class="eyebrow">Pricing</div>
     <h2>A monthly plan. A setup fee only once you approve.</h2>
-    <p class="lede">Your first month covers your wireframe and two rounds of changes. If it isn't right, cancel before you approve it and you never pay a setup fee.</p>
+    <p class="lede">You pay the first month when you subscribe. It covers your wireframe and up to two rounds of changes, and it isn't refunded because that work happens in it. If the wireframe isn't right, cancel before approving and you never pay a setup fee.</p>
     <div class="plans">
       <div class="plan main">
         <span class="flag">Most businesses</span>
@@ -440,13 +522,7 @@ h2{font-size:44px}
         <p class="who">For a single-location business that wants its plan on one screen.</p>
         <div class="price"><b>$349</b><span>/ month</span></div>
         <div class="setup">$3,000 setup <em>at wireframe approval</em></div>
-        <ul>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 4 connected tools</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 4 dashboard pages in your brand</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Data refreshed every day</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>1 change request each month</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Logins for you and your team</li>
-        </ul>
+        <ul><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 4 connected tools</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 4 dashboard pages in your brand</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Data refreshed every day</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>1 change request each month</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Logins for you and your team</li></ul>
         <a class="btn btn-dark" href="https://buy.stripe.com/3cIeVf0PU8DZgyE8FN4Rq02">Start with Starter</a>
       </div>
       <div class="plan">
@@ -454,13 +530,7 @@ h2{font-size:44px}
         <p class="who">For businesses with more tools, more locations or a bigger team.</p>
         <div class="price"><b>$699</b><span>/ month</span></div>
         <div class="setup">$6,000 setup <em>at wireframe approval</em></div>
-        <ul>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 8 connected tools</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 8 dashboard pages</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Data refreshed every hour</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>3 change requests each month</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Monthly review call</li>
-        </ul>
+        <ul><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 8 connected tools</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 8 dashboard pages</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Data refreshed every hour</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>3 change requests each month</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Monthly review call with your analyst</li></ul>
         <a class="btn btn-light" href="https://buy.stripe.com/eVqbJ31TYcUfgyE7BJ4Rq03">Start with Growth</a>
       </div>
       <div class="plan">
@@ -468,43 +538,74 @@ h2{font-size:44px}
         <p class="who">For multi-location groups and companies that need their own data warehouse.</p>
         <div class="price"><b>Custom</b></div>
         <div class="setup">Scoped with you</div>
-        <ul>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A Verelia-hosted Snowflake warehouse, or yours</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Direct data access for your analysts</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Single sign-on</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Unlimited tools and pages</li>
-          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A named contact at Verelia</li>
-        </ul>
-        <a class="btn btn-light" href="mailto:support@vereliaai.com?subject=Verelia%20Enterprise">Talk to us</a>
+        <ul><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A Verelia-hosted Snowflake warehouse, or yours</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Direct data access for your analysts</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Single sign-on</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Unlimited tools and pages</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A named contact at Verelia</li></ul>
+        <a class="btn btn-light" href="#talk">Talk to us</a>
       </div>
     </div>
-    <p class="guarantee"><b>Monthly, cancel anytime.</b> Enterprise questions: support@vereliaai.com</p>
+    <p class="guarantee"><b>Monthly, cancel anytime.</b> Not ready to subscribe? <a href="#talk">Talk to us first</a>.</p>
+
+    <div class="setup-grid">
+      <div class="setup-card">
+        <h3>What goes into your setup</h3>
+        <p>The setup fee pays for building your dashboard, not for a template.</p>
+        <ul class="plain">
+          <li><b>Defining your metrics.</b> Agreeing how each number is calculated and what it's measured against.</li>
+          <li><b>Connecting your systems.</b> Authorizing read access to each tool and pulling its history.</li>
+          <li><b>Reconciling the figures.</b> Checking our numbers against your own records until they match.</li>
+          <li><b>Building your pages.</b> Turning the approved wireframe into a live dashboard with your data.</li>
+          <li><b>Testing accuracy.</b> Checking every visual, filter and calculation before you go live.</li>
+          <li><b>Setting up access.</b> Logins for you and your team, and a dashboard you keep using every month.</li>
+        </ul>
+      </div>
+      <div class="setup-card">
+        <h3>What counts as a change request</h3>
+        <p>Your plan includes a set number of changes each month. Fixes never count against it.</p>
+        <div class="cr-cols">
+          <div><b class="cr-yes">Change request</b><ul class="plain"><li>Adding a new metric or visual</li><li>Adding a page section or a new filter</li><li>Changing how a metric is calculated</li><li>Connecting a tool you didn't have before</li></ul></div>
+          <div><b class="cr-no">Included, never counted</b><ul class="plain"><li>Fixing a broken connection</li><li>Correcting a number that doesn't match its agreed definition</li><li>Updating a target figure you send us</li><li>Refreshes, hosting and monitoring</li></ul></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="mist" id="faq">
+<section class="mist" id="talk">
+  <div class="wrap talk-grid">
+    <div>
+      <div class="eyebrow">Talk to us first</div>
+      <h2>Want to talk it through before you subscribe?</h2>
+      <p class="lede">Tell us what you want to see and which tools you use. We'll reply within one business day, usually with a short call to review your requirements.</p>
+      <p class="lede" style="font-size:15px">Or email support@vereliaai.com.</p>
+    </div>
+    <form class="talk-form" name="discuss" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="company_site">
+      <input type="hidden" name="form-name" value="discuss">
+      <p class="hp"><label>Leave this empty <input name="company_site"></label></p>
+      <div class="tf-row">
+        <div class="tf"><label for="tName">Your name</label><input type="text" id="tName" name="name" required autocomplete="name"></div>
+        <div class="tf"><label for="tEmail">Email</label><input type="email" id="tEmail" name="email" required autocomplete="email"></div>
+      </div>
+      <div class="tf"><label for="tBiz">Business</label><input type="text" id="tBiz" name="business" required autocomplete="organization"></div>
+      <div class="tf"><label for="tMsg">What do you want to see on your dashboard?</label><textarea id="tMsg" name="message" rows="4" placeholder="Example: daily revenue against target, each stylist's numbers, how many clients come back"></textarea></div>
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow" style="text-align:center">FAQ</div>
     <h2 style="text-align:center">Questions owners ask first.</h2>
-    <div class="faq">
-      <details><summary>What do I need to send you?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Whatever you already use to run the business: a strategic plan, a scorecard, a spreadsheet, or a list of the numbers you check each week. Add your logo and the tools you use. We do the rest.</p></details>
-      <details><summary>What does the setup fee cover?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Connecting your tools, mapping your data to each metric, checking the numbers against your own records, and building the approved design with your real data. It is due once, when you approve your wireframe.</p></details>
-      <details><summary>What if I don't like the wireframe?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Two rounds of changes are included. If it still isn't right, cancel your subscription before approving and you won't pay a setup fee.</p></details>
-      <details><summary>Do I need a data warehouse or a data team?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>No. We host your data for you. Enterprise customers can have a dedicated Snowflake warehouse hosted by Verelia, or connect their own.</p></details>
-      <details><summary>What if my tool isn't on your list?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Tell us when you sign up. If it has a way to export or share its data, we can usually connect it. We confirm every connection before you approve the wireframe.</p></details>
-      <details><summary>Who can see my dashboard?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Only you and the people you invite. Your dashboard sits behind your own login at app.vereliaai.com.</p></details>
-      <details><summary>Can I cancel?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Yes. Plans are month to month. The setup fee is not refunded once the build has started.</p></details>
-    </div>
+    <div class="faq"><details><summary>What do I need to send you?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Whatever you already use to run the business: a strategic plan, a scorecard, a spreadsheet, or a list of the numbers you check each week. Add your logo and the tools you use. We do the rest.</p></details><details><summary>Is the first month refundable?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>No. The first month pays for your wireframe and up to two rounds of changes, and that work happens during it. If the wireframe isn't right, cancel before approving it and you won't pay a setup fee.</p></details><details><summary>What does the setup fee cover?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Defining your metrics, connecting your tools, reconciling the numbers against your records, building the approved design with your real data, and testing it before you go live. It is due once, when you approve your wireframe.</p></details><details><summary>What counts as a change request?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Adding something new: a metric, a visual, a filter, a page section, a new tool, or a different calculation. Fixing anything that is wrong or broken, updating a target, and keeping the data refreshed are included and never count.</p></details><details><summary>Who owns my data?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>You do. We use it only to build and run your dashboard. If you leave, we can export your data and then delete it. See <a href="/security">Data security</a>.</p></details><details><summary>Where is my data stored and who can see it?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>In encrypted, access-controlled cloud databases in the United States. Only you, the people you invite, and the Verelia staff working on your dashboard can see it. Details are on our <a href="/security">Data security</a> page.</p></details><details><summary>Do I need a data warehouse or a data team?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>No. We host your data for you. Enterprise customers can have a dedicated Snowflake warehouse hosted by Verelia, or connect their own.</p></details><details><summary>What if my tool isn't on your list?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Tell us when you sign up. If it has a way to export or share its data, we can usually connect it. We confirm every connection before you approve the wireframe.</p></details><details><summary>Can I cancel?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><p>Yes. Plans are month to month. The setup fee is not refunded once the build has started.</p></details></div>
   </div>
 </section>
 
 <section class="dark final">
   <div class="wrap">
-    <h2>Put your plan on one screen.</h2>
+    <h2>See your business clearly, every day.</h2>
     <p class="lede">Subscribe today and your wireframe arrives within 5 business days.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://buy.stripe.com/3cIeVf0PU8DZgyE8FN4Rq02">Start your dashboard</a>
-      <a class="btn btn-ghost" href="/example">See a full example</a>
+      <a class="btn btn-ghost" href="#talk">Talk to us first</a>
     </div>
   </div>
 </section>
@@ -515,7 +616,9 @@ h2{font-size:44px}
     <span>&copy; 2026 Verelia AI LLC &middot; Houston, Texas</span>
     <div class="links">
       <a href="/example">Example</a>
+      <a href="/security">Data security</a>
       <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
       <a href="https://app.vereliaai.com/sign-in">Sign in</a>
       <span>support@vereliaai.com</span>
     </div>
@@ -584,12 +687,21 @@ h2{font-size:44px}
     // KPI 1 is the daily revenue goal
     var days=[],sum=0;for(var i=0;i<14;i++){var v=st.goal*(0.82+R()*0.36);days.push(v);sum+=v}
     var avg=sum/14,s1=status(avg,st.goal);
-    var html='<div class="kpi"><div class="l">Revenue per day</div><div class="v">'+fmt(avg,'$0')+'</div><div class="t">Target '+fmt(st.goal,'$0')+'</div><span class="tag '+s1+'">'+LBL[s1]+'</span></div>';
-    T.kpis.forEach(function(k){var low=k.f==='%d';var v=k.t*(low?(0.9+R()*0.22):(0.9+R()*0.16));var s=status(v,k.t,low);
-      html+='<div class="kpi"><div class="l">'+k.l+'</div><div class="v">'+fmt(v,k.f)+'</div><div class="t">'+k.w+'</div><span class="tag '+s+'">'+LBL[s]+'</span></div>'});
+    var UPI='<svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#16A34A"/><path d="M8 11.5V4.8M5.2 7.4L8 4.6l2.8 2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',DNI='<svg class="ar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#DC2626"/><path d="M8 4.5v6.7M5.2 8.6L8 11.4l2.8-2.8" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var res=[{l:'Revenue per day',v:avg,t:st.goal,low:false,f:'$0'}];
+    T.kpis.forEach(function(k){var low=k.f==='%d';var v=k.t*(low?(0.9+R()*0.22):(0.9+R()*0.16));res.push({l:k.l,v:v,t:k.t,low:low,f:k.f,w:k.w})});
+    var html='';res.forEach(function(r,i){var s=status(r.v,r.t,r.low),good=s==='on';
+      html+='<div class="kpi"><div class="l">'+r.l+'</div><div class="v">'+(good?UPI:DNI)+fmt(r.v,r.f)+'</div><div class="t">'+(i===0?'Target '+fmt(st.goal,'$0'):r.w)+'</div><span class="tag '+s+'">'+LBL[s]+'</span></div>'});
     document.getElementById('pvKpis').innerHTML=html;
+    var gap=res.map(function(r){var d=r.low?(r.t-r.v)/r.t:(r.v-r.t)/r.t;return{r:r,d:d}});
+    var worst=gap.slice().sort(function(a,b){return a.d-b.d})[0],best=gap.slice().sort(function(a,b){return b.d-a.d})[0];
+    function phr(g){var pct=Math.abs(Math.round(g.d*100));if(pct===0)return g.r.l.toLowerCase()+' is right on target';return g.r.l.toLowerCase()+' is '+pct+'% '+(g.d>=0?'better than':'short of')+' target'}
+    var ins=worst.d>=0?'What this tells you: everything is at or above target this month. The question now is whether the targets are high enough.':
+      best.d<0?'What this tells you: every number is short of target, and '+phr(worst)+'. Start there.':
+      'What this tells you: '+phr(best).replace(/^./,function(c){return c.toUpperCase()})+', but '+phr(worst)+'. That gap is where to look first.';
+    document.getElementById('pvInsight').innerHTML='<b>What this tells you:</b>'+ins.slice(ins.indexOf(':')+1);
     // chart
-    var W=420,H=150,max=st.goal*1.3,bw=W/14,s='';
+    var W=420,H=215,max=st.goal*1.3,bw=W/14,s='';
     days.forEach(function(v,i){var h=(H-16)*v/max,x=i*bw+3;s+='<rect x="'+x.toFixed(1)+'" y="'+(H-h).toFixed(1)+'" width="'+(bw-6).toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2" fill="'+(v>=st.goal?'#111827':'#D1D5DB')+'"><title>Day '+(i+1)+': '+fmt(v,'$0')+'</title></rect>'});
     var ty=H-(H-16)*st.goal/max;
     s+='<line x1="0" x2="'+W+'" y1="'+ty.toFixed(1)+'" y2="'+ty.toFixed(1)+'" stroke="'+st.color+'" stroke-width="2" stroke-dasharray="6 4"/>';
