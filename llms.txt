@@ -30,7 +30,7 @@ This file describes Verelia as of November 1, 2026. Verelia leads with the Busin
 - Verelia Pulse: $99 per month, no setup fee.
 - Starter: $349 per month, plus a one-time $3,000 setup fee due at wireframe approval (or 3 monthly payments of $1,000). Up to 4 connected tools, up to 4 pages, daily refresh, 1 change request a month, weekly Business Pulse Score included.
 - Existing Pulse subscribers: the first 3 months of Pulse payments (up to $297) are credited toward the setup fee when moving to a Business Performance plan.
-- Market Report: $149 one-time ($49 for Pulse subscribers). A study of a business type in an area for someone planning to open: every competitor nearby, who ranks first in local searches, review themes and complaints, openings, and what AI assistants recommend, with a PDF and a spreadsheet. Buyers who start Pulse within 30 days get the first month free.
+- Market Report: $45 one-time ($29 for Pulse subscribers). A study of a business type in an area for someone planning to open: every competitor nearby, who ranks first in local searches, review themes and complaints, openings, and what AI assistants recommend, with a PDF and a spreadsheet. Buyers who start Pulse within 30 days get the first month free.
 - Growth: $699 per month, plus a one-time $6,000 setup fee due at wireframe approval (or 3 monthly payments of $2,000). Up to 8 connected tools, up to 8 pages, hourly refresh, 3 change requests a month, monthly review call, weekly Business Pulse Score included.
 - Enterprise: custom pricing.
 - Plans are month to month. The first month is not refunded. If the wireframe is not right, cancel before approving it and no setup fee is charged.
