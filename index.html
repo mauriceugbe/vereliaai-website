@@ -225,6 +225,14 @@ section{padding:100px 0}
 .plan li{display:flex;gap:10px;font-size:15px;line-height:1.45}
 .plan li svg{flex:none;margin-top:3px}
 .plan .btn{margin-top:auto;width:100%}
+.report-band{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:center;margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px}
+.report-band .k{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan-700)}
+.report-band h3{font-size:22px;margin-top:4px}
+.report-band p{font-size:15px;color:var(--muted);margin-top:6px;line-height:1.55}
+.report-band .rpbox b{font-size:34px;color:var(--ink)}.report-band .rpbox span{color:var(--muted)}
+.report-band .rpbox small{display:block;font-size:13px;color:var(--muted);margin:6px 0 14px}
+.report-band .rpbox .btn{width:100%;text-align:center}
+@media(max-width:820px){.report-band{grid-template-columns:1fr}}
 .guarantee{margin-top:22px;text-align:center;font-size:15px;color:var(--muted)}
 /* Pulse Score hero */
 .pulse-hero{background:linear-gradient(180deg,#F0FBFD 0%,#FFFFFF 70%);border-bottom:1px solid var(--line);padding:96px 0}
@@ -947,6 +955,10 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
         <ul><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A Verelia-hosted Snowflake warehouse, or yours</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Direct data access for your analysts</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Single sign-on</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Unlimited tools and pages</li><li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>A named contact at Verelia</li></ul>
         <a class="btn btn-light" href="#talk">Talk to us</a>
       </div>
+    </div>
+    <div class="report-band" id="market-report">
+      <div><div class="k">Planning to open?</div><h3>Market Report</h3><p>Pick a type of business and an area. Get every competitor nearby, who customers find first, what they love and complain about, where a new business could stand out, and what AI assistants recommend. Ready in about two minutes, with a PDF and the full list as a spreadsheet.</p></div>
+      <div class="rpbox"><b>$149</b><span> one-time</span><small>$49 for Pulse subscribers. Start Pulse within 30 days and your first month is free.</small><a class="btn btn-dark" href="https://app.vereliaai.com/report">Get a market report</a></div>
     </div>
     <p class="guarantee"><b>Monthly, cancel anytime.</b> Questions first? <a href="#talk">Talk to us</a>.</p>
   </div>
