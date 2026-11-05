@@ -69,6 +69,14 @@ section{padding:100px 0}
 .logo-icon{width:36px;height:36px;border-radius:10px;background:var(--ink);display:grid;place-items:center;flex:none}
 .logo-text{font-size:20px;font-weight:700;letter-spacing:-.02em}
 .logo-badge{font-size:11.5px;font-weight:700;color:var(--cyan-600);background:var(--cyan-50);padding:2px 7px;border-radius:5px}
+.nav-new{display:inline-flex;align-items:center;gap:6px}.nav-new span{font-size:10.5px;font-weight:700;color:var(--cyan-600);background:var(--cyan-50);padding:1px 6px;border-radius:5px}
+.ec-band{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;margin-top:20px;padding:22px 26px;border-radius:16px;background:linear-gradient(135deg,#0B1222,#0F172A 60%,#10233d);color:#fff;text-decoration:none}
+.ec-mark{width:44px;height:44px;border-radius:12px;background:#111827;border:1px solid #1f2a44;display:grid;place-items:center}
+.ec-body{display:flex;flex-direction:column;gap:4px}.ec-k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#67E8F9}
+.ec-body b{font-size:18px}.ec-p{font-size:14.5px;line-height:1.5;color:#CBD5E1}
+.ec-go{font-weight:700;font-size:14.5px;color:#0F172A;background:#67E8F9;padding:10px 16px;border-radius:10px;white-space:nowrap}
+.ec-band:hover .ec-go{background:#fff}
+@media (max-width:720px){.ec-band{grid-template-columns:1fr;gap:12px}.ec-go{justify-self:start}}
 .nav{display:flex;gap:26px}
 .nav a{font-size:14.5px;font-weight:600;color:var(--muted);text-decoration:none}
 .nav a:hover{color:var(--ink)}
@@ -623,6 +631,7 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
+      <a href="https://edgecast.vereliaai.com" class="nav-new">Edgecast<span>New</span></a>
     </nav>
     <a class="signin" href="https://app.vereliaai.com/sign-in">Sign in</a>
     <a class="btn btn-primary" href="#pulse" data-buy>Get your Pulse Score</a>
@@ -897,6 +906,15 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
         <ul class="f-creds"><li>Doctorate in Information Technology, Data Analytics</li><li>AWS Certified Solutions Architect</li><li>Marketing &amp; Business Analytics Leader</li></ul>
       </div>
     </div>
+    <a class="ec-band" href="https://edgecast.vereliaai.com">
+      <span class="ec-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 56 56" fill="none"><defs><linearGradient id="ecg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#9333ea"/></linearGradient></defs><polyline points="11,10 22,30 33,10" stroke="url(#ecg)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17,46 28,26 39,46" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="22" y1="39" x2="34" y2="39" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg></span>
+      <span class="ec-body">
+        <span class="ec-k">Also from Verelia</span>
+        <b>Edgecast: Find the edge. Understand the odds.</b>
+        <span class="ec-p">Predictions for stocks, games, crypto and the economy. Edgecast compares what markets are pricing with what the data says and gives one clear call: Yes, Maybe or No, with the analysis behind it.</span>
+      </span>
+      <span class="ec-go">Visit Edgecast</span>
+    </a>
   </div>
 </section>
 
@@ -1004,6 +1022,7 @@ ul.plain li::before{content:"";position:absolute;left:0;top:9px;width:6px;height
       <a href="/security">Data security</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
+      <a href="https://edgecast.vereliaai.com">Edgecast</a>
       <a href="https://app.vereliaai.com/sign-in">Sign in</a>
       <span>support@vereliaai.com</span>
     </div>

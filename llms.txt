@@ -49,3 +49,4 @@ The customer owns their data. It is used only to build and run their performance
 - Customer app: https://app.vereliaai.com
 - Contact: support@vereliaai.com
 - Mailing address: Verelia AI LLC, 2300 Wilson Blvd, Ste 700 #1066, Arlington, VA 22201
+- Edgecast (also from Verelia): https://edgecast.vereliaai.com - predictions for stocks, games, crypto and the economy, each with a clear Yes, Maybe or No call and the analysis behind it.
